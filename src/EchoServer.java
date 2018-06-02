@@ -3,6 +3,9 @@
 // license found at www.lloseng.com 
 
 import java.io.*;
+
+import com.mysql.jdbc.StringUtils;
+
 import ocsf.server.*;
 
 /**
@@ -51,26 +54,33 @@ public class EchoServer extends AbstractServer
 	{
 		System.out.println("Message received: " + msg + " from " + client);
 		/* check choice */
-		int id = Integer.parseInt(msg.toString());
-		if(id == 1) {
-			signIn = true;
-			return;
+		int id;
+		if(isNumber(msg.toString())) {
+			id = Integer.parseInt(msg.toString());
+
+			if(id == 1) {
+				signIn = true;
+				return;
+			}
+			else if(id == 2){
+				signIn = false;
+				return;
+			}
 		}
-		else if(id == 2){
-			signIn = false;
-			return;
-		}
+
+		String input = msg.toString();
+		String name = input.substring(0,input.indexOf(' '));
+		String pass = input.substring(input.indexOf(' ') + 1);
 
 		try {
-
-			if(signIn) {
-				if(m.userExist("SELECT * FROM parking WHERE id = " + id + ";")) {	
+			if(signIn) {			
+				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "' AND Password = '"+ pass +"';")) {	
 					client.sendToClient("SignIn success!");
 				}else {
 					client.sendToClient("SingIn faild!");
 				}
 			}else {
-				if(m.addUserToTable("parking",id)) {
+				if(m.addUserToTable("parking",name,pass)) {
 					client.sendToClient("Register success!");
 				}else {
 					client.sendToClient("Register faild!");
@@ -81,6 +91,19 @@ public class EchoServer extends AbstractServer
 			e.printStackTrace();
 		}
 	}
+
+	private boolean isNumber(String str) {
+		 try  
+		  {  
+		    int d = Integer.parseInt(str);  
+		  }  
+		  catch(NumberFormatException nfe)  
+		  {  
+		    return false;  
+		  }  
+		  return true;  
+	}
+
 
 	/**
 	 * This method overrides the one in the superclass.  Called

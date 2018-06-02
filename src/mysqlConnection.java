@@ -98,7 +98,7 @@ public class mysqlConnection {
 
 	}
 
-	public boolean addUserToTable(String table,int id) {
+	public boolean addUserToTable(String table,String name,String pass) {
 		try {
 			// add record to table.
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -107,7 +107,8 @@ public class mysqlConnection {
 
 			uprs = stmt.executeQuery("SELECT * FROM " + table + ";");
 			uprs.moveToInsertRow(); 
-			uprs.updateInt("id",id);
+			uprs.updateString("Name",name);
+			uprs.updateString("Password",pass);
 			uprs.insertRow();
 			return true;
 		}catch (SQLException e) {

@@ -85,8 +85,15 @@ public class ClientConsole implements ChatIF
 					continue;
 				}
 				client.handleMessageFromClientUI(message);
-				message = fromConsole.readLine();
-				client.handleMessageFromClientUI(message);
+
+				/*..*/
+
+				String userNameAndPass = "";
+				System.out.println("Please Enter userName");
+				userNameAndPass += fromConsole.readLine() + " "; 
+				System.out.println("Please Enter Password");
+				userNameAndPass += fromConsole.readLine();
+				client.handleMessageFromClientUI(userNameAndPass);				
 				break;
 			}
 		}
