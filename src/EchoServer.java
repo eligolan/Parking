@@ -6,7 +6,6 @@ import java.io.*;
 
 import com.mysql.jdbc.StringUtils;
 
-import ocsf.server.*;
 
 /**
  * This class overrides some of the methods in the abstract 

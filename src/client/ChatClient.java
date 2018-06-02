@@ -3,8 +3,6 @@
 // license found at www.lloseng.com 
 
 package client;
-
-import ocsf.client.*;
 import common.*;
 import java.io.*;
 
