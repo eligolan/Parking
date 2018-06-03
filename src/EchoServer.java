@@ -79,6 +79,10 @@ public class EchoServer extends AbstractServer
 					client.sendToClient("SingIn faild!");
 				}
 			}else {
+				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "';")) {
+					client.sendToClient("Register faild!");
+					return;
+				}	
 				if(m.addUserToTable("parking",name,pass)) {
 					client.sendToClient("Register success!");
 				}else {
