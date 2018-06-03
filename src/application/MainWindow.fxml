@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.MainWindowController">
+   <children>
+      <Button id="orderParking" fx:id="orderParking" layoutX="195.0" layoutY="59.0" mnemonicParsing="false" onAction="#clickOnOrderParking" text="order parking" />
+      <Button id="exitParking" fx:id="exitParking" layoutX="201.0" layoutY="119.0" mnemonicParsing="false" onAction="#clickOnExitParking" text="exit parking" />
+      <Button id="cancelParking" fx:id="cancelParking" layoutX="193.0" layoutY="174.0" mnemonicParsing="false" onAction="#clickOnCancelParking" text="cancel parking" />
+      <Button id="complaint" fx:id="complaint" layoutX="190.0" layoutY="230.0" mnemonicParsing="false" onAction="#clickOnComplaint" text="send complaint" />
+   </children>
+</AnchorPane>

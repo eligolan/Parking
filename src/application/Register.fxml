@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="application.RegisterController">
+   <children>
+      <Label layoutX="64.0" layoutY="59.0" text="id:" />
+      <Label layoutX="55.0" layoutY="103.0" text="car number:" />
+      <Label layoutX="63.0" layoutY="150.0" text="start date:" />
+      <Label layoutX="72.0" layoutY="197.0" text="e-mail:" />
+      <TextField id="idText" fx:id="idText" layoutX="187.0" layoutY="54.0" />
+      <TextField id="carNumText" fx:id="carNumText" layoutX="187.0" layoutY="98.0" />
+      <TextField id="startDateText" fx:id="startDateText" layoutX="187.0" layoutY="145.0" />
+      <TextField id="emailText" fx:id="emailText" layoutX="187.0" layoutY="192.0" />
+      <Button id="register" fx:id="register" layoutX="248.0" layoutY="242.0" mnemonicParsing="false" onAction="#clickOnRegister" text="Register" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <Label layoutX="64.0" layoutY="55.0" text="Id:" />
+      <Label layoutX="55.0" layoutY="84.0" text="car number:" />
+      <Label layoutX="55.0" layoutY="116.0" text="start time" />
+      <Label layoutX="55.0" layoutY="150.0" text="end time" />
+      <Label layoutX="55.0" layoutY="187.0" text="E-mail:" />
+      <TextField id="id" fx:id="id" layoutX="183.0" layoutY="50.0" />
+      <TextField id="startT" fx:id="startT" layoutX="183.0" layoutY="101.0" />
+      <TextField id="endT" fx:id="endT" layoutX="183.0" layoutY="145.0" />
+      <TextField id="email" fx:id="email" layoutX="183.0" layoutY="193.0" />
+      <Button id="order" fx:id="order" layoutX="228.0" layoutY="244.0" mnemonicParsing="false" text="Order" />
+   </children>
+</AnchorPane>

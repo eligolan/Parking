@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OneTimeReqController">
+   <children>
+      <TextField fx:id="textId" layoutX="149.0" layoutY="71.0" promptText="textId" />
+      <Label layoutX="51.0" layoutY="71.0" prefHeight="31.0" prefWidth="74.0" text="Id request :" />
+      <Button id="ok" fx:id="ok" layoutX="370.0" layoutY="71.0" mnemonicParsing="false" onAction="#clickOk" text="ok" />
+      <Button id="parkingRes" fx:id="parkingRes" layoutX="149.0" layoutY="150.0" mnemonicParsing="false" text="Parking reservation" />
+   </children>
+</AnchorPane>

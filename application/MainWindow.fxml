@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainWindowController">
+   <children>
+      <Button id="reserve" fx:id="reserve" layoutX="165.0" layoutY="49.0" mnemonicParsing="false" onAction="#clickOnReserve" text="Parking reservation" />
+      <Button id="exit" fx:id="exit" layoutX="190.0" layoutY="135.0" mnemonicParsing="false" onAction="#ClickOnExit" text="Exit parking" />
+      <Button id="complaint" fx:id="complaint" layoutX="196.0" layoutY="211.0" mnemonicParsing="false" onAction="#cliclOnComplaint" text="complaint" />
+   </children>
+</AnchorPane>

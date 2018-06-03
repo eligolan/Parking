@@ -68,6 +68,9 @@ public class ClientConsole implements ChatIF
 	 */
 	public void accept() 
 	{
+		
+		
+		
 		try
 		{
 			BufferedReader fromConsole = 
@@ -128,18 +131,15 @@ public class ClientConsole implements ChatIF
 		String host = "";
 		int port = 0;  //The port number
 
-		try
-		{
-			host = args[0];
-		}
-		catch(ArrayIndexOutOfBoundsException e)
-		{
+
 			host = "localhost";
-		}
+		
 
 		/*TODO: add code to get user info(user name, user id) and pass it, NOTE: no need to check if info is valid */
 
 		ClientConsole chat= new ClientConsole(host, DEFAULT_PORT);
+		
+		
 		chat.accept();  //Wait for console data
 	}
 }
