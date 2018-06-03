@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="application.GettingDeatailsController">
+   <children>
+      <TextField id="numId" fx:id="numId" layoutX="155.0" layoutY="65.0" />
+      <TextField id="numParkingLot" fx:id="numParkingLot" layoutX="155.0" layoutY="115.0" />
+      <Button id="cancel" fx:id="cancel" layoutX="325.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickOnCancel" text="cancel parking" />
+      <Button id="exit" fx:id="exit" layoutX="87.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickOnExit" text="exit parking" />
+   </children>
+</AnchorPane>

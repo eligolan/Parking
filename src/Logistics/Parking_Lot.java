@@ -8,6 +8,7 @@ import Actors.Employee;
 import Actors.Manager;
 
 public class Parking_Lot {
+	int numId;
 	private List<ParkedCar> listCar;
 	private List<Employee> employees;
 	private Map<Location, ParkedCar> parkingZone;
@@ -15,8 +16,9 @@ public class Parking_Lot {
 	private Location loc;
 	private String name;
 	
-	public Parking_Lot(Location loc, String name, Manager manger)
+	public Parking_Lot(int numId,Location loc, String name, Manager manger)
 	{
+		this.numId = numId;
 		this.loc = loc;
 		this.name = name;
 		this.setManager(manger);
