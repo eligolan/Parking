@@ -1,12 +1,26 @@
 package application;
+
 import java.io.IOException;
 import java.net.URL;
+
+import ClientServer.ClientConsole;
+import ClientServer.ClientServerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-public class Main extends Application {
+public final class MainController extends Application {
+	public MainController() {
+	}
+	
+	
+	
+	public void showMainMenu(String[] args)
+	{ 
+		launch(args);
+	}
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		// constructing our scene
@@ -18,7 +32,10 @@ public class Main extends Application {
 		primaryStage.setTitle( "Parking Lot" );
 		primaryStage.show();
 	}
-	public static void main(String[] args) {
-		launch(args);
+	
+	public boolean sendUserAndPassToClient(String userAndPass)
+	{
+		return ClientServerController.sendMsgToServer(userAndPass);
 	}
+	
 }

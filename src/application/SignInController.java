@@ -19,6 +19,19 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class SignInController {
+	
+	private MainController controll;
+//	
+//   public SignInController(GuiController controll)
+//   {
+//	   this.controll = controll;
+//   }
+	
+	@FXML
+    public void initialize()
+    {
+		controll =new MainController();
+    }
 
     @FXML // fx:id="userText"
     private TextField userText; // Value injected by FXMLLoader
@@ -38,6 +51,7 @@ public class SignInController {
     	String pass = passText.getText();
     	if(checkInputIsValid(user, pass))
     	{
+    		controll.sendUserAndPassToClient(user+" "+pass);
     		getMainWindow(event);
     	}
     	else
@@ -48,8 +62,8 @@ public class SignInController {
     }
 
 	private boolean checkInputIsValid(String user, String pass) {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO check if it is write propetlly and it is on the server
+		return true;
 	}
 	
 	private void getMainWindow(ActionEvent event) {

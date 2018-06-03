@@ -62,7 +62,7 @@ public class ChatClient extends AbstractClient
    *
    * @param message The message from the UI.    
    */
-  public void handleMessageFromClientUI(String message)
+  public boolean handleMessageFromClientUI(String message)
   {
     try
     {
@@ -76,6 +76,7 @@ public class ChatClient extends AbstractClient
         ("Could not send message to server.  Terminating client.");
       quit();
     }
+    return true;
   }
   
   /**

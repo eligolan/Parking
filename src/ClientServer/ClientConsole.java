@@ -1,8 +1,11 @@
+package ClientServer;
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
 import java.io.*;
+
+import application.MainController;
 import client.*;
 import common.*;
 
@@ -31,6 +34,7 @@ public class ClientConsole implements ChatIF
 	 * The instance of the client that created this ConsoleChat.
 	 */
 	ChatClient client;
+	ClientServerController controller;
 
 
 	//Constructors ****************************************************
@@ -46,6 +50,7 @@ public class ClientConsole implements ChatIF
 		try 
 		{
 			client= new ChatClient(host, port, this);
+			controller = new ClientServerController(this);
 		} 
 		catch(IOException exception) 
 		{
@@ -66,45 +71,52 @@ public class ClientConsole implements ChatIF
 	 * This method waits for input from the console.  Once it is 
 	 * received, it sends it to the client's message handler.
 	 */
-	public void accept() 
+	public void accept(String[] args) 
 	{
+		
 		
 		
 		
 		try
 		{
-			BufferedReader fromConsole = 
-					new BufferedReader(new InputStreamReader(System.in));
-			String message;
-			System.out.println("Connection success!");
-			while(true) {
-				System.out.println("Please enter your command number:");
-				System.out.println("(1) Sign in");
-				System.out.println("(2) Register");
-				message = fromConsole.readLine();
-				int getOrder = Integer.parseInt(message);
-				if(getOrder < 1 || getOrder > 2) {
-					System.out.println("bad command, try again..");
-					continue;
-				}
-				client.handleMessageFromClientUI(message);
-
-				/*..*/
-
-				String userNameAndPass = "";
-				System.out.println("Please Enter userName");
-				userNameAndPass += fromConsole.readLine() + " "; 
-				System.out.println("Please Enter Password");
-				userNameAndPass += fromConsole.readLine();
-				client.handleMessageFromClientUI(userNameAndPass);				
-				break;
-			}
+			controller.showMainMenu(args);
+//			BufferedReader fromConsole = 
+//					new BufferedReader(new InputStreamReader(System.in));
+//			String message;
+//			System.out.println("Connection success!");
+//			while(true) {
+//				System.out.println("Please enter your command number:");
+//				System.out.println("(1) Sign in");
+//				System.out.println("(2) Register");
+//				message = fromConsole.readLine();
+//				int getOrder = Integer.parseInt(message);
+//				if(getOrder < 1 || getOrder > 2) {
+//					System.out.println("bad command, try again..");
+//					continue;
+//				}
+//				client.handleMessageFromClientUI(message);
+//
+//				/*..*/
+//
+//				String userNameAndPass = "";
+//				System.out.println("Please Enter userName");
+//				userNameAndPass += fromConsole.readLine() + " "; 
+//				System.out.println("Please Enter Password");
+//				userNameAndPass += fromConsole.readLine();
+//				client.handleMessageFromClientUI(userNameAndPass);				
+//				break;
+//			}
 		}
 		catch (Exception ex) 
 		{
 			System.out.println
 			("Unexpected error while reading from console!");
 		}
+	}
+	
+	public boolean sendMsgToServer(String userNameAndPass)
+	{
+		return client.handleMessageFromClientUI(userNameAndPass);
 	}
 
 	/**
@@ -140,7 +152,7 @@ public class ClientConsole implements ChatIF
 		ClientConsole chat= new ClientConsole(host, DEFAULT_PORT);
 		
 		
-		chat.accept();  //Wait for console data
+		chat.accept(args);  //Wait for console data
 	}
 }
 //End of ConsoleChat class
