@@ -15,7 +15,7 @@ import java.io.*;
  * @author Fran&ccedil;ois B&eacute;langer
  * @version July 2000
  */
-public class ChatClient extends AbstractClient
+public class ConnectionClient extends AbstractClient
 {
   //Instance variables **********************************************
   
@@ -23,7 +23,7 @@ public class ChatClient extends AbstractClient
    * The interface type variable.  It allows the implementation of 
    * the display method in the client.
    */
-  ChatIF clientUI; 
+  ParkingClientIF clientUI; 
 
   
   //Constructors ****************************************************
@@ -36,7 +36,7 @@ public class ChatClient extends AbstractClient
    * @param clientUI The interface type variable.
    */
   
-  public ChatClient(String host, int port, ChatIF clientUI) 
+  public ConnectionClient(String host, int port, ParkingClientIF clientUI) 
     throws IOException 
   {
     super(host, port); //Call the superclass constructor

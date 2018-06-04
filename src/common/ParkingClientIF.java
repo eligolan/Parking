@@ -12,7 +12,7 @@ package common;
  * @author Dr Timothy C. Lethbridge
  * @version July 2000
  */
-public interface ChatIF 
+public interface ParkingClientIF 
 {
 	
 	/*TODO: add abstract methods to pass the info, and implement in implementing classes*/

@@ -19,7 +19,7 @@ import common.*;
  * @author Dr Robert Lagani&egrave;re
  * @version July 2000
  */
-public class ClientConsole implements ChatIF 
+public class ClientConsole implements ParkingClientIF 
 {
 	//Class variables *************************************************
 
@@ -33,7 +33,7 @@ public class ClientConsole implements ChatIF
 	/**
 	 * The instance of the client that created this ConsoleChat.
 	 */
-	ChatClient client;
+	ConnectionClient client;
 	ClientServerController controller;
 
 
@@ -49,7 +49,7 @@ public class ClientConsole implements ChatIF
 	{  
 		try 
 		{
-			client= new ChatClient(host, port, this);
+			client= new ConnectionClient(host, port, this);
 			controller = new ClientServerController(this);
 		} 
 		catch(IOException exception) 
