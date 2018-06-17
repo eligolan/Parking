@@ -2,10 +2,12 @@ package Logistics;
 
 public class ParkedCar extends Car {
 	Location loc;
-
-	public ParkedCar(int id, int ownerId) {
+	AllOrders order_type;
+	
+	public ParkedCar(int id, int ownerId, Location loc, AllOrders order_type) {
 		super(id, ownerId);
-		
+		this.loc=loc;
+		this.order_type=order_type;
 	}
 	
 	public void setLocation(Location loc)
@@ -17,5 +19,16 @@ public class ParkedCar extends Car {
 	{
 		return loc;
 	}
+	
+	public void setOrder(AllOrders order)
+	{
+		this.order_type = order;
+	}
+	
+	public AllOrders getOrder()
+	{
+		return order_type;
+	}
+	
 
 }

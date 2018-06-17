@@ -51,7 +51,7 @@ public class RequestOneTimeController {
 
     @FXML
     void clickOnPay(ActionEvent event) {
-    	if(controller.isParkingAvailable())
+    	if(controller.isParkingFull(idText))
     	{
     		controller.orderParking();
     	}

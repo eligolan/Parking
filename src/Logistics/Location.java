@@ -1,13 +1,15 @@
 package Logistics;
 
 public class Location {
-	private int corX;
-	private int corY;
+	private int corX; // row
+	private int corY; // column
+	private int corZ; // depth
 	
-	public Location(int x, int y)
+	public Location(int x, int y, int z)
 	{
 		this.corX = x;
 		this.corY = y;
+		this.corZ=z;
 	}
 	
 	public int getX()
@@ -20,6 +22,11 @@ public class Location {
 		return corY;
 	}
 	
+	public int getZ()
+	{
+		return corZ;
+	}
+	
 	public void setX(int x)
 	{
 		this.corX = x;
@@ -28,6 +35,11 @@ public class Location {
 	public void setY(int y)
 	{
 		this.corY = y;
+	}
+	
+	public void setZ(int z)
+	{
+		this.corZ = z;
 	}
 
 }

@@ -1,27 +1,27 @@
 package Actors;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class MemberShip extends Customer {
 	
 	private int carId;
-	private Date date;
+	private LocalDateTime date;
+	private double payment;
 	
-	public MemberShip(String name, int id, int carId, Date date) {
+	public MemberShip(String name, int id, int carId) {
 		super(name, id);
 		this.carId = carId;
-		this.date = date;
+		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		 this.date=LocalDateTime.now();  
+		 payment=250.0;
 	}
 	
-	
-//	public MemberShip(int id, int carId, Date date)
-//	{
-//		
-//	}
-	public Date getDate() {
+
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	public int getCarId() {
