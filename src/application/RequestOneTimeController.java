@@ -5,6 +5,8 @@
 package application;
 
 import Logistics.ParkingController;
+import Logistics.Parking_Lot;
+import Logistics.Time;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,12 +50,16 @@ public class RequestOneTimeController {
 
     @FXML // fx:id="c1"
     private AnchorPane c1; // Value injected by FXMLLoader
+    
+    @FXML
+    private TextField parkingNum;
 
     @FXML
     void clickOnPay(ActionEvent event) {
-    	if(controller.isParkingFull(idText))
+    	if(controller.isParkingFull(Integer.parseInt(parkingNum.toString())))
     	{
-    		controller.orderParking();
+    		/*TODO how to order? what is the right function?*/
+    		//controller.order(Parking_Lot pl,int customer_id,int car_id ,String email ,Time departure);
     	}
     	else
     	{
