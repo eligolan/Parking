@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class SetUpController {
+public class SetUpWinController {
 
     @FXML
     private AnchorPane c1;
@@ -18,7 +18,7 @@ public class SetUpController {
     private TextField location;
 
     @FXML
-    private TextField nameParking;
+    private TextField name;
 
     @FXML
     private TextField capacity;

@@ -26,19 +26,19 @@ public class ManagerWindowController {
     @FXML
     void clickOnSetUp(ActionEvent event) {
     	try {
-			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("SetUp.fxml")) ;
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("SetUpWin.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
 			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(existingWindow);
-			stage.setTitle("SetUpWindow");
+			stage.setTitle("Main Window");
 			stage.setScene(new Scene(root1));
 			stage.show();
 		}catch (Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("couldnt open the SetUpWindow windows");
+			System.out.println("couldnt open the MainWindow windows");
 		}
 
     }
