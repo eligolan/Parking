@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Actors.Customer;
 import Actors.Employee;
 import Actors.Manager;
+import javafx.util.Pair;
 
 public final class ParkingController {
 	
@@ -16,11 +17,17 @@ public final class ParkingController {
 		parking = new ArrayList<Parking_Lot>();
 	}
 	
+	
+	//setUp
+	public void SetUp(int parking_id , String loc , Manager m , String name , int capacity){
+	   addParkingLot(parking_id, loc, m, name, capacity);
+	}
+	
 	// will create a new parking lot and add it to list of all parking lots
-	public void addParkingLot(int parking_id ,Location loc, Manager m, String name, int capcity){
+	public void addParkingLot(int parking_id ,String loc, Manager m, String name, int capacity){
 		
 		if(!checkIfparkingLotExist(parking_id))
-	        parking.add(new Parking_Lot(parking_id, loc, name, m,capcity));
+	        parking.add(new Parking_Lot(parking_id, loc, name, m,capacity));
 		else{
 			System.err.println("can not add parkinglot-already exist");
 		}    
@@ -171,6 +178,25 @@ public final class ParkingController {
 		Parking_Lot pl=GetParkingLotById(parking_id);
 		String order = pl.viewOrder(customer_id,car_id);
 		return order;
+	}
+	
+	// display function for gui
+	// will display all locations which are not available
+	public ArrayList<Pair<Integer, Integer>> display(int parking_id, int rows , int col){
+		ArrayList<Pair<Integer, Integer>> view_array=new ArrayList<Pair<Integer, Integer>>();
+		Parking_Lot pl =GetParkingLotById(parking_id);
+		for(int i=0;i<rows;i++)
+		{
+		  for(int j=0; j<col;j++){
+			  Location loc=new Location(i, j, 1);
+			  if(!pl.isParkingAvailableAtLocation(loc)){
+				 Pair<Integer, Integer > indexes = new Pair<>(i,j);
+				 view_array.add(indexes);
+			  }
+		 }
+		  
+		}
+		return view_array;	
 	}
 	
 	

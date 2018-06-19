@@ -19,13 +19,13 @@ public class Parking_Lot {
 	private Map<Location, ParkedCar> parkingZone;
 	private Map<Location, Integer> reservedParkings;
 	private Manager manager;
-	private Location loc;
+	private String loc;
 	private String name;
 	private int maximum_capacity;
 	private Location maximum_corrdinates;
 	private Location next_nearest_location;
 	
-	public Parking_Lot(int numId,Location loc, String name, Manager manger, int capacity)
+	public Parking_Lot(int numId,String loc, String name, Manager manger, int capacity)
 	{
 		this.numId = numId;
 		this.loc = loc;
@@ -267,10 +267,10 @@ public class Parking_Lot {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Location getLoc() {
+	public String getLoc() {
 		return loc;
 	}
-	public void setLoc(Location loc) {
+	public void setLoc(String loc) {
 		this.loc = loc;
 	}
 
