@@ -5,20 +5,28 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RequestOneTimeController">
+<AnchorPane id="c1" fx:id="c1" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RequestOneTimeController">
    <children>
       <Label layoutX="63.0" layoutY="61.0" text="Id :" />
       <Label layoutX="43.0" layoutY="93.0" text="car number :" />
-      <Label layoutX="50.0" layoutY="140.0" text="start time :" />
-      <Label layoutX="54.0" layoutY="184.0" text="end time:" />
-      <Label layoutX="61.0" layoutY="229.0" text="e-mail :" />
+      <Label layoutX="54.0" layoutY="161.0" text="start date:" />
+      <Label layoutX="52.0" layoutY="236.0" text="end date:" />
+      <Label layoutX="65.0" layoutY="347.0" text="e-mail :" />
       <TextField id="idText" fx:id="idText" layoutX="134.0" layoutY="49.0" />
       <TextField id="carNumText" fx:id="carNumText" layoutX="134.0" layoutY="88.0" />
-      <TextField id="startTimeText" fx:id="startTimeText" layoutX="134.0" layoutY="135.0" />
-      <TextField id="endTimeText" fx:id="endTimeText" layoutX="134.0" layoutY="179.0" />
-      <TextField id="emailText" fx:id="emailText" layoutX="134.0" layoutY="224.0" />
+      <TextField id="dateStart" fx:id="dateStart" layoutX="134.0" layoutY="157.0" />
+      <TextField id="endDate" fx:id="endDate" layoutX="134.0" layoutY="232.0" />
+      <TextField id="emailText" fx:id="emailText" layoutX="134.0" layoutY="343.0" />
       <Button id="pay" fx:id="pay" layoutX="380.0" layoutY="135.0" mnemonicParsing="false" onAction="#clickOnPay" text="Pay" />
       <TextField id="parkingNum" fx:id="parkingNum" layoutX="134.0" layoutY="14.0" />
       <Label layoutX="28.0" layoutY="18.0" text="parking number:" />
+      <Label layoutX="63.0" layoutY="201.0" text="time:" />
+      <TextField id="timeStart" fx:id="timeStart" layoutX="134.0" layoutY="197.0" />
+      <Label layoutX="58.0" layoutY="127.0" text="Start day:" />
+      <TextField id="startDay" fx:id="startDay" layoutX="134.0" layoutY="123.0" />
+      <Label layoutX="55.0" layoutY="276.0" text="time end:" />
+      <Label layoutX="58.0" layoutY="311.0" text="end day:" />
+      <TextField id="timeEnd" fx:id="timeEnd" layoutX="134.0" layoutY="272.0" />
+      <TextField id="endDay" fx:id="endDay" layoutX="134.0" layoutY="307.0" />
    </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -19,23 +20,23 @@ import javafx.stage.Window;
 
 public class RegisterController {
 
-    @FXML // fx:id="carNumText"
-    private TextField carNumText; // Value injected by FXMLLoader
+    @FXML
+    private AnchorPane c1;
 
-    @FXML // fx:id="startDateText"
-    private TextField startDateText; // Value injected by FXMLLoader
+    @FXML
+    private TextField name;
 
-    @FXML // fx:id="emailText"
-    private TextField emailText; // Value injected by FXMLLoader
+    @FXML
+    private TextField carNumText;
 
-    @FXML // fx:id="idText"
-    private TextField idText; // Value injected by FXMLLoader
+    @FXML
+    private TextField emailText;
 
-    @FXML // fx:id="c1"
-    private AnchorPane c1; // Value injected by FXMLLoader
+    @FXML
+    private Button register;
 
-    @FXML // fx:id="register"
-    private Button register; // Value injected by FXMLLoader
+    @FXML
+    private PasswordField pass;
 
     @FXML
     void clickOnRegister(ActionEvent event) {

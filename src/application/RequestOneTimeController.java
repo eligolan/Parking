@@ -29,37 +29,50 @@ public class RequestOneTimeController {
     {
 		controller =new ParkingController();
     }
+    @FXML
+    private AnchorPane c1;
 
-    @FXML // fx:id="carNumText"
-    private TextField carNumText; // Value injected by FXMLLoader
+    @FXML
+    private TextField idText;
 
-    @FXML // fx:id="endTimeText"
-    private TextField endTimeText; // Value injected by FXMLLoader
+    @FXML
+    private TextField carNumText;
 
-    @FXML // fx:id="pay"
-    private Button pay; // Value injected by FXMLLoader
+    @FXML
+    private TextField dateStart;
 
-    @FXML // fx:id="emailText"
-    private TextField emailText; // Value injected by FXMLLoader
+    @FXML
+    private TextField endDate;
 
-    @FXML // fx:id="idText"
-    private TextField idText; // Value injected by FXMLLoader
+    @FXML
+    private TextField emailText;
 
-    @FXML // fx:id="startTimeText"
-    private TextField startTimeText; // Value injected by FXMLLoader
+    @FXML
+    private Button pay;
 
-    @FXML // fx:id="c1"
-    private AnchorPane c1; // Value injected by FXMLLoader
-    
     @FXML
     private TextField parkingNum;
+
+    @FXML
+    private TextField timeStart;
+
+    @FXML
+    private TextField startDay;
+
+    @FXML
+    private TextField timeEnd;
+
+    @FXML
+    private TextField endDay;
 
     @FXML
     void clickOnPay(ActionEvent event) {
     	if(controller.isParkingFull(Integer.parseInt(parkingNum.toString())))
     	{
     		/*TODO how to order? what is the right function?*/
-    		//controller.order(Parking_Lot pl,int customer_id,int car_id ,String email ,Time departure);
+    		Time arrival = new Time(Integer.parseInt(timeStart.toString()),Integer.parseInt(startDay.toString()),dateStart.toString());
+    		Time departure = new Time(Integer.parseInt(timeEnd.toString()),Integer.parseInt(endDay.toString()),endDate.toString());
+    		controller.orderParking(Integer.parseInt(parkingNum.toString()),Integer.parseInt(idText.toString()),Integer.parseInt(carNumText.toString()) ,2,"",arrival ,departure );
     	}
     	else
     	{
