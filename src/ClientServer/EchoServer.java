@@ -64,9 +64,10 @@ public class EchoServer extends AbstractServer
 			switch (numRequest) {
 			case 1:  /* sign in */
 				String input = sndRequest.getMsg().toString();
-				String name = input.substring(0,input.indexOf(' '));
-				String pass = input.substring(input.indexOf(' ') + 1);
-
+				
+				List<String> element = Arrays.asList(input.split(" "));
+				String name = element.get(0);
+				String pass = element.get(1);
 
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "' AND Password = '"+ pass +"';")) {	
 					client.sendToClient("SignIn success!");
@@ -76,7 +77,7 @@ public class EchoServer extends AbstractServer
 				break;
 			case 2: /* register */
 				input = sndRequest.getMsg().toString();
-				List<String> element = Arrays.asList(input.split(" "));
+				element = Arrays.asList(input.split(" "));
 						
 				name = element.get(0);
 				pass = element.get(1);
@@ -95,9 +96,25 @@ public class EchoServer extends AbstractServer
 					client.sendToClient("Register failed!");
 				}
 				break;
-			case 3:
+			case 3: /* is manager */
 				name = sndRequest.getMsg().toString();
 				if(m.isManager("SELECT * FROM parking WHERE Name = '" + name + "' AND Manager = 1;")){
+					client.sendToClient("success!");
+				}else {
+					client.sendToClient("failed!");
+				}
+				break;
+			case 4: /* order park */
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));
+					
+				int parking_id = Integer.parseInt(element.get(0));
+				int customer_id = Integer.parseInt(element.get(1));
+				String car_number = element.get(3);
+				mail = element.get(2);
+
+				
+				if(m.addOrderToTable("parkingOrder",parking_id,customer_id,car_number,mail)){
 					client.sendToClient("success!");
 				}else {
 					client.sendToClient("failed!");

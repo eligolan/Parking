@@ -153,4 +153,27 @@ public class mysqlConnection {
 		}
 		return false;
 	}
+
+	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail) {
+		try {
+			// add record to table.
+			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+			ResultSet uprs;
+
+			uprs = stmt.executeQuery("SELECT * FROM " + table + ";");
+			uprs.moveToInsertRow(); 
+			uprs.updateInt("parking_id",parking_id);
+			uprs.updateInt("customer_id",customer_id);
+			uprs.updateString("car_number",car_number);
+			uprs.updateString("eail",mail);
+		//	uprs.updateDate("Date_start",start);
+			uprs.insertRow();
+			return true;
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
