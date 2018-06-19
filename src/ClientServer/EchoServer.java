@@ -59,21 +59,6 @@ public class EchoServer extends AbstractServer
 		/* check choice */
 		ObjectSender sndRequest = (ObjectSender) msg;
 
-		/*		int id;
-		if(isNumber(msg.toString())) {
-			id = Integer.parseInt(msg.toString());
-
-			if(id == 1) {
-				signIn = true;
-				return;
-			}
-			else if(id == 2){
-				signIn = false;
-				return;
-			}
-		}
-		 */
-
 		int numRequest = sndRequest.getNumRequest();
 		try {
 			switch (numRequest) {
@@ -92,8 +77,7 @@ public class EchoServer extends AbstractServer
 			case 2: /* register */
 				input = sndRequest.getMsg().toString();
 				List<String> element = Arrays.asList(input.split(" "));
-				
-				
+						
 				name = element.get(0);
 				pass = element.get(1);
 				String mail = element.get(2);
@@ -109,6 +93,14 @@ public class EchoServer extends AbstractServer
 					client.sendToClient("Register success!");
 				}else {
 					client.sendToClient("Register failed!");
+				}
+				break;
+			case 3:
+				name = sndRequest.getMsg().toString();
+				if(m.isManager("SELECT * FROM parking WHERE Name = '" + name + "' AND Manager = 1;")){
+					client.sendToClient("success!");
+				}else {
+					client.sendToClient("failed!");
 				}
 				break;
 			}

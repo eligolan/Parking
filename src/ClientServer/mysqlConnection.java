@@ -87,7 +87,36 @@ public class mysqlConnection {
 		} catch (SQLException e) {e.printStackTrace();}
 		return false;
 	}
-
+	
+	
+	
+	public boolean isManager(String query)
+	{
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				System.out.println(rs.getString(1));
+				return true;
+			}
+			//rs.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			//stmt.executeUpdate("UPDATE course SET semestr=\"W08\" WHERE num=61309");
+		} catch (SQLException e) {e.printStackTrace();}
+		return false;
+	}
+	
 
 	public void createTable(String table){
 		Statement stmt;

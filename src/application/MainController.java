@@ -50,5 +50,15 @@ public final class MainController extends Application {
 		}
 		return true;
 	}
+
+
+
+	public boolean isManager(Object check) {
+		String msg = ClientServerController.sendMsgToServer(check).toString();
+		if(msg.equals("failed!")) {
+			return false;
+		}
+		return true;
+	}
 	
 }

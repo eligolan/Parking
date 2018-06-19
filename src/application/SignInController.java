@@ -53,9 +53,15 @@ public class SignInController {
     	if(checkInputIsValid(user, pass))
     	{
     		ObjectSender snd = new ObjectSender(1,user+" "+pass);
-    		if(controll.sendUserAndPassToClient(snd)) {    			
-    			getMainWindow(event);
-    			return;
+    		if(controll.sendUserAndPassToClient(snd)) {  
+    			if(controll.isManager(new ObjectSender(3,user))) {
+    				System.out.println("yes");
+    				return;
+    			}else {
+    				getMainWindow(event);
+    			}
+    				
+    			
     		}else {
     			wrongInput(event);
     		}		
