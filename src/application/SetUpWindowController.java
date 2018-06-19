@@ -1,5 +1,6 @@
 package application;
 
+import Actors.Manager;
 import Logistics.ParkingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,12 +11,17 @@ import javafx.scene.layout.AnchorPane;
 public class SetUpWindowController {
 	
 	ParkingController controller;
+	Manager manager;
 	
 	@FXML
     public void initialize()
     {
 		controller =new ParkingController();
     }
+	
+	void initData(Manager m) {
+	    manager = m;
+	  }
     @FXML
     private AnchorPane c1;
 
