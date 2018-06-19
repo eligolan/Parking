@@ -1,27 +1,13 @@
 package application;
 
-import Actors.Manager;
-import Logistics.ParkingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class SetUpWindowController {
-	
-	ParkingController controller;
-	Manager manager;
-	
-	@FXML
-    public void initialize()
-    {
-		controller =new ParkingController();
-    }
-	
-	void initData(Manager m) {
-	    manager = m;
-	  }
+public class SetUpController {
+
     @FXML
     private AnchorPane c1;
 
@@ -38,12 +24,10 @@ public class SetUpWindowController {
     private TextField capacity;
 
     @FXML
-    private Button btOk;
+    private Button btn;
 
     @FXML
     void clickOnOk(ActionEvent event) {
-    	
-    	
 
     }
 

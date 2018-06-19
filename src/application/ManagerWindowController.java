@@ -1,5 +1,5 @@
 package application;
-import Actors.Manager;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 public class ManagerWindowController {
@@ -25,35 +23,21 @@ public class ManagerWindowController {
     @FXML
     private Button view;
 
-    Manager manager;
-    
-    void initData(Manager m) {
-	    manager = m;
-	  }
-    
     @FXML
     void clickOnSetUp(ActionEvent event) {
     	try {
-    		FXMLLoader loader = new FXMLLoader(
-    			    getClass().getResource(
-    			      "SetUpWindow.fxml"
-    			    )
-    			  );
-
-    			  Stage stage = new Stage(StageStyle.DECORATED);
-    			  stage.setScene(
-    			    new Scene(
-    			      (Pane) loader.load()
-    			    )
-    			  );
-
-    			  SetUpWindowController controller = 
-    			    loader.<SetUpWindowController>getController();
-    			  controller.initData(manager);
-
-    			  stage.show();
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("SetUp.fxml")) ;
+			Parent root1 = (Parent) fxmloader.load();
+			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(existingWindow);
+			stage.setTitle("SetUpWindow");
+			stage.setScene(new Scene(root1));
+			stage.show();
 		}catch (Exception e)
 		{
+			e.printStackTrace();
 			System.out.println("couldnt open the SetUpWindow windows");
 		}
 
