@@ -6,6 +6,8 @@ package client;
 import common.*;
 import java.io.*;
 
+import ClientServer.ObjectSender;
+
 /**
  * This class overrides some of the methods defined in the abstract
  * superclass in order to give more functionality to the client.
@@ -62,21 +64,18 @@ public class ConnectionClient extends AbstractClient
 	 *
 	 * @param message The message from the UI.    
 	 */
-	public Object handleMessageFromClientUI(String message)
+	public Object handleMessageFromClientUI(Object message)
 	{
 		try
 		{
-			/*TODO: add the functionality to ChatIF and all it's implementations and use it to handle message type "send"*/
 			sendToServer(message);
-			BufferedReader in =
-					new BufferedReader(
-							new InputStreamReader(clientSocket.getInputStream()));
 			return input.readObject();
 		}
 		catch(IOException e)
 		{
-			clientUI.display
-			("Could not send message to server.  Terminating client.");
+			/*clientUI.display
+			("Could not send message to server.  Terminating client.");*/
+			e.printStackTrace();
 			quit();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

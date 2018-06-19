@@ -54,7 +54,9 @@ public class EchoServer extends AbstractServer
 	{
 		System.out.println("Message received: " + msg + " from " + client);
 		/* check choice */
-		int id;
+		ObjectSender sndRequest = (ObjectSender) msg;
+
+		/*		int id;
 		if(isNumber(msg.toString())) {
 			id = Integer.parseInt(msg.toString());
 
@@ -67,19 +69,28 @@ public class EchoServer extends AbstractServer
 				return;
 			}
 		}
+		 */
 
-		String input = msg.toString();
-		String name = input.substring(0,input.indexOf(' '));
-		String pass = input.substring(input.indexOf(' ') + 1);
-
+		int numRequest = sndRequest.getNumRequest();
 		try {
-			if(signIn) {			
+			switch (numRequest) {
+			case 1:  /* sign in */
+				String input = sndRequest.getMsg().toString();
+				String name = input.substring(0,input.indexOf(' '));
+				String pass = input.substring(input.indexOf(' ') + 1);
+
+
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "' AND Password = '"+ pass +"';")) {	
 					client.sendToClient("SignIn success!");
 				}else {
 					client.sendToClient("SingIn faild!");
 				}
-			}else {
+				break;
+			case 2: /* regi */
+				input = sndRequest.getMsg().toString();
+				name = input.substring(0,input.indexOf(' '));
+				pass = input.substring(input.indexOf(' ') + 1);
+
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "';")) {
 					client.sendToClient("Register faild!");
 					return;
@@ -89,23 +100,26 @@ public class EchoServer extends AbstractServer
 				}else {
 					client.sendToClient("Register faild!");
 				}
+				break;
 			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	private boolean isNumber(String str) {
-		 try  
-		  {  
-		    int d = Integer.parseInt(str);  
-		  }  
-		  catch(NumberFormatException nfe)  
-		  {  
-		    return false;  
-		  }  
-		  return true;  
+		try  
+		{  
+			int d = Integer.parseInt(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
 	}
 
 

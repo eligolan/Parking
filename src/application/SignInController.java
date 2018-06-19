@@ -4,6 +4,7 @@
 
 package application;
 
+import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,7 +52,8 @@ public class SignInController {
     	String pass = passText.getText();
     	if(checkInputIsValid(user, pass))
     	{
-    		if(controll.sendUserAndPassToClient(user+" "+pass)) {    			
+    		ObjectSender snd = new ObjectSender(1,user+" "+pass);
+    		if(controll.sendUserAndPassToClient(snd)) {    			
     			getMainWindow(event);
     			return;
     		}else {

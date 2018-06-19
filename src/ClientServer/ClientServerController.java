@@ -14,7 +14,7 @@ public final class ClientServerController {
 	}
 	
 
-	public static Object sendMsgToServer(String userAndPass) {
+	public static Object sendMsgToServer(Object userAndPass) {
 		return client.sendMsgToServer(userAndPass);
 	}
 

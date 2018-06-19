@@ -33,7 +33,7 @@ public final class MainController extends Application {
 		primaryStage.show();
 	}
 	
-	public boolean sendUserAndPassToClient(String userAndPass)
+	public boolean sendUserAndPassToClient(Object userAndPass)
 	{
 		String msg = ClientServerController.sendMsgToServer(userAndPass).toString();
 		if(msg.equals("SingIn faild!")) {
