@@ -114,6 +114,7 @@ public class mysqlConnection {
 			uprs.updateString("Password",pass);
 			uprs.updateInt("manager",manager);
 			uprs.updateString("Car_number",carNumber);
+			uprs.updateString("Mail",mail);
 		//	uprs.updateDate("Date_start",start);
 			uprs.insertRow();
 			return true;

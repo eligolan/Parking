@@ -5,6 +5,8 @@ package ClientServer;
 
 import java.io.*;
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -89,21 +91,24 @@ public class EchoServer extends AbstractServer
 				break;
 			case 2: /* register */
 				input = sndRequest.getMsg().toString();
-				name = input.substring(0,input.indexOf(' '));
-				pass = input.substring(input.indexOf(' ') + 1);
-				String mail = input.substring(input.indexOf(' ') + 1);
-				String carNumber = input.substring(input.indexOf(' ') + 1);
-				int manager = Integer.parseInt(input.substring(input.indexOf(' ') + 1));
+				List<String> element = Arrays.asList(input.split(" "));
+				
+				
+				name = element.get(0);
+				pass = element.get(1);
+				String mail = element.get(2);
+				String carNumber = element.get(3);
+				int manager = Integer.parseInt(element.get(4));
 			//	Date dateStart = Date.parse(input.substring(input.indexOf(' ') + 1));
 
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "';")) {
-					client.sendToClient("Register faild!");
+					client.sendToClient("Register failed!");
 					return;
 				}	
 				if(m.addUserToTable("parking",name,pass,mail,carNumber,manager)) {
 					client.sendToClient("Register success!");
 				}else {
-					client.sendToClient("Register faild!");
+					client.sendToClient("Register failed!");
 				}
 				break;
 			}

@@ -51,10 +51,13 @@ public class RegisterController {
     void clickOnRegister(ActionEvent event) {
     	String user = name.getText();
     	String password = pass.getText();
+    	String email = emailText.getText();
+    	String numCar = carNumText.getText();
+    	
     	if(checkInputIsValid(user, password))
     	{
-    		ObjectSender snd = new ObjectSender(1,user+" "+pass);
-    		if(controll.sendUserAndPassToClient(snd)) {    			
+    		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0);
+    		if(controll.registerUserAndPassToClient(snd)) {    			
     			getMainWindow(event);
     			return;
     		}else {
@@ -65,11 +68,6 @@ public class RegisterController {
     	{
     		wrongInput(event);
     	}
-    	
-    	
-    	
-    	getMainWindow(event);
-
     }
     
     private boolean checkInputIsValid(String user, String pass) {
