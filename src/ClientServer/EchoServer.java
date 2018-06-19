@@ -4,6 +4,9 @@ package ClientServer;
 // license found at www.lloseng.com 
 
 import java.io.*;
+import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -54,58 +57,71 @@ public class EchoServer extends AbstractServer
 	{
 		System.out.println("Message received: " + msg + " from " + client);
 		/* check choice */
-		int id;
-		if(isNumber(msg.toString())) {
-			id = Integer.parseInt(msg.toString());
+		ObjectSender sndRequest = (ObjectSender) msg;
 
-			if(id == 1) {
-				signIn = true;
-				return;
-			}
-			else if(id == 2){
-				signIn = false;
-				return;
-			}
-		}
-
-		String input = msg.toString();
-		String name = input.substring(0,input.indexOf(' '));
-		String pass = input.substring(input.indexOf(' ') + 1);
-
+		int numRequest = sndRequest.getNumRequest();
 		try {
-			if(signIn) {			
+			switch (numRequest) {
+			case 1:  /* sign in */
+				String input = sndRequest.getMsg().toString();
+				String name = input.substring(0,input.indexOf(' '));
+				String pass = input.substring(input.indexOf(' ') + 1);
+
+
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "' AND Password = '"+ pass +"';")) {	
 					client.sendToClient("SignIn success!");
 				}else {
-					client.sendToClient("SingIn faild!");
+					client.sendToClient("SingIn failed!");
 				}
-			}else {
+				break;
+			case 2: /* register */
+				input = sndRequest.getMsg().toString();
+				List<String> element = Arrays.asList(input.split(" "));
+						
+				name = element.get(0);
+				pass = element.get(1);
+				String mail = element.get(2);
+				String carNumber = element.get(3);
+				int manager = Integer.parseInt(element.get(4));
+			//	Date dateStart = Date.parse(input.substring(input.indexOf(' ') + 1));
+
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "';")) {
-					client.sendToClient("Register faild!");
+					client.sendToClient("Register failed!");
 					return;
 				}	
-				if(m.addUserToTable("parking",name,pass)) {
+				if(m.addUserToTable("parking",name,pass,mail,carNumber,manager)) {
 					client.sendToClient("Register success!");
 				}else {
-					client.sendToClient("Register faild!");
+					client.sendToClient("Register failed!");
 				}
+				break;
+			case 3:
+				name = sndRequest.getMsg().toString();
+				if(m.isManager("SELECT * FROM parking WHERE Name = '" + name + "' AND Manager = 1;")){
+					client.sendToClient("success!");
+				}else {
+					client.sendToClient("failed!");
+				}
+				break;
 			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	private boolean isNumber(String str) {
-		 try  
-		  {  
-		    int d = Integer.parseInt(str);  
-		  }  
-		  catch(NumberFormatException nfe)  
-		  {  
-		    return false;  
-		  }  
-		  return true;  
+		try  
+		{  
+			int d = Integer.parseInt(str);  
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
 	}
 
 

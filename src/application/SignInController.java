@@ -4,6 +4,8 @@
 
 package application;
 
+
+import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,8 +53,18 @@ public class SignInController {
     	String pass = passText.getText();
     	if(checkInputIsValid(user, pass))
     	{
-    		controll.sendUserAndPassToClient(user+" "+pass);
-    		getMainWindow(event);
+    		ObjectSender snd = new ObjectSender(1,user+" "+pass);
+    		if(controll.sendUserAndPassToClient(snd)) {  
+    			if(controll.isManager(new ObjectSender(3,user))) {
+    				getManagerWindow(event);
+    			}else {
+    				getMainWindow(event);
+    			}
+    				
+    			
+    		}else {
+    			wrongInput(event);
+    		}		
     	}
     	else
     	{
@@ -60,6 +72,24 @@ public class SignInController {
     	}
 
     }
+
+	private void getManagerWindow(ActionEvent event) {
+		try {
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("ManagerWindow.fxml")) ;
+			Parent root1 = (Parent) fxmloader.load();
+			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(existingWindow);
+			stage.setTitle("ManagerWindow");
+			stage.setScene(new Scene(root1));
+			stage.show();
+		}catch (Exception e)
+		{
+			System.out.println("couldnt open the ManagerWindow windows");
+		}
+		
+	}
 
 	private boolean checkInputIsValid(String user, String pass) {
 		// TODO check if it is write propetlly and it is on the server

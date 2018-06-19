@@ -24,6 +24,9 @@ private ParkingController controller;
 
     @FXML
     private TextField numParkingLot;
+    
+    @FXML
+    private TextField carNumber;
 
     @FXML
     private Button cancel;
@@ -34,18 +37,18 @@ private ParkingController controller;
 
     @FXML
     void clickOnCancel(ActionEvent event) {
-    	if(controller.isParkingExist())
+    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.toString())))
     	{
-    		controller.cancelParking();
+    		controller.cancelParking(Integer.parseInt(numParkingLot.toString()) , Integer.parseInt(numId.toString()) , Integer.parseInt(carNumber.toString()));
     	}
 
     }
 
     @FXML
     void clickOnExit(ActionEvent event) {
-    	if(controller.isParkingExist())
+    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.toString())))
     	{
-    		controller.exitParking();
+    		controller.exitParking(Integer.parseInt(numParkingLot.toString()) , Integer.parseInt(numId.toString()) , Integer.parseInt(carNumber.toString()));
     		pay();
     	}
 

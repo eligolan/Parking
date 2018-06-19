@@ -33,9 +33,32 @@ public final class MainController extends Application {
 		primaryStage.show();
 	}
 	
-	public boolean sendUserAndPassToClient(String userAndPass)
+	public boolean sendUserAndPassToClient(Object userAndPass)
 	{
-		return ClientServerController.sendMsgToServer(userAndPass);
+		String msg = ClientServerController.sendMsgToServer(userAndPass).toString();
+		if(msg.equals("SingIn failed!")) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean registerUserAndPassToClient(Object userAndPass)
+	{
+		String msg = ClientServerController.sendMsgToServer(userAndPass).toString();
+		if(msg.equals("Register failed!")) {
+			return false;
+		}
+		return true;
+	}
+
+
+
+	public boolean isManager(Object check) {
+		String msg = ClientServerController.sendMsgToServer(check).toString();
+		if(msg.equals("failed!")) {
+			return false;
+		}
+		return true;
 	}
 	
 }
