@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class RegisterController {
+	
+	private MainController controll;
 
     @FXML
     private AnchorPane c1;
@@ -38,12 +40,18 @@ public class RegisterController {
 
     @FXML
     private PasswordField pass;
+    
+    @FXML
+    public void initialize()
+    {
+		controll =new MainController();
+    }
 
     @FXML
     void clickOnRegister(ActionEvent event) {
-    /*	String user = userText.getText();
-    	String pass = passText.getText();
-    	if(checkInputIsValid(user, pass))
+    	String user = name.getText();
+    	String password = pass.getText();
+    	if(checkInputIsValid(user, password))
     	{
     		ObjectSender snd = new ObjectSender(1,user+" "+pass);
     		if(controll.sendUserAndPassToClient(snd)) {    			
@@ -60,10 +68,14 @@ public class RegisterController {
     	
     	
     	
-    	getMainWindow(event);*/
+    	getMainWindow(event);
 
     }
     
+    private boolean checkInputIsValid(String user, String pass) {
+		// TODO check if it is write propetlly and it is on the server
+		return true;
+	}
     
 	private void getMainWindow(ActionEvent event) {
 		try {
