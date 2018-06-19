@@ -14,7 +14,7 @@ public final class ClientServerController {
 	}
 	
 
-	public static boolean sendMsgToServer(String userAndPass) {
+	public static Object sendMsgToServer(String userAndPass) {
 		return client.sendMsgToServer(userAndPass);
 	}
 

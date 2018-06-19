@@ -51,8 +51,12 @@ public class SignInController {
     	String pass = passText.getText();
     	if(checkInputIsValid(user, pass))
     	{
-    		controll.sendUserAndPassToClient(user+" "+pass);
-    		getMainWindow(event);
+    		if(controll.sendUserAndPassToClient(user+" "+pass)) {    			
+    			getMainWindow(event);
+    			return;
+    		}else {
+    			wrongInput(event);
+    		}		
     	}
     	else
     	{

@@ -17,79 +17,85 @@ import java.io.*;
  */
 public class ConnectionClient extends AbstractClient
 {
-  //Instance variables **********************************************
-  
-  /**
-   * The interface type variable.  It allows the implementation of 
-   * the display method in the client.
-   */
-  ParkingClientIF clientUI; 
+	//Instance variables **********************************************
 
-  
-  //Constructors ****************************************************
-  
-  /**
-   * Constructs an instance of the chat client.
-   *
-   * @param host The server to connect to.
-   * @param port The port number to connect on.
-   * @param clientUI The interface type variable.
-   */
-  
-  public ConnectionClient(String host, int port, ParkingClientIF clientUI) 
-    throws IOException 
-  {
-    super(host, port); //Call the superclass constructor
-    this.clientUI = clientUI;
-    openConnection();
-  }
+	/**
+	 * The interface type variable.  It allows the implementation of 
+	 * the display method in the client.
+	 */
+	ParkingClientIF clientUI; 
 
-  
-  //Instance methods ************************************************
-    
-  /**
-   * This method handles all data that comes in from the server.
-   *
-   * @param msg The message from the server.
-   */
-  public void handleMessageFromServer(Object msg) 
-  {
-    clientUI.display(msg.toString());
-  }
 
-  /**
-   * This method handles all data coming from the UI            
-   *
-   * @param message The message from the UI.    
-   */
-  public boolean handleMessageFromClientUI(String message)
-  {
-    try
-    {
-    	/*TODO: add the functionality to ChatIF and all it's implementations and use it to handle message type "send"*/
-    	
-    	sendToServer(message);
-    }
-    catch(IOException e)
-    {
-      clientUI.display
-        ("Could not send message to server.  Terminating client.");
-      quit();
-    }
-    return true;
-  }
-  
-  /**
-   * This method terminates the client.
-   */
-  public void quit()
-  {
-    try
-    {
-      closeConnection();
-    }
-    catch(IOException e) {}
-    System.exit(0);
-  }
+	//Constructors ****************************************************
+
+	/**
+	 * Constructs an instance of the chat client.
+	 *
+	 * @param host The server to connect to.
+	 * @param port The port number to connect on.
+	 * @param clientUI The interface type variable.
+	 */
+
+	public ConnectionClient(String host, int port, ParkingClientIF clientUI) 
+			throws IOException 
+	{
+		super(host, port); //Call the superclass constructor
+		this.clientUI = clientUI;
+		openConnection();
+	}
+
+
+	//Instance methods ************************************************
+
+	/**
+	 * This method handles all data that comes in from the server.
+	 *
+	 * @param msg The message from the server.
+	 */
+	public void handleMessageFromServer(Object msg) 
+	{
+		clientUI.display(msg.toString());
+	}
+
+	/**
+	 * This method handles all data coming from the UI            
+	 *
+	 * @param message The message from the UI.    
+	 */
+	public Object handleMessageFromClientUI(String message)
+	{
+		try
+		{
+			/*TODO: add the functionality to ChatIF and all it's implementations and use it to handle message type "send"*/
+			sendToServer(message);
+			BufferedReader in =
+					new BufferedReader(
+							new InputStreamReader(clientSocket.getInputStream()));
+			return input.readObject();
+		}
+		catch(IOException e)
+		{
+			clientUI.display
+			("Could not send message to server.  Terminating client.");
+			quit();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	/**
+	 * This method terminates the client.
+	 */
+	public void quit()
+	{
+		try
+		{
+			closeConnection();
+		}
+		catch(IOException e) {}
+		System.exit(0);
+	}
 }
 //End of ChatClient class
