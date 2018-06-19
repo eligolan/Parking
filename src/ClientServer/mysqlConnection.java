@@ -166,7 +166,7 @@ public class mysqlConnection {
 			uprs.updateInt("parking_id",parking_id);
 			uprs.updateInt("customer_id",customer_id);
 			uprs.updateString("car_number",car_number);
-			uprs.updateString("eail",mail);
+			uprs.updateString("email",mail);
 		//	uprs.updateDate("Date_start",start);
 			uprs.insertRow();
 			return true;

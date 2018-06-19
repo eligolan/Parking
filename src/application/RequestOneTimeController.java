@@ -4,6 +4,8 @@
 
 package application;
 
+import ClientServer.ClientServerController;
+import ClientServer.ObjectSender;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
 import Logistics.Time;
@@ -21,71 +23,83 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class RequestOneTimeController {
-	
+
 	private ParkingController controller;
-	
+
 	@FXML
-    public void initialize()
-    {
-		controller =new ParkingController();
-    }
-    @FXML
-    private AnchorPane c1;
+	public void initialize()
+	{
+		controller = new ParkingController();
+	}
+	@FXML
+	private AnchorPane c1;
 
-    @FXML
-    private TextField idText;
+	@FXML
+	private TextField idText;
 
-    @FXML
-    private TextField carNumText;
+	@FXML
+	private TextField carNumText;
 
-    @FXML
-    private TextField dateStart;
+	@FXML
+	private TextField dateStart;
 
-    @FXML
-    private TextField endDate;
+	@FXML
+	private TextField endDate;
 
-    @FXML
-    private TextField emailText;
+	@FXML
+	private TextField emailText;
 
-    @FXML
-    private Button pay;
+	@FXML
+	private Button pay;
 
-    @FXML
-    private TextField parkingNum;
+	@FXML
+	private TextField parkingNum;
 
-    @FXML
-    private TextField timeStart;
+	@FXML
+	private TextField timeStart;
 
-    @FXML
-    private TextField startDay;
+	@FXML
+	private TextField startDay;
 
-    @FXML
-    private TextField timeEnd;
+	@FXML
+	private TextField timeEnd;
 
-    @FXML
-    private TextField endDay;
+	@FXML
+	private TextField endDay;
 
-    @FXML
-    void clickOnPay(ActionEvent event) {
-    	if(controller.isParkingFull(Integer.parseInt(parkingNum.toString())))
-    	{
-    		/*TODO how to order? what is the right function?*/
-    		Time arrival = new Time(Integer.parseInt(timeStart.toString()),Integer.parseInt(startDay.toString()),dateStart.toString());
-    		Time departure = new Time(Integer.parseInt(timeEnd.toString()),Integer.parseInt(endDay.toString()),endDate.toString());
-    		controller.orderParking(Integer.parseInt(parkingNum.toString()),Integer.parseInt(idText.toString()),Integer.parseInt(carNumText.toString()) ,2,"",arrival ,departure );
-    	}
-    	else
-    	{
-    		showNoParkingAvailable(event);
-    	}
+	@FXML
+	void clickOnPay(ActionEvent event) {
+/*		if(controller.isParkingFull(Integer.parseInt(parkingNum.getText())))
+		{*/
+			/*TODO how to order? what is the right function?*/
+			//Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
+			//Time departure = new Time(Integer.parseInt(timeEnd.getText()),Integer.parseInt(endDay.getText()),endDate.getText());
+			//controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure );
+			int parking_id = Integer.parseInt(parkingNum.getText());
+			int customer_id = Integer.parseInt(idText.getText());
+			int car_id = Integer.parseInt(carNumText.getText());
+			String email = emailText.getText();
+			ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
+			String msg = ClientServerController.sendMsgToServer(snd).toString();
+			if(msg.equals("failed!")) {
+				System.out.println("failed!");
+			}
+			else {
+				System.out.println("success!");
+			}
+/*		}
+		else
+		{
+			showNoParkingAvailable(event);
+		}*/
 
-    }
-    
-    private void showNoParkingAvailable(ActionEvent event) {
-    	try {
+	}
+
+	private void showNoParkingAvailable(ActionEvent event) {
+		try {
 			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("NoParkingAvailable.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
-			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+			Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(existingWindow);
@@ -96,25 +110,25 @@ public class RequestOneTimeController {
 		{
 			System.out.println("couldnt open the NoParkingAvailable windows");
 		}
-		
+
 	}
 
-//	private void showNoParkingExist(ActionEvent event) {
-//    	try {
-//			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("NoParkingExist.fxml")) ;
-//			Parent root1 = (Parent) fxmloader.load();
-//			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
-//			Stage stage = new Stage();
-//			stage.initModality(Modality.APPLICATION_MODAL);
-//			stage.initOwner(existingWindow);
-//			stage.setTitle("Main Window");
-//			stage.setScene(new Scene(root1));
-//			stage.show();
-//		}catch (Exception e)
-//		{
-//			System.out.println("couldnt open the MainWindow windows");
-//		}
-//		
-//	}
+	//	private void showNoParkingExist(ActionEvent event) {
+	//    	try {
+	//			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("NoParkingExist.fxml")) ;
+	//			Parent root1 = (Parent) fxmloader.load();
+	//			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+	//			Stage stage = new Stage();
+	//			stage.initModality(Modality.APPLICATION_MODAL);
+	//			stage.initOwner(existingWindow);
+	//			stage.setTitle("Main Window");
+	//			stage.setScene(new Scene(root1));
+	//			stage.show();
+	//		}catch (Exception e)
+	//		{
+	//			System.out.println("couldnt open the MainWindow windows");
+	//		}
+	//		
+	//	}
 
 }
