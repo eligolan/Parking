@@ -1,10 +1,13 @@
 package Logistics;
 
 import java.util.ArrayList;
+import ClientServer.*;
 
 import Actors.Customer;
 import Actors.Employee;
 import Actors.Manager;
+import ClientServer.ClientServerController;
+import ClientServer.ObjectSender;
 import javafx.util.Pair;
 
 public final class ParkingController {
@@ -91,9 +94,16 @@ public final class ParkingController {
 	}
 	
     // handles parking lot orders by type
-	public void orderParking(int parking_id,int customer_id,int car_id, int order_type,String email ,Time arrival, Time departure) {
-	
-	  Parking_Lot pl = GetParkingLotById(parking_id);
+	public boolean orderParking(int parking_id,int customer_id,int car_id, int order_type,String email ,Time arrival, Time departure) {
+		ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
+		String msg = ClientServerController.sendMsgToServer(snd).toString();
+		if(msg.equals("failed!")) {
+			return false;
+		}
+		return true;
+		//TODO add order type
+				
+	/*  Parking_Lot pl = GetParkingLotById(parking_id);
 	  if(OrderType.Order.getOrderType() == order_type){
 		 
 		  order(pl,customer_id, car_id,email , departure);
@@ -105,7 +115,7 @@ public final class ParkingController {
       if(OrderType.MembershipOrder.getOrderType() == order_type){
 		  
     	  orderMembershipParking(pl,customer_id, car_id);
-	  }
+	  }*/
 		
 	}
 	

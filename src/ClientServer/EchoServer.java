@@ -111,9 +111,8 @@ public class EchoServer extends AbstractServer
 				int parking_id = Integer.parseInt(element.get(0));
 				int customer_id = Integer.parseInt(element.get(1));
 				String car_number = element.get(3);
-				mail = element.get(2);
+				mail = element.get(4);
 
-				
 				if(m.addOrderToTable("parkingOrder",parking_id,customer_id,car_number,mail)){
 					client.sendToClient("success!");
 				}else {
