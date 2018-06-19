@@ -1,5 +1,6 @@
 package ClientServer;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,7 +100,8 @@ public class mysqlConnection {
 
 	}
 
-	public boolean addUserToTable(String table,String name,String pass) {
+	public boolean addUserToTable(String table,String name,String pass,String mail,
+			String carNumber,int manager) {
 		try {
 			// add record to table.
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -110,6 +112,9 @@ public class mysqlConnection {
 			uprs.moveToInsertRow(); 
 			uprs.updateString("Name",name);
 			uprs.updateString("Password",pass);
+			uprs.updateInt("manager",manager);
+			uprs.updateString("Car_number",carNumber);
+		//	uprs.updateDate("Date_start",start);
 			uprs.insertRow();
 			return true;
 		}catch (SQLException e) {

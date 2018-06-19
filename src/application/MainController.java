@@ -36,7 +36,7 @@ public final class MainController extends Application {
 	public boolean sendUserAndPassToClient(Object userAndPass)
 	{
 		String msg = ClientServerController.sendMsgToServer(userAndPass).toString();
-		if(msg.equals("SingIn faild!")) {
+		if(msg.equals("SingIn failed!")) {
 			return false;
 		}
 		return true;

@@ -4,6 +4,7 @@ package ClientServer;
 // license found at www.lloseng.com 
 
 import java.io.*;
+import java.sql.Date;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -83,19 +84,23 @@ public class EchoServer extends AbstractServer
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "' AND Password = '"+ pass +"';")) {	
 					client.sendToClient("SignIn success!");
 				}else {
-					client.sendToClient("SingIn faild!");
+					client.sendToClient("SingIn failed!");
 				}
 				break;
-			case 2: /* regi */
+			case 2: /* register */
 				input = sndRequest.getMsg().toString();
 				name = input.substring(0,input.indexOf(' '));
 				pass = input.substring(input.indexOf(' ') + 1);
+				String mail = input.substring(input.indexOf(' ') + 1);
+				String carNumber = input.substring(input.indexOf(' ') + 1);
+				int manager = Integer.parseInt(input.substring(input.indexOf(' ') + 1));
+			//	Date dateStart = Date.parse(input.substring(input.indexOf(' ') + 1));
 
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "';")) {
 					client.sendToClient("Register faild!");
 					return;
 				}	
-				if(m.addUserToTable("parking",name,pass)) {
+				if(m.addUserToTable("parking",name,pass,mail,carNumber,manager)) {
 					client.sendToClient("Register success!");
 				}else {
 					client.sendToClient("Register faild!");
