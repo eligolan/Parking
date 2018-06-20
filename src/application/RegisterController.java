@@ -57,16 +57,17 @@ public class RegisterController {
     	if(checkInputIsValid(user, password))
     	{
     		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0);
-    		if(controll.registerUserAndPassToClient(snd)) {    			
+    		if(controll.registerUserAndPassToClient(snd)) {
     			getMainWindow(event);
+    			showMsg(event,"Register Success :)"," ");
     			return;
     		}else {
-    			wrongInput(event);
+    			showMsg(event,"Wrong Input","try again");
     		}		
     	}
     	else
     	{
-    		wrongInput(event);
+    		showMsg(event,"Wrong Input","try again");
     	}
     }
     
@@ -93,8 +94,10 @@ public class RegisterController {
 	}
 
 	
-	private void wrongInput(ActionEvent event) {
+	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
+			TextEditor.getInstance().setBigText(text);
+			TextEditor.getInstance().setSmallText(smallText);
 			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("WrongInput.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
 			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
@@ -103,6 +106,7 @@ public class RegisterController {
 			stage.initOwner(existingWindow);
 			stage.setTitle("WrongInput");
 			stage.setScene(new Scene(root1));
+			
 			stage.show();
 		}catch (Exception e)
 		{

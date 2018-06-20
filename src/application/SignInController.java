@@ -58,17 +58,19 @@ public class SignInController {
     			if(controll.isManager(new ObjectSender(3,user))) {
     				getManagerWindow(event);
     			}else {
+    				
     				getMainWindow(event);
+    				showMsg(event,"Signn In Success :)","");
     			}
     				
     			
     		}else {
-    			wrongInput(event);
+    			showMsg(event,"Wrong Input","try again");
     		}		
     	}
     	else
     	{
-    		wrongInput(event);
+    		showMsg(event,"Wrong Input","try again");
     	}
 
     }
@@ -113,8 +115,10 @@ public class SignInController {
 		}
 	}
 
-	private void wrongInput(ActionEvent event) {
+	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
+			TextEditor.getInstance().setBigText(text);
+			TextEditor.getInstance().setSmallText(smallText);
 			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("WrongInput.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
 			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
@@ -123,6 +127,7 @@ public class SignInController {
 			stage.initOwner(existingWindow);
 			stage.setTitle("WrongInput");
 			stage.setScene(new Scene(root1));
+			
 			stage.show();
 		}catch (Exception e)
 		{

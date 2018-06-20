@@ -20,8 +20,9 @@ public class WrongInputController {
     @FXML
     public void initialize()
     {
-		textEditor =new TextEditor();
-		bigText.setText(textEditor.getWrongInput());
+		textEditor =TextEditor.getInstance();
+		bigText.setText(textEditor.getBigText());
+		smallText.setText(textEditor.getSmallText());
     }
 
 }
