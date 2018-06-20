@@ -142,7 +142,7 @@ public final class ParkingController {
 		
 		Location new_loc=pl.FindNearestPlLocation(); 
 		/*TODO falling here!*/
-		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, departure,null);
+		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, arrival,departure);
 		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, pre_order));
 		
 	}

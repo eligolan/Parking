@@ -43,7 +43,7 @@ public class SetUpWinController {
     @FXML
     void clickOnOk(ActionEvent event) {
     	contoller.SetUp(Integer.parseInt(parkingId.getText()) , loc.getText() , null, name.getText() ,Integer.parseInt(capacity.getText()));
-    	contoller.SetUp(Integer.parseInt(parkingId.getText()) , loc.getText() , null, name.getText() ,Integer.parseInt(capacity.getText()));
+    	
     }
 
 }

@@ -39,8 +39,9 @@ private ParkingController controller;
     void clickOnCancel(ActionEvent event) {
     	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.toString())))
     	{
-    		controller.cancelParking(Integer.parseInt(numParkingLot.toString()) , Integer.parseInt(numId.toString()) , Integer.parseInt(carNumber.toString()));
+    		controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
     	}
+    	
 
     }
 
@@ -48,16 +49,11 @@ private ParkingController controller;
     void clickOnExit(ActionEvent event) {
     	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.toString())))
     	{
-    		controller.exitParking(Integer.parseInt(numParkingLot.toString()) , Integer.parseInt(numId.toString()) , Integer.parseInt(carNumber.toString()));
-    		pay();
+    		controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
     	}
 
     }
 
-	private void pay() {
-		// TODO Auto-generated method stub
-		
-	}
 
     
 
