@@ -56,10 +56,13 @@ public class Parking_Lot {
 	public void updateNextNearestLocation(){
 		
 		boolean loop_flag=true;
+		
+		
 		while(loop_flag){
 		if(maximum_corrdinates.getY()==next_nearest_location.getY()){
 			next_nearest_location.setY(1);
 			if(next_nearest_location.getZ()==maximum_corrdinates.getZ()){
+				System.out.println("heheheh");
 				next_nearest_location.setZ(1);
 				next_nearest_location.setX(next_nearest_location.getX()+1);
 			}
@@ -67,7 +70,7 @@ public class Parking_Lot {
 		else{
 			next_nearest_location.setY(next_nearest_location.getY()+1);
 		}
-	   
+	   	
 		if(isParkingAvailableAtLocation(next_nearest_location))
 			loop_flag=false;
 	  }
@@ -126,7 +129,8 @@ public class Parking_Lot {
 	public void updateEnableParking(ParkedCar car)
 	{   
 		if (isParkingAvailableAtLocation(car.getLocation())){
-			Location locNew  = car.getLocation();
+            Location c=car.getLocation();			
+			Location locNew  = new Location(c.getX(),c.getY(),c.getZ());
 		    listCar.add(car);
 		    parkingZone.put(locNew, car);
 		    updateNextNearestLocation();
@@ -155,7 +159,8 @@ public class Parking_Lot {
     
 	// will check if parking is available at certain location
 	public boolean isParkingAvailableAtLocation(Location loc){
-		for (Location key : parkingZone.keySet()) {    
+		
+		for (Location key : parkingZone.keySet()) {  
 			if (key.getX()== loc.getX() && key.getY()==loc.getY() && key.getZ()==loc.getZ())
 				return false;
 		}

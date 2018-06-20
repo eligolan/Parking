@@ -105,14 +105,6 @@ public final class ParkingController {
 	
     // handles parking lot orders by type
 	public void orderParking(int parking_id,int customer_id,int car_id, int order_type,String email ,Time arrival, Time departure) {
-//		ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
-//		String msg = ClientServerController.sendMsgToServer(snd).toString();
-//		if(msg.equals("failed!")) {
-//			return false;
-//		}
-//		return true;
-		//TODO add order type
-				
 	  Parking_Lot pl = GetParkingLotById(parking_id);
 	  if(OrderType.Order.getOrderType() == order_type){
 		 
@@ -141,8 +133,7 @@ public final class ParkingController {
 	public void orderPreOrderParking(Parking_Lot pl,int customer_id,int car_id ,String email ,Time arrival, Time departure){
 		
 		Location new_loc=pl.FindNearestPlLocation(); 
-		/*TODO falling here!*/
-		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, departure,null);
+		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, arrival,departure);
 		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, pre_order));
 		
 	}
