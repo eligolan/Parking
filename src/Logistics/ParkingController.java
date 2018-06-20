@@ -12,13 +12,23 @@ import javafx.util.Pair;
 
 public final class ParkingController {
 	
-	ArrayList<Parking_Lot> parking;
+	private static ParkingController single_instance = null;
+	
+	 ArrayList<Parking_Lot> parking;
 	
  	//c'tor
-	public ParkingController()
+	private ParkingController()
 	{
 		parking = new ArrayList<Parking_Lot>();
 	}
+	
+	public static ParkingController getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new ParkingController();
+ 
+        return single_instance;
+    }
 	
 	
 	//setUp
@@ -94,16 +104,16 @@ public final class ParkingController {
 	}
 	
     // handles parking lot orders by type
-	public boolean orderParking(int parking_id,int customer_id,int car_id, int order_type,String email ,Time arrival, Time departure) {
-		ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
-		String msg = ClientServerController.sendMsgToServer(snd).toString();
-		if(msg.equals("failed!")) {
-			return false;
-		}
-		return true;
+	public void orderParking(int parking_id,int customer_id,int car_id, int order_type,String email ,Time arrival, Time departure) {
+//		ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
+//		String msg = ClientServerController.sendMsgToServer(snd).toString();
+//		if(msg.equals("failed!")) {
+//			return false;
+//		}
+//		return true;
 		//TODO add order type
 				
-	/*  Parking_Lot pl = GetParkingLotById(parking_id);
+	  Parking_Lot pl = GetParkingLotById(parking_id);
 	  if(OrderType.Order.getOrderType() == order_type){
 		 
 		  order(pl,customer_id, car_id,email , departure);
@@ -115,7 +125,7 @@ public final class ParkingController {
       if(OrderType.MembershipOrder.getOrderType() == order_type){
 		  
     	  orderMembershipParking(pl,customer_id, car_id);
-	  }*/
+	  }
 		
 	}
 	
@@ -131,6 +141,7 @@ public final class ParkingController {
 	public void orderPreOrderParking(Parking_Lot pl,int customer_id,int car_id ,String email ,Time arrival, Time departure){
 		
 		Location new_loc=pl.FindNearestPlLocation(); 
+		/*TODO falling here!*/
 		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, departure,null);
 		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, pre_order));
 		

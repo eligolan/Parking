@@ -13,7 +13,7 @@ private ParkingController controller;
 	@FXML
     public void initialize()
     {
-		controller =new ParkingController();
+		controller =ParkingController.getInstance();
     }
 
     @FXML

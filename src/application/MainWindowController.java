@@ -29,6 +29,10 @@ public class MainWindowController {
 
     @FXML
     private Button orderParking;
+    
+
+    @FXML
+    private Button myOrders;
 
     @FXML
     void clickOnOrderParking(ActionEvent event) {
@@ -101,6 +105,26 @@ public class MainWindowController {
 	@FXML
     void clickOnComplaint(ActionEvent event) {
     	
+
+    }
+	
+
+    @FXML
+    void clickOnMyOrders(ActionEvent event) {
+    	try {
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("MyOrders.fxml")) ;
+			Parent root1 = (Parent) fxmloader.load();
+			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+			Stage stage = new Stage();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(existingWindow);
+			stage.setTitle("GettingDeatailsParking");
+			stage.setScene(new Scene(root1));
+			stage.show();
+		}catch (Exception e)
+		{
+			System.out.println("couldnt open the GettingDeatailsParking windows");
+		}
 
     }
 
