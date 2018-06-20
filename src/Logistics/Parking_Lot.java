@@ -83,7 +83,7 @@ public class Parking_Lot {
 	}
 	
 	public Location FindNearestPlLocation(){
-		return next_nearest_location;
+		return new Location(next_nearest_location.getX(),next_nearest_location.getY(),next_nearest_location.getZ());
 	}
 	
 	public void SetNearestLocation(Location loc){
@@ -132,7 +132,7 @@ public class Parking_Lot {
             Location c=car.getLocation();			
 			Location locNew  = new Location(c.getX(),c.getY(),c.getZ());
 		    listCar.add(car);
-		    parkingZone.put(locNew, car);
+		    parkingZone.put(car.getLocation(), car);
 		    updateNextNearestLocation();
 		}
 		else{
@@ -146,7 +146,7 @@ public class Parking_Lot {
 	{   
 		Location locNew  = car.getLocation();
 		listCar.remove(car);
-		parkingZone.remove(locNew);
+		parkingZone.remove(car.getLocation());
 	}
 	
 	// will check if parking lot is full
@@ -198,6 +198,7 @@ public class Parking_Lot {
 			
 			if (car.getId()== car_id && car.getOwnerId()==customer_id){
 				updateAbleParking(car);
+				break;
 			}
 		}
 	}
@@ -235,25 +236,50 @@ public class Parking_Lot {
 		}
 	}
 	
-	public void CancelParking(int customer_id,int car_id){
+	public double CancelParking(int customer_id,int car_id){
 		double fine_for_cancelation=0;
 		for(ParkedCar pc : listCar){
 			if(pc.getOwnerId()==customer_id && pc.getId()==car_id){
+					
+//				Date date=new Date();
+//				@SuppressWarnings("deprecation")
+//				int cancelation_time= pc.getOrder().getArrivalTime() - date.getHours();
+//				if(cancelation_time >=3)
+//					fine_for_cancelation = pc.getOrder().getPricePerHour() * 0.1;
+//				if(cancelation_time <3 && cancelation_time > 1)
+//					fine_for_cancelation = pc.getOrder().getPricePerHour() * 0.5;
+//				if(cancelation_time >0 && cancelation_time <=1)
+//					fine_for_cancelation=pc.getOrder().getPricePerHour() * 0.1;
 				
-				if (pc.getOrder().getOrderType() != 2)
-					return;
-				Date date=new Date();
-				@SuppressWarnings("deprecation")
-				int cancelation_time= pc.getOrder().getArrivalTime() - date.getHours();
-				if(cancelation_time >=3)
-					fine_for_cancelation = pc.getOrder().getPricePerHour() * 0.1;
-				if(cancelation_time <3 && cancelation_time > 1)
-					fine_for_cancelation = pc.getOrder().getPricePerHour() * 0.5;
-				if(cancelation_time >0 && cancelation_time <=1)
-					fine_for_cancelation=pc.getOrder().getPricePerHour() * 0.1;
+				
+//				break;
+				ParkedCar car_n = getCar(customer_id,car_id);
+				removeCarFromParkingLot(car_n.getLocation(), car_n);
+ 				System.out.println(parkingZone.size());
 	    	}
+			
 		}
+		
+		System.out.println(fine_for_cancelation);
+		return fine_for_cancelation;
 	}
+	
+	public ParkedCar getCar(int customer_id,int car_id){
+		for (Map.Entry<Location ,ParkedCar> entry : parkingZone.entrySet()) { 
+			
+			Location loc = entry.getKey();
+			ParkedCar car =entry.getValue();
+			
+			if (car.getId()== car_id && car.getOwnerId()==customer_id){
+				return car;
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	
 	public String viewOrder(int customer_id,int car_id){
 		
 		String pl_name=name + "\n";

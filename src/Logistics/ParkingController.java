@@ -141,7 +141,6 @@ public final class ParkingController {
 	public void orderPreOrderParking(Parking_Lot pl,int customer_id,int car_id ,String email ,Time arrival, Time departure){
 		
 		Location new_loc=pl.FindNearestPlLocation(); 
-		/*TODO falling here!*/
 		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, arrival,departure);
 		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, pre_order));
 		
