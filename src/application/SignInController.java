@@ -5,6 +5,7 @@
 package application;
 
 
+import Actors.Customer;
 import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,13 +58,15 @@ public class SignInController {
     		if(controll.sendUserAndPassToClient(snd)) {  
     			if(controll.isManager(new ObjectSender(3,user))) {
     				getManagerWindow(event);
-    			}else {
-    				
+    			}else {				
     				getMainWindow(event);
-    				showMsg(event,"Signn In Success :)","");
-    			}
-    				
-    			
+    				showMsg(event,"Sign In Success :)","");
+    				snd = new ObjectSender(5,user);
+    				int idUser = controll.getId(snd);
+    				System.out.println(idUser);
+    				Customer cst = new Customer(user, idUser);
+    				TextEditor.getInstance().setCst(cst);
+    			} 			
     		}else {
     			showMsg(event,"Wrong Input","try again");
     		}		

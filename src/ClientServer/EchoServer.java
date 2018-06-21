@@ -119,6 +119,11 @@ public class EchoServer extends AbstractServer
 					client.sendToClient("failed!");
 				}
 				break;
+				
+			case 5: /* get Id */
+				input = sndRequest.getMsg().toString();
+				client.sendToClient(m.getId(input));
+				break;
 			}
 
 		} catch (IOException e) {

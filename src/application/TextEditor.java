@@ -2,6 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
+import Actors.Customer;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
 
@@ -11,7 +12,16 @@ import Logistics.Parking_Lot;
 	
 	String bigText;
 	String smallText;
+	Customer cst;
 	
+	public Customer getCst() {
+		return cst;
+	}
+
+	public void setCst(Customer cst) {
+		this.cst = cst;
+	}
+
 	//c'tor
 	private TextEditor()
 	{ 
