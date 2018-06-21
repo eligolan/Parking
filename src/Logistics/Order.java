@@ -70,7 +70,9 @@ public class Order extends AllOrders {
 		 String text= "Order \n";
 		  //String owner = "owner : " + customer.getName() +"\n";
 		  String car = "car_id : "+ carNumber +"\n";
-		return text + car;
+		  String startDate = "start : "+this.start.toString() +"\n";
+		  String endDate = "end : "+this.end.toString() +"\n";
+		return text + car + startDate + endDate;
 	}
 	
 	public void setPricePerHour(double price){

@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Actors.Customer;
@@ -158,7 +160,7 @@ public class mysqlConnection {
 		return false;
 	}
 
-	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail) {
+	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail, String startOrder, String endOrder) {
 		try {
 			// add record to table.
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -171,7 +173,8 @@ public class mysqlConnection {
 			uprs.updateInt("customer_id",customer_id);
 			uprs.updateString("car_number",car_number);
 			uprs.updateString("email",mail);
-		//	uprs.updateDate("Date_start",start);
+			uprs.updateString("start_time",startOrder);
+			uprs.updateString("end_time",endOrder);
 			uprs.insertRow();
 			return true;
 		}catch (SQLException e) {
@@ -212,14 +215,16 @@ public class mysqlConnection {
 		ArrayList<Order> orders = new ArrayList<Order>();
 		Order temp;
 		Statement stmt;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		try 
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingOrder WHERE customer_id = '" + id + "';");
 			while (rs.next()) {
 				Customer cst = new Customer(name,id);
-				java.util.Date start = rs.getTimestamp(7);
-				java.util.Date end = rs.getTimestamp(8);	
+				java.util.Date start = dateFormat.parse(rs.getString(7));
+				java.util.Date end = dateFormat.parse(rs.getString(8));
+	
 				System.out.println(start);
 				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
 				orders.add(temp);
@@ -235,7 +240,10 @@ public class mysqlConnection {
 					stmt.close();
 				} catch (SQLException e) { /* ignored */}
 			}
-		} catch (SQLException e) {e.printStackTrace();}
+		} catch (SQLException e) {e.printStackTrace();} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return orders;
 	}
 }

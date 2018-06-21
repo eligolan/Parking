@@ -74,8 +74,12 @@ public class RequestOneTimeController {
 			int customer_id = textEditor.getCst().getId();
 			int car_id = Integer.parseInt(carNumText.getText());
 			String email = emailText.getText();
-			Date arrive = dateFormat.parse(dateStart.getText() + " " + timeStart.getText());
-			Date end = dateFormat.parse(endDate.getText() + " " + timeEnd.getText());
+			
+			
+			String dateArrive = dateStart.getText() + " " + timeStart.getText();
+			String dateEnd = endDate.getText() + " " + timeEnd.getText();
+			Date arrive = dateFormat.parse(dateArrive);
+			Date end = dateFormat.parse(dateEnd);
 
 			/*	Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
 			Time departure = new Time(Integer.parseInt(timeEnd.getText()),Integer.parseInt(endDay.getText()),endDate.getText());
@@ -88,7 +92,7 @@ public class RequestOneTimeController {
 
 			else {
 				controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure );
-			 */	ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
+			 */	ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " ");
 			 String msg = ClientServerController.sendMsgToServer(snd).toString();
 			 if(msg.equals("failed!")) {
 				 showMsg(event,"Not Approved"," ");
