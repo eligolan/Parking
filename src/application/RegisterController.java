@@ -4,6 +4,8 @@
 
 package application;
 
+import java.io.IOException;
+
 import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +60,7 @@ public class RegisterController {
     	{
     		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0);
     		if(controll.registerUserAndPassToClient(snd)) {
-    			getMainWindow(event);
+    			openScene("MainWindow.fxml",event);
     			showMsg(event,"Register Success :)"," ");
     			return;
     		}else {
@@ -93,6 +95,21 @@ public class RegisterController {
     	}
 	}
 
+	private void openScene(String sceneName, ActionEvent event)
+	{
+		Parent parent;
+		try {
+			parent = FXMLLoader.load((getClass().getResource(sceneName)));
+			Scene child = new Scene(parent);
+			
+			Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			window.setScene(child);
+			window.show();
+		} catch (IOException e) {
+			System.out.println("couldnt open the MainWindow windows");
+		}
+		
+	}
 	
 	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
