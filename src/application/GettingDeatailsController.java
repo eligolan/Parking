@@ -37,7 +37,7 @@ private ParkingController controller;
 
     @FXML
     void clickOnCancel(ActionEvent event) {
-    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.toString())))
+    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
     	{
     		controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
     	}
@@ -47,7 +47,7 @@ private ParkingController controller;
 
     @FXML
     void clickOnExit(ActionEvent event) {
-    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.toString())))
+    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
     	{
     		controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
     	}

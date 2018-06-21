@@ -60,5 +60,12 @@ public final class MainController extends Application {
 		}
 		return true;
 	}
+
+
+
+	public int getId(Object user) {
+		// TODO Auto-generated method stub
+		return (int) ClientServerController.sendMsgToServer(user);
+	}
 	
 }

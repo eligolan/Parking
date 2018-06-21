@@ -114,9 +114,9 @@ public class ClientConsole implements ParkingClientIF
 		}
 	}
 	
-	public Object sendMsgToServer(Object userNameAndPass)
+	public Object sendMsgToServer(Object msg)
 	{
-		return client.handleMessageFromClientUI(userNameAndPass);
+		return client.handleMessageFromClientUI(msg);
 	}
 
 	/**

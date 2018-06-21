@@ -93,9 +93,11 @@ public class RequestOneTimeController {
 				ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
 				String msg = ClientServerController.sendMsgToServer(snd).toString();
 				if(msg.equals("failed!")) {
+					showMsg(event,"Your Request Is Not Approved"," ");
 					System.out.println("failed!");
 				}
 				else {
+					showMsg(event,"Your Request Is Approved"," ");
 					System.out.println("success!");
 					SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
 					Date start = myFormat.parse(dateStart.getText());
@@ -109,20 +111,23 @@ public class RequestOneTimeController {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			wrongInput(event);
+			showMsg(event,"Wrong Input","try again");
 		}
 	}
 
-	private void wrongInput(ActionEvent event) {
+	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
+			TextEditor.getInstance().setBigText(text);
+			TextEditor.getInstance().setSmallText(smallText);
 			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("WrongInput.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
-			Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(existingWindow);
 			stage.setTitle("WrongInput");
 			stage.setScene(new Scene(root1));
+			
 			stage.show();
 		}catch (Exception e)
 		{

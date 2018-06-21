@@ -6,8 +6,6 @@ public class Customer extends Person{
 		super(name, id);
 		// TODO Auto-generated constructor stub
 	}
-
-
 	
 	public void placeOrder()
 	{

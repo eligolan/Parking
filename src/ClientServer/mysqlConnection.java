@@ -176,4 +176,31 @@ public class mysqlConnection {
 		}
 		return false;
 	}
+
+	public int getId(String name) {
+		// 
+		
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE Name = '" + name + "';");
+			if(rs.next()) {
+				System.out.println(rs.getInt(1));
+				return rs.getInt(1);
+			}
+			//rs.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return 0;
+	}
 }
