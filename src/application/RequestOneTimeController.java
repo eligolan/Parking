@@ -104,7 +104,7 @@ public class RequestOneTimeController {
 					Date end = myFormat.parse(endDate.getText());
 					long difference = end.getTime() - start.getTime();
 					float daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-					if()
+					//if()
 				}
 			}
 		}

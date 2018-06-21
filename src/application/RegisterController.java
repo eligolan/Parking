@@ -78,22 +78,7 @@ public class RegisterController {
 		return true;
 	}
     
-	private void getMainWindow(ActionEvent event) {
-		try {
-    		FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("MainWindow.fxml")) ;
-    		Parent root1 = (Parent) fxmloader.load();
-    		Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
-    		Stage stage = new Stage();
-    		stage.initModality(Modality.APPLICATION_MODAL);
-    		stage.initOwner(existingWindow);
-    		stage.setTitle("MainWindow");
-    		stage.setScene(new Scene(root1));
-    		stage.show();
-    	}catch (Exception e)
-    	{
-    		System.out.println("couldnt open the MainWindow windows");
-    	}
-	}
+
 
 	private void openScene(String sceneName, ActionEvent event)
 	{
