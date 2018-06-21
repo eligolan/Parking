@@ -69,10 +69,13 @@ public class RequestOneTimeController {
 	@FXML
 	void clickOnPay(ActionEvent event) {
 		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			int parking_id = Integer.parseInt(parkingNum.getText());
 			int customer_id = textEditor.getCst().getId();
 			int car_id = Integer.parseInt(carNumText.getText());
 			String email = emailText.getText();
+			Date arrive = dateFormat.parse(dateStart.getText() + " " + timeStart.getText());
+			Date end = dateFormat.parse(endDate.getText() + " " + timeEnd.getText());
 
 			/*	Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
 			Time departure = new Time(Integer.parseInt(timeEnd.getText()),Integer.parseInt(endDay.getText()),endDate.getText());
@@ -92,7 +95,7 @@ public class RequestOneTimeController {
 				 System.out.println("failed!");
 			 }
 			 else {
-				 showMsg(event,"Approved",""+getPay());
+				 showMsg(event,"Approved",""+getPay(arrive, end));
 				 System.out.println("success!");
 			 }
 			 //}
@@ -142,27 +145,18 @@ public class RequestOneTimeController {
 
 	}
 
-	private double getPay() {
+	private double getPay(Date arrive, Date end) {
 		double price = textEditor.getPrice();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		Date arrive, end;
 		float daysBetween = 0;
 		int hoursDiff = 0;
-
-		try {
-			arrive = dateFormat.parse(dateStart.getText() + " " + timeStart.getText());
-
-			end = dateFormat.parse(endDate.getText() + " " + timeEnd.getText());
-			long difference = end.getTime() - arrive.getTime();
-			daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-			hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		long difference = end.getTime() - arrive.getTime();
+		daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+		hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
 		int daysDiff = Math.round(daysBetween);
+		System.out.println(daysBetween);
+		System.out.println(hoursDiff);
 		if(daysDiff > 0) return ((daysDiff*24*price)+(hoursDiff*price));
-		return (daysDiff*24*price);
+		return (hoursDiff*price);
 	}
 
 }
