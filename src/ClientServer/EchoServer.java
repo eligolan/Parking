@@ -119,10 +119,18 @@ public class EchoServer extends AbstractServer
 					client.sendToClient("failed!");
 				}
 				break;
-				
 			case 5: /* get Id */
 				input = sndRequest.getMsg().toString();
 				client.sendToClient(m.getId(input));
+				break;
+			case 6: /* get user order */				
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				name = element.get(0);
+				customer_id = Integer.parseInt(element.get(1));
+							
+				input = sndRequest.getMsg().toString();
+				client.sendToClient(m.getOrders(name,customer_id));
 				break;
 			}
 

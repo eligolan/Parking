@@ -75,7 +75,7 @@ public class RequestOneTimeController {
 			int car_id = Integer.parseInt(carNumText.getText());
 			String email = emailText.getText();
 
-			Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
+		/*	Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
 			Time departure = new Time(Integer.parseInt(timeEnd.getText()),Integer.parseInt(endDay.getText()),endDate.getText());
 			if(controller.checkIfparkingLotExist(parking_id)==false)
 				throw new Exception();
@@ -86,7 +86,7 @@ public class RequestOneTimeController {
 
 			else {
 				controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure );
-				ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
+			*/	ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
 				String msg = ClientServerController.sendMsgToServer(snd).toString();
 				if(msg.equals("failed!")) {
 					showMsg(event,"Your Request Is Not Approved"," ");
@@ -96,7 +96,7 @@ public class RequestOneTimeController {
 					showMsg(event,"Your Request Is Approved"," ");
 					System.out.println("success!");
 				}
-			}
+			//}
 		}
 		catch(Exception e)
 		{

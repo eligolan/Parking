@@ -1,5 +1,7 @@
 package Actors;
 
+import java.io.Serializable;
+
 public class Customer extends Person{
 	
 	public Customer(String name, int id) {

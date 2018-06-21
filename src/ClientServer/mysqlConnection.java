@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import Actors.Customer;
+import Logistics.Order;
 
 
 public class mysqlConnection {
@@ -202,5 +206,36 @@ public class mysqlConnection {
 			}
 		} catch (SQLException e) {e.printStackTrace();}
 		return 0;
+	}
+
+	public ArrayList<Order> getOrders(String name,int id) {
+		ArrayList<Order> orders = new ArrayList<Order>();
+		Order temp;
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingOrder WHERE customer_id = '" + id + "';");
+			while (rs.next()) {
+				Customer cst = new Customer(name,id);
+				java.util.Date start = rs.getTimestamp(7);
+				java.util.Date end = rs.getTimestamp(8);	
+				System.out.println(start);
+				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
+				orders.add(temp);
+			}			
+			//rs.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return orders;
 	}
 }

@@ -1,5 +1,6 @@
 package Logistics;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,6 +12,9 @@ public class Order extends AllOrders {
 	protected Time estimated_departure;
 	protected Time arrival;
 	protected double price_per_hour;
+	protected Date start;
+	protected Date end;
+	
 	int order_type;
 	
 	public Order(Customer customer , int car_id, String email , Time departe){
@@ -18,6 +22,15 @@ public class Order extends AllOrders {
 		this.email=email;
 		estimated_departure=departe;
 		arrival=SetArrivalTime();
+		price_per_hour=5.0;
+		order_type=1;
+	}
+	
+	public Order(Customer customer , String car_id, String email , Date start,Date end){
+		super(customer , car_id);
+		this.email=email;
+		this.start = start;
+		this.end = end;
 		price_per_hour=5.0;
 		order_type=1;
 	}
