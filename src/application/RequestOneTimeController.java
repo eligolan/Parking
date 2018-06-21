@@ -4,6 +4,11 @@
 
 package application;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
 import Logistics.ParkingController;
@@ -25,17 +30,17 @@ import javafx.stage.Window;
 public class RequestOneTimeController {
 
 	private ParkingController controller;
+	private TextEditor textEditor;
 
 	@FXML
 	public void initialize()
 	{
 		controller = ParkingController.getInstance();
+		textEditor = TextEditor.getInstance();
 	}
-	@FXML
-	private AnchorPane c1;
 
 	@FXML
-	private TextField idText;
+	private AnchorPane c1;
 
 	@FXML
 	private TextField carNumText;
@@ -59,23 +64,17 @@ public class RequestOneTimeController {
 	private TextField timeStart;
 
 	@FXML
-	private TextField startDay;
-
-	@FXML
 	private TextField timeEnd;
-
-	@FXML
-	private TextField endDay;
 
 	@FXML
 	void clickOnPay(ActionEvent event) {
 		try {
 			int parking_id = Integer.parseInt(parkingNum.getText());
-			int customer_id = Integer.parseInt(idText.getText());
+			int customer_id = textEditor.getCst().getId();
 			int car_id = Integer.parseInt(carNumText.getText());
 			String email = emailText.getText();
 
-		/*	Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
+			/*	Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
 			Time departure = new Time(Integer.parseInt(timeEnd.getText()),Integer.parseInt(endDay.getText()),endDate.getText());
 			if(controller.checkIfparkingLotExist(parking_id)==false)
 				throw new Exception();
@@ -86,17 +85,17 @@ public class RequestOneTimeController {
 
 			else {
 				controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure );
-			*/	ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
-				String msg = ClientServerController.sendMsgToServer(snd).toString();
-				if(msg.equals("failed!")) {
-					showMsg(event,"Your Request Is Not Approved"," ");
-					System.out.println("failed!");
-				}
-				else {
-					showMsg(event,"Your Request Is Approved"," ");
-					System.out.println("success!");
-				}
-			//}
+			 */	ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
+			 String msg = ClientServerController.sendMsgToServer(snd).toString();
+			 if(msg.equals("failed!")) {
+				 showMsg(event,"Not Approved"," ");
+				 System.out.println("failed!");
+			 }
+			 else {
+				 showMsg(event,"Approved",""+getPay());
+				 System.out.println("success!");
+			 }
+			 //}
 		}
 		catch(Exception e)
 		{
@@ -111,13 +110,13 @@ public class RequestOneTimeController {
 			TextEditor.getInstance().setSmallText(smallText);
 			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("WrongInput.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
-			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
+			Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(existingWindow);
 			stage.setTitle("WrongInput");
 			stage.setScene(new Scene(root1));
-			
+
 			stage.show();
 		}catch (Exception e)
 		{
@@ -141,6 +140,29 @@ public class RequestOneTimeController {
 			System.out.println("couldnt open the NoParkingAvailable windows");
 		}
 
+	}
+
+	private double getPay() {
+		double price = textEditor.getPrice();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date arrive, end;
+		float daysBetween = 0;
+		int hoursDiff = 0;
+
+		try {
+			arrive = dateFormat.parse(dateStart.getText() + " " + timeStart.getText());
+
+			end = dateFormat.parse(endDate.getText() + " " + timeEnd.getText());
+			long difference = end.getTime() - arrive.getTime();
+			daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+			hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int daysDiff = Math.round(daysBetween);
+		if(daysDiff > 0) return ((daysDiff*24*price)+(hoursDiff*price));
+		return (daysDiff*24*price);
 	}
 
 }

@@ -64,6 +64,15 @@ public class Order extends AllOrders {
 		return payment;
 	}
 	
+	@Override
+	public String toString() {
+
+		 String text= "Order \n";
+		  //String owner = "owner : " + customer.getName() +"\n";
+		  String car = "car_id : "+ carNumber +"\n";
+		return text + car;
+	}
+	
 	public void setPricePerHour(double price){
 		price_per_hour=price;
 	}

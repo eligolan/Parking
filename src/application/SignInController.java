@@ -76,10 +76,6 @@ public class SignInController {
     				snd = new ObjectSender(6, user + " " + idUser);
     				ArrayList<Order> orders = controll.getOrders(snd); 				
     				TextEditor.getInstance().setCst(cst,orders);
-    				
-    				for (Order order : orders) {
-						System.out.println(order.getCustomer().getName());
-					}
     			} 			
     		}else {
     			showMsg(event,"Wrong Input","try again");
