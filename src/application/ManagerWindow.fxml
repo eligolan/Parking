@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ManagerWindowController">
    <children>
-      <Button id="setUpBtn" fx:id="setUpBtn" layoutX="193.0" layoutY="67.0" mnemonicParsing="false" onAction="#clickOnSetUp" text="Set Up Parking Lot" />
-      <Button id="view" fx:id="view" layoutX="198.0" layoutY="115.0" mnemonicParsing="false" onAction="#clickOnView" text="View Parking Lot" />
-      <Button id="changePrice" fx:id="changePrice" layoutX="208.0" layoutY="158.0" mnemonicParsing="false" onAction="#clickOnChangePrice" text="change price" />
-      <Button fx:id="handleComp" layoutX="196.0" layoutY="204.0" mnemonicParsing="false" onAction="#clickHandleComp" text="handle complains" />
+      <Button id="setUpBtn" fx:id="setUpBtn" layoutX="193.0" layoutY="117.0" mnemonicParsing="false" onAction="#clickOnSetUp" text="Set Up Parking Lot" />
+      <Button id="view" fx:id="view" layoutX="198.0" layoutY="173.0" mnemonicParsing="false" onAction="#clickOnView" text="View Parking Lot" />
+      <Button id="changePrice" fx:id="changePrice" layoutX="277.0" layoutY="42.0" mnemonicParsing="false" onAction="#clickOnChangePrice" text="change price" />
+      <Button id="handleComp" fx:id="handleComp" layoutX="196.0" layoutY="246.0" mnemonicParsing="false" onAction="#clickHandleComp" text="handle complains" />
+      <TextField id="textPrice" fx:id="textPrice" layoutX="102.0" layoutY="42.0" />
    </children>
 </AnchorPane>
