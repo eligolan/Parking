@@ -2,9 +2,12 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import ClientServer.ClientConsole;
 import ClientServer.ClientServerController;
+import ClientServer.ObjectSender;
+import Logistics.Order;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -66,6 +69,10 @@ public final class MainController extends Application {
 	public int getId(Object user) {
 		// TODO Auto-generated method stub
 		return (int) ClientServerController.sendMsgToServer(user);
+	}
+
+	public ArrayList<Order> getOrders(Object msg) {
+		return (ArrayList<Order>) ClientServerController.sendMsgToServer(msg);
 	}
 	
 }

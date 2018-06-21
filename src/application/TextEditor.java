@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 
 import Actors.Customer;
+import Logistics.Order;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
 
@@ -13,13 +14,15 @@ import Logistics.Parking_Lot;
 	String bigText;
 	String smallText;
 	Customer cst;
+	ArrayList<Order> orders; 
 	
 	public Customer getCst() {
 		return cst;
 	}
 
-	public void setCst(Customer cst) {
+	public void setCst(Customer cst,ArrayList<Order> orders) {
 		this.cst = cst;
+		this.orders = orders;
 	}
 
 	//c'tor

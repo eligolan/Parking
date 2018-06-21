@@ -5,8 +5,11 @@
 package application;
 
 
+import java.util.ArrayList;
+
 import Actors.Customer;
 import ClientServer.ObjectSender;
+import Logistics.Order;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,11 +64,20 @@ public class SignInController {
     			}else {				
     				getMainWindow(event);
     				showMsg(event,"Sign In Success :)","");
+    				
+    				/* get id */
     				snd = new ObjectSender(5,user);
     				int idUser = controll.getId(snd);
-    				System.out.println(idUser);
     				Customer cst = new Customer(user, idUser);
-    				TextEditor.getInstance().setCst(cst);
+    				
+    				/* get orders */
+    				snd = new ObjectSender(6, user + " " + idUser);
+    				ArrayList<Order> orders = controll.getOrders(snd); 				
+    				TextEditor.getInstance().setCst(cst,orders);
+    				
+    				for (Order order : orders) {
+						System.out.println(order.getCustomer().getName());
+					}
     			} 			
     		}else {
     			showMsg(event,"Wrong Input","try again");
