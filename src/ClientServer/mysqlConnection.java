@@ -211,6 +211,33 @@ public class mysqlConnection {
 		} catch (SQLException e) {e.printStackTrace();}
 		return 0;
 	}
+	
+	
+	public String getDateRegister(int customer_id) {
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE id = '" + customer_id + "';");
+			if(rs.next()) {
+				System.out.println(rs.getInt(1));
+				return rs.getString(7);
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return " ";
+	}
+	
+	
 
 	public ArrayList<Order> getOrders(String name,int id) {
 		ArrayList<Order> orders = new ArrayList<Order>();
@@ -222,7 +249,18 @@ public class mysqlConnection {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingOrder WHERE customer_id = '" + id + "';");
 			while (rs.next()) {
-				Customer cst = new Customer(name,id);
+				
+				/* add date register */
+				String dateReg = getDateRegister(id);
+				java.util.Date registerDate = null;
+				try {
+					registerDate = dateFormat.parse(dateReg);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				/**/
+				
+				Customer cst = new Customer(name,id,registerDate);
 				java.util.Date start = dateFormat.parse(rs.getString(7));
 				java.util.Date end = dateFormat.parse(rs.getString(8));
 	
@@ -246,5 +284,74 @@ public class mysqlConnection {
 			e.printStackTrace();
 		}
 		return orders;
+	}
+
+	public  ArrayList<Order> getAllOrders() {
+		ArrayList<Order> orders = new ArrayList<Order>();
+		Order temp;
+		Statement stmt;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingOrder;");
+			while (rs.next()) {
+				int customerId = rs.getInt(3);
+				
+				/* add date register */
+				String dateReg = getDateRegister(customerId);
+				java.util.Date registerDate = null;
+				try {
+					registerDate = dateFormat.parse(dateReg);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				/**/
+							
+				Customer cst = new Customer(getName(customerId),customerId,registerDate);
+				java.util.Date start = dateFormat.parse(rs.getString(7));
+				java.util.Date end = dateFormat.parse(rs.getString(8));
+				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
+				orders.add(temp);
+			}			
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		} catch (SQLException e) {e.printStackTrace();} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return orders;
+	}
+
+	private String getName(int customerId) {
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE id = '" + customerId + "';");
+			if(rs.next()) {
+				return rs.getString(2);
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return " ";
 	}
 }

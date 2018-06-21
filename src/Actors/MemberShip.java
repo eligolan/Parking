@@ -1,4 +1,4 @@
-package Actors;
+/*package Actors;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,4 +31,4 @@ public class MemberShip extends Customer {
 		this.carId = carId;
 	}
 
-}
+}*/

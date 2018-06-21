@@ -8,13 +8,13 @@ import java.util.Map;
 import Actors.Customer;
 import Actors.Employee;
 import Actors.Manager;
-import Actors.MemberShip;
+//import Actors.MemberShip;
 
 public class Parking_Lot {
 	int numId;
 	private List<ParkedCar> listCar;
 	private List<Employee> employees;
-	private List<MemberShip> pl_memeberships;
+	//private List<MemberShip> pl_memeberships;
 	private List<Location> invalid_parking_location;
 	private Map<Location, ParkedCar> parkingZone;
 	private Map<Location, Integer> reservedParkings;
@@ -34,7 +34,7 @@ public class Parking_Lot {
 		listCar = new ArrayList<ParkedCar>();
 		invalid_parking_location= new ArrayList<Location>();
 		employees = new ArrayList<Employee>();
-		pl_memeberships= new ArrayList<MemberShip>();
+		//pl_memeberships= new ArrayList<MemberShip>();
 		parkingZone = new HashMap<Location, ParkedCar>();
 		reservedParkings = new HashMap<Location, Integer>();
 		maximum_capacity=capacity;
@@ -101,7 +101,7 @@ public class Parking_Lot {
 		return false;
 	}
 	
-	// will add membership to parking lot
+/*	// will add membership to parking lot
 	public void addMembershipToPl(String name, int id, int carId){
 		pl_memeberships.add(new MemberShip(name, id, carId));
 	}
@@ -123,7 +123,7 @@ public class Parking_Lot {
 		}
 		return false;
 	}
-	
+	*/
 	
 	// will place car in parking lot
 	public void updateEnableParking(ParkedCar car)

@@ -1,14 +1,21 @@
 package Actors;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Customer extends Person{
 	
-	public Customer(String name, int id) {
+	private Date dateRegister;
+	
+	public Customer(String name, int id, Date resigerDate) {
 		super(name, id);
-		// TODO Auto-generated constructor stub
+		dateRegister = resigerDate;
 	}
 	
+	public Date getDateRegister() {
+		return dateRegister;
+	}
+
 	public void placeOrder()
 	{
 		

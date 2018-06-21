@@ -1,4 +1,4 @@
-package Logistics;
+/*package Logistics;
 
 import Actors.Customer;
 import Actors.MemberShip;
@@ -35,3 +35,4 @@ public class MembershipOrder extends AllOrders {
 		  
 		}	
 }
+*/

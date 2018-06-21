@@ -74,5 +74,11 @@ public final class MainController extends Application {
 	public ArrayList<Order> getOrders(Object msg) {
 		return (ArrayList<Order>) ClientServerController.sendMsgToServer(msg);
 	}
+
+
+
+	public String getDateReg(ObjectSender msg) {
+		return ClientServerController.sendMsgToServer(msg).toString();
+	}
 	
 }

@@ -77,7 +77,18 @@ public class SignInController {
 					/* get id */
 					snd = new ObjectSender(5,user);
 					int idUser = controll.getId(snd);
-					Customer cst = new Customer(user, idUser);
+					
+					/* get date start register */
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+					snd = new ObjectSender(8,idUser);
+					String dateReg = controll.getDateReg(snd);
+					Date resigerDate = null;
+					try {
+						resigerDate = dateFormat.parse(dateReg);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Customer cst = new Customer(user, idUser,resigerDate);
 
 					/* get orders */
 					snd = new ObjectSender(6, user + " " + idUser);

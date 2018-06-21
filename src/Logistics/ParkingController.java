@@ -124,37 +124,37 @@ public final class ParkingController {
 	  }
       if(OrderType.MembershipOrder.getOrderType() == order_type){
 		  
-    	  orderMembershipParking(pl,customer_id, car_id);
+    	 // orderMembershipParking(pl,customer_id, car_id);
 	  }
 		
 	}
 	
 	public void order(Parking_Lot pl,int customer_id,int car_id ,String email ,Time departure){
-		
-		Location new_loc=pl.FindNearestPlLocation(); 
+		//TODO
+/*		Location new_loc=pl.FindNearestPlLocation(); 
 		Order order =new Order((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, departure);
-		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, order));
+		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, order));*/
 	}
 	
 	
 	// will handle pre order parking request
 	public void orderPreOrderParking(Parking_Lot pl,int customer_id,int car_id ,String email ,Time arrival, Time departure){
-		
-		Location new_loc=pl.FindNearestPlLocation(); 
+		//TODO
+/*		Location new_loc=pl.FindNearestPlLocation(); 
 		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, arrival,departure);
 		pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, pre_order));
-		
+		*/
 	}
 	
-	//will handle orders of type membership
+	/*//will handle orders of type membership
 	public void orderMembershipParking(Parking_Lot pl,int customer_id, int car_id){
 		
 		if(pl.checkIfMembershipExist(customer_id, car_id)){
 			Location new_loc=pl.FindNearestPlLocation(); 
-			MembershipOrder mo= new MembershipOrder(pl.getMembership(customer_id, car_id), null);
-			pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, mo));
+			//MembershipOrder mo= new MembershipOrder(pl.getMembership(customer_id, car_id), null);
+			//pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, mo));
 		}		
-	}
+	}*/
 	
 	// will check that parking lot exist
 	public boolean doesParkingLotExist(int parking_id) {
