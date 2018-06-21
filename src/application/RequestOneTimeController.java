@@ -153,8 +153,6 @@ public class RequestOneTimeController {
 		daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
 		hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
 		int daysDiff = Math.round(daysBetween);
-		System.out.println(daysBetween);
-		System.out.println(hoursDiff);
 		if(daysDiff > 0) return ((daysDiff*24*price)+(hoursDiff*price));
 		return (hoursDiff*price);
 	}
