@@ -4,6 +4,10 @@
 
 package application;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
 import Logistics.ParkingController;
@@ -85,7 +89,7 @@ public class RequestOneTimeController {
 			}
 
 			else {
-				controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure );
+				controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure);
 				ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
 				String msg = ClientServerController.sendMsgToServer(snd).toString();
 				if(msg.equals("failed!")) {
@@ -93,6 +97,12 @@ public class RequestOneTimeController {
 				}
 				else {
 					System.out.println("success!");
+					SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy");
+					Date start = myFormat.parse(dateStart.getText());
+					Date end = myFormat.parse(endDate.getText());
+					long difference = end.getTime() - start.getTime();
+					float daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+					if()
 				}
 			}
 		}
