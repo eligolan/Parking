@@ -5,6 +5,7 @@
 package application;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Actors.Customer;
@@ -60,9 +61,10 @@ public class SignInController {
     		ObjectSender snd = new ObjectSender(1,user+" "+pass);
     		if(controll.sendUserAndPassToClient(snd)) {  
     			if(controll.isManager(new ObjectSender(3,user))) {
-    				getManagerWindow(event);
-    			}else {				
-    				getMainWindow(event);
+    				openScene("ManagerWindow.fxml", event);
+    			}else {
+    				openScene("MainWindow.fxml",event);
+    				//getMainWindow(event);
     				showMsg(event,"Sign In Success :)","");
     				
     				/* get id */
@@ -90,45 +92,28 @@ public class SignInController {
 
     }
 
-	private void getManagerWindow(ActionEvent event) {
-		try {
-			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("ManagerWindow.fxml")) ;
-			Parent root1 = (Parent) fxmloader.load();
-			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.initOwner(existingWindow);
-			stage.setTitle("ManagerWindow");
-			stage.setScene(new Scene(root1));
-			stage.show();
-		}catch (Exception e)
-		{
-			System.out.println("couldnt open the ManagerWindow windows");
-		}
-		
-	}
 
 	private boolean checkInputIsValid(String user, String pass) {
 		// TODO check if it is write propetlly and it is on the server
 		return true;
 	}
 	
-	private void getMainWindow(ActionEvent event) {
+	private void openScene(String sceneName, ActionEvent event)
+	{
+		Parent parent;
 		try {
-			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("MainWindow.fxml")) ;
-			Parent root1 = (Parent) fxmloader.load();
-			 Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.initOwner(existingWindow);
-			stage.setTitle("Main Window");
-			stage.setScene(new Scene(root1));
-			stage.show();
-		}catch (Exception e)
-		{
+			parent = FXMLLoader.load((getClass().getResource(sceneName)));
+			Scene child = new Scene(parent);
+			
+			Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			window.setScene(child);
+			window.show();
+		} catch (IOException e) {
 			System.out.println("couldnt open the MainWindow windows");
 		}
+		
 	}
+	
 
 	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {

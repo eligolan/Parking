@@ -10,6 +10,7 @@ import Logistics.Parking_Lot;
  public class TextEditor {
 	
 	private static TextEditor single_instance = null;
+	private int price ;
 	
 	String bigText;
 	String smallText;
@@ -24,12 +25,19 @@ import Logistics.Parking_Lot;
 		this.cst = cst;
 		this.orders = orders;
 	}
+	
+	
+
+	public ArrayList<Order> getOrders() {
+		return orders;
+	}
 
 	//c'tor
 	private TextEditor()
 	{ 
 		bigText = "Noa";
 		smallText = "Bayer";
+		price = 5;
 	}
 	
 	public static TextEditor getInstance()
@@ -58,6 +66,14 @@ import Logistics.Parking_Lot;
 	public void setSmallText(String t)
 	{
 		this.smallText = t;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }
