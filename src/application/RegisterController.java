@@ -5,6 +5,8 @@
 package application;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
@@ -55,10 +57,11 @@ public class RegisterController {
     	String password = pass.getText();
     	String email = emailText.getText();
     	String numCar = carNumText.getText();
+    	String dateStart = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
     	
     	if(checkInputIsValid(user, password))
     	{
-    		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0);
+    		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0 + " " + dateStart);
     		if(controll.registerUserAndPassToClient(snd)) {
     			openScene("MainWindow.fxml",event);
     			showMsg(event,"Register Success :)"," ");

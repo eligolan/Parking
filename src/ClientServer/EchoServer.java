@@ -84,13 +84,13 @@ public class EchoServer extends AbstractServer
 				String mail = element.get(2);
 				String carNumber = element.get(3);
 				int manager = Integer.parseInt(element.get(4));
-			//	Date dateStart = Date.parse(input.substring(input.indexOf(' ') + 1));
+				String startDate = element.get(5)+" " +element.get(6);
 
 				if(m.userExist("SELECT * FROM parking WHERE Name = '" + name + "';")) {
 					client.sendToClient("Register failed!");
 					return;
 				}	
-				if(m.addUserToTable("parking",name,pass,mail,carNumber,manager)) {
+				if(m.addUserToTable("parking",name,pass,mail,carNumber,manager,startDate)) {
 					client.sendToClient("Register success!");
 				}else {
 					client.sendToClient("Register failed!");

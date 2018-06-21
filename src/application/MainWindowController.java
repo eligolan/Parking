@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class MainWindowController {
+	
+	
 
     @FXML
     private Button complaint;

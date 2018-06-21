@@ -136,7 +136,7 @@ public class mysqlConnection {
 	}
 
 	public boolean addUserToTable(String table,String name,String pass,String mail,
-			String carNumber,int manager) {
+			String carNumber,int manager, String startDate) {
 		try {
 			// add record to table.
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -150,6 +150,7 @@ public class mysqlConnection {
 			uprs.updateInt("manager",manager);
 			uprs.updateString("Car_number",carNumber);
 			uprs.updateString("Mail",mail);
+			uprs.updateString("Date_start",startDate);
 		//	uprs.updateDate("Date_start",start);
 			uprs.insertRow();
 			return true;
