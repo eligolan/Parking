@@ -12,8 +12,8 @@
 <AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #364f6b; -fx-border-color: #f5f5f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GettingDeatailsController">
    <children>
       <TextField id="orderNum" fx:id="orderNum" layoutX="184.0" layoutY="123.0" prefHeight="35.0" prefWidth="173.0" />
-      <Button id="cancel" fx:id="cancel" layoutX="288.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3fc1c9; -fx-border-color: #f5f5f5;" text="cancel parking" />
-      <Button id="exit" fx:id="exit" layoutX="61.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickOnExit" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3fc1c9; -fx-border-color: #f5f5f5;" text="exit parking" />
+      <Button id="cancel" fx:id="cancel" layoutX="288.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickOnCancel" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3fc1c9; -fx-border-color: #f5f5f5;" text="Cancel Parking" />
+      <Button id="exit" fx:id="exit" layoutX="61.0" layoutY="195.0" mnemonicParsing="false" onAction="#clickOnExit" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #3fc1c9; -fx-border-color: #f5f5f5;" text="Exit Parking" />
       <Label layoutX="61.0" layoutY="128.0" text="Order Number :" textFill="WHITESMOKE" />
       <Label layoutX="168.0" layoutY="38.0" prefHeight="50.0" prefWidth="165.0" text="Order Details" textAlignment="CENTER" textFill="WHITESMOKE">
          <font>
