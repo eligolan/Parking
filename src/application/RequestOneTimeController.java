@@ -75,8 +75,6 @@ public class RequestOneTimeController {
 			int customer_id = textEditor.getCst().getId();
 			int car_id = Integer.parseInt(carNumText.getText());
 			String email = emailText.getText();
-			
-			
 			String dateArrive = dateStart.getText() + " " + timeStart.getText();
 			String dateEnd = endDate.getText() + " " + timeEnd.getText();
 			Date arrive = dateFormat.parse(dateArrive);
