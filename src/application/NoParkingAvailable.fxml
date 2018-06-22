@@ -10,12 +10,12 @@
 
 <AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #364f6b; -fx-border-color: #f5f5f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="55.0" layoutY="41.0" prefHeight="53.0" prefWidth="291.0" text="This parking is not available" textFill="WHITESMOKE">
+      <Label alignment="CENTER" layoutX="55.0" layoutY="41.0" prefHeight="53.0" prefWidth="291.0" text="This parking is not available" textFill="WHITESMOKE">
          <font>
             <Font name="Agency FB Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="161.0" layoutY="111.0" prefHeight="44.0" prefWidth="79.0" text="try again" textFill="WHITESMOKE">
+      <Label alignment="CENTER" layoutX="161.0" layoutY="111.0" prefHeight="44.0" prefWidth="79.0" text="Try Again" textFill="WHITESMOKE">
          <font>
             <Font name="Agency FB Bold" size="24.0" />
          </font>
