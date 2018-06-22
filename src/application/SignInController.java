@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -94,7 +95,8 @@ public class SignInController {
 					snd = new ObjectSender(6, user + " " + idUser);
 					ArrayList<Order> orders = controll.getOrders(snd); 				
 					TextEditor.getInstance().setCst(cst,orders);
-					checkMeassage(event);
+					checkMsgForLate(event);
+					checkMsgForReNewAcount(event);
 					showMsg(event,"Sign In Success :)","");
 				} 			
 			}else {
@@ -109,7 +111,26 @@ public class SignInController {
 	}
 
 
-	private void checkMeassage(ActionEvent event) {
+	private void checkMsgForReNewAcount(ActionEvent event) {
+		Date starAcount = controllEdit.getCst().getDateRegister();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	    Calendar c = Calendar.getInstance();
+	    c.setTime(starAcount); // Now use today date.
+	    c.add(Calendar.DATE, 7);
+	    Date endAcount = c.getTime();
+	    Calendar cn = Calendar.getInstance();
+	    cn.setTime(new Date());
+	    Date currentDate = cn.getTime();
+	    if(currentDate.after(endAcount))
+	    {
+	    	showMsg(event,"your acount is going to expire ","less than 1 week please renews");
+	    }
+		
+	}
+
+
+	private void checkMsgForLate(ActionEvent event) {
 		ArrayList<Order> orders = controllEdit.getOrders();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		try {
