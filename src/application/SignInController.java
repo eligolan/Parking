@@ -69,7 +69,12 @@ public class SignInController {
 		if(checkInputIsValid(user, pass))
 		{
 			ObjectSender snd = new ObjectSender(1,user+" "+pass);
-			if(controll.sendUserAndPassToClient(snd)) {  
+			
+			snd = new ObjectSender(5,user);
+			int idUserr = controll.getId(snd);
+			ObjectSender snd1 = new ObjectSender(14,idUserr);
+			
+			if(controll.sendUserAndPassToClient(snd) && !(boolean)ClientServerController.sendMsgToServer(snd1)) {  
 				if(controll.isManager(new ObjectSender(3,user))) {
 					openScene("ManagerWindow.fxml", event);
 				}else {
@@ -81,6 +86,10 @@ public class SignInController {
 					/* get id */
 					snd = new ObjectSender(5,user);
 					int idUser = controll.getId(snd);
+					
+					/* register online user */
+					snd = new ObjectSender(15,idUserr);
+					ClientServerController.sendMsgToServer(snd);
 					
 					/* get date start register */
 					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -109,7 +118,19 @@ public class SignInController {
 					ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
 							ClientServerController.sendMsgToServer(snd));
 					
-					
+					final Thread mainThread = Thread.currentThread();
+					Runtime.getRuntime().addShutdownHook(new Thread() {
+					    public void run() {
+					    	ObjectSender snd = new ObjectSender(16,idUser);
+					        ClientServerController.sendMsgToServer(snd);
+					        try {
+								mainThread.join();
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+					    }
+					});
 					showMsg(event,"Sign In Success :)","");
 				} 			
 			}else {

@@ -23,7 +23,7 @@ public class GGuiController {
 	@FXML
     public void initialize()
     {
-		controll =new MainController();
+		controll = new MainController();
     }
 
 	@FXML
