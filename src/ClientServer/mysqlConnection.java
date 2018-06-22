@@ -220,7 +220,6 @@ public class mysqlConnection {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE id = '" + customer_id + "';");
 			if(rs.next()) {
-				System.out.println(rs.getInt(1));
 				return rs.getString(7);
 			}
 			if (rs != null) {
