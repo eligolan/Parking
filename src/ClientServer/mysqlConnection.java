@@ -429,5 +429,46 @@ public class mysqlConnection {
 		} catch (SQLException e) {e.printStackTrace();} 
 		return parkingInfo;
 	}
+
+	public int addComplain(String com) {
+		try {
+			// add record to table.
+			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+			ResultSet uprs;
+			uprs = stmt.executeQuery("SELECT * FROM complain;");
+			uprs.moveToInsertRow(); 
+			uprs.updateString("messege",com);
+			uprs.insertRow();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+	}
+
+	public ArrayList<String> getAllColmpains() {
+		ArrayList<String> parkingCom = new ArrayList<String>();
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingLot;");
+			while (rs.next()) {
+				parkingCom.add(rs.getString(2));
+			}			
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {  /* ignored */ }
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {  /* ignored */ }
+			}
+		} catch (SQLException e) {e.printStackTrace();} 
+		return parkingCom;
+	}
 	
 }

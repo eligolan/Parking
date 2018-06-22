@@ -1,5 +1,7 @@
 package application;
 
+import ClientServer.ClientServerController;
+import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +21,8 @@ public class SendComplaintController {
 
     @FXML
     void clickOnSend(ActionEvent event) {
-
+    	ObjectSender snd = new ObjectSender(12,textComplaint.getText());
+    	ClientServerController.sendMsgToServer(snd);
     }
 
 }
