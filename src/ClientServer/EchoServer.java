@@ -141,9 +141,22 @@ public class EchoServer extends AbstractServer
 				customer_id = Integer.parseInt(element.get(0));				
 				client.sendToClient(m.getDateRegister(customer_id));
 				break;
+			case 9: /* get order id */	
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));			
+				int parkingId = Integer.parseInt(element.get(0));
+				customer_id = Integer.parseInt(element.get(1));				
+				String carID = element.get(2);
+				client.sendToClient(m.getOrderId(parkingId, customer_id, carID));
+				break;
+			case 10: /* delete Order */	
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				int OrderId = Integer.parseInt(element.get(0));				
+				client.sendToClient(m.deleteOrder(OrderId));
+				break;
 			}
-			
-
+		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
