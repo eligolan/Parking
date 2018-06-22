@@ -164,7 +164,7 @@ public class mysqlConnection {
 		return false;
 	}
 
-	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail, String startOrder, String endOrder) {
+	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail, String startOrder, String endOrder, int x, int y, int z) {
 		try {
 			// add record to table.
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -179,6 +179,9 @@ public class mysqlConnection {
 			uprs.updateString("email",mail);
 			uprs.updateString("start_time",startOrder);
 			uprs.updateString("end_time",endOrder);
+			uprs.updateInt("xCordinate",x);
+			uprs.updateInt("yCordinate",y);
+			uprs.updateInt("floor",z);
 			uprs.insertRow();
 			return true;
 		}catch (SQLException e) {

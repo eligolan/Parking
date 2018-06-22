@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import Actors.Customer;
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
+import Logistics.Location;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
 import javafx.event.ActionEvent;
@@ -81,18 +82,18 @@ public class RequestOneTimeController {
 			Date arrive = dateFormat.parse(dateArrive);
 			Date end = dateFormat.parse(dateEnd);
 
-			if(controller.checkIfparkingLotExist(parking_id)==false)
-				throw new Exception();
-			if(controller.isParkingFull(parking_id))
-			{
-				showNoParkingAvailable(event);
-			}
+//			if(controller.checkIfparkingLotExist(parking_id)==false)
+//				throw new Exception();
+//			if(controller.isParkingFull(parking_id))
+//			{
+//				showNoParkingAvailable(event);
+//			}
 
-			else {
+/*			else {*/
 			ObjectSender snd1 = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
 			int orderId1 = (int) ClientServerController.sendMsgToServer(snd1);
-			controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
-			 ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " ");
+			//Location loc = controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
+			 ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " " + 1 + " " + 1 + " " + 3 + " ");
 			 String msg = ClientServerController.sendMsgToServer(snd).toString();
 			 if(msg.equals("failed!")) {
 				 showMsg(event,"Not Approved"," ");
@@ -101,10 +102,9 @@ public class RequestOneTimeController {
 			 else {
 				 snd = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
 				 int orderId = (int) ClientServerController.sendMsgToServer(snd);
-				 showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));
-				 
+				 showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));				 
 			 }
-		  }
+		  //}
 		}
 		catch(Exception e)
 		{
