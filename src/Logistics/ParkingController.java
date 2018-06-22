@@ -95,22 +95,23 @@ public final class ParkingController {
 	}
 	
     // handles parking lot orders by type
-	public void orderParking(int parking_id,Customer customer,String car_id,int order_id, int order_type,String email ,Date start, Date end) {
+	public Location orderParking(int parking_id,Customer customer,String car_id,int order_id, int order_type,String email ,Date start, Date end) {
 				
 	  Parking_Lot pl = GetParkingLotById(parking_id);
 	  
 	  if(OrderType.Order.getOrderType() == order_type){
 		   
-		  order(pl,customer, car_id, order_id,email ,start , end);
+		 return order(pl,customer, car_id, order_id,email ,start , end);
 	  }
       if(OrderType.PreOrder.getOrderType() == order_type){
 		  
-    	  orderPreOrderParking();
+    	  return orderPreOrderParking();
 	  }
       if(OrderType.MembershipOrder.getOrderType() == order_type){
 		  
-    	  orderMembershipParking();
+    	  return orderMembershipParking();
 	  }
+      return null;
 		
 	}
 	
@@ -125,13 +126,13 @@ public final class ParkingController {
 	
 	
 	// will handle pre order parking request
-	public void orderPreOrderParking(){
-		return;
+	public Location orderPreOrderParking(){
+		return null;
 	}
 	
 	//will handle orders of type membership
-	public void orderMembershipParking(){
-		return;	
+	public Location orderMembershipParking(){
+		return null;	
 	}
 	
 	// will check that parking lot exist
