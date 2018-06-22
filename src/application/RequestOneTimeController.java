@@ -82,14 +82,14 @@ public class RequestOneTimeController {
 			Date arrive = dateFormat.parse(dateArrive);
 			Date end = dateFormat.parse(dateEnd);
 
-//			if(controller.checkIfparkingLotExist(parking_id)==false)
-//				throw new Exception();
-//			if(controller.isParkingFull(parking_id))
-//			{
-//				showNoParkingAvailable(event);
-//			}
+			if(controller.checkIfparkingLotExist(parking_id)==false)
+				throw new Exception();
+			if(controller.isParkingFull(parking_id))
+			{
+				showNoParkingAvailable(event);
+			}
 
-/*			else {*/
+			else {
 			ObjectSender snd1 = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
 			int orderId1 = (int) ClientServerController.sendMsgToServer(snd1);
 			//Location loc = controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
@@ -104,7 +104,7 @@ public class RequestOneTimeController {
 				 int orderId = (int) ClientServerController.sendMsgToServer(snd);
 				 showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));				 
 			 }
-		  //}
+		  }
 		}
 		catch(Exception e)
 		{
