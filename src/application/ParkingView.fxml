@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ParkingViewController">
+   <children>
+      <ImageView id="index11" fx:id="index11" fitHeight="86.0" fitWidth="104.0" layoutX="21.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index12" fx:id="index12" fitHeight="86.0" fitWidth="104.0" layoutX="139.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index13" fx:id="index13" fitHeight="86.0" fitWidth="104.0" layoutX="258.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index14" fx:id="index14" fitHeight="86.0" fitWidth="104.0" layoutX="374.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index21" fx:id="index21" fitHeight="86.0" fitWidth="104.0" layoutX="22.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index22" fx:id="index22" fitHeight="86.0" fitWidth="104.0" layoutX="140.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index23" fx:id="index23" fitHeight="86.0" fitWidth="104.0" layoutX="259.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index24" fx:id="index24" fitHeight="86.0" fitWidth="104.0" layoutX="375.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index31" fx:id="index31" fitHeight="86.0" fitWidth="104.0" layoutX="24.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index32" fx:id="index32" fitHeight="86.0" fitWidth="104.0" layoutX="142.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index32" fx:id="index33" fitHeight="86.0" fitWidth="104.0" layoutX="261.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+      <ImageView id="index34" fx:id="index34" fitHeight="86.0" fitWidth="104.0" layoutX="377.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@green-car.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
