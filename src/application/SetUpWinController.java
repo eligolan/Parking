@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import Actors.Manager;
 import Logistics.ParkingController;
 import javafx.event.ActionEvent;
@@ -56,10 +58,30 @@ public class SetUpWinController {
 		if((smallCapacity.isSelected() && bigCapacity.isSelected()) ||
 				((!smallCapacity.isSelected()) && (!bigCapacity.isSelected())))
 		{
-			showMsg(event,"Wrong Input","you picked 2 check box, pick 1");
+			showMsg(event,"Wrong Input","pick 1 on check box");
 
 		}
+		else
+		{
+			
+		}
 		//contoller.SetUp(Integer.parseInt(parkingId.getText()) , loc.getText() , null, name.getText() ,Integer.parseInt(capacity.getText()));
+
+	}
+	
+	private void openScene(String sceneName, ActionEvent event)
+	{
+		Parent parent;
+		try {
+			parent = FXMLLoader.load((getClass().getResource(sceneName)));
+			Scene child = new Scene(parent);
+
+			Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			window.setScene(child);
+			window.show();
+		} catch (IOException e) {
+			System.out.println("couldnt open the MainWindow windows");
+		}
 
 	}
 
