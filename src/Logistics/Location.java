@@ -1,11 +1,13 @@
 package Logistics;
 
-public class Location {
+import java.io.Serializable;
+
+public class Location implements Serializable{
 	private int corX; // row
 	private int corY; // column
 	private int corZ; // depth
 	
-	public Location(int x, int y, int z)
+	public Location(int x, int y, int z) 
 	{
 		this.corX = x;
 		this.corY = y;
