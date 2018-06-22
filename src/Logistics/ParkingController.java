@@ -1,13 +1,12 @@
 package Logistics;
 
+import java.sql.Time;
 import java.util.ArrayList;
-import ClientServer.*;
+import java.util.Date;
 
 import Actors.Customer;
 import Actors.Employee;
 import Actors.Manager;
-import ClientServer.ClientServerController;
-import ClientServer.ObjectSender;
 import javafx.util.Pair;
 
 public final class ParkingController {
@@ -104,7 +103,7 @@ public final class ParkingController {
 	}
 	
     // handles parking lot orders by type
-	public void orderParking(int parking_id,int customer_id,int car_id, int order_type,String email ,Time arrival, Time departure) {
+	public void orderParking(int parking_id,Customer customer,String car_id,int order_id, int order_type,String email ,Date start, Date end) {
 //		ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " ");
 //		String msg = ClientServerController.sendMsgToServer(snd).toString();
 //		if(msg.equals("failed!")) {
@@ -115,21 +114,21 @@ public final class ParkingController {
 				
 	  Parking_Lot pl = GetParkingLotById(parking_id);
 	  if(OrderType.Order.getOrderType() == order_type){
-		 
-		  order(pl,customer_id, car_id,email , departure);
+		   
+		  order(pl,customer, car_id, order_id,email ,start , end);
 	  }
       if(OrderType.PreOrder.getOrderType() == order_type){
 		  
-    	  orderPreOrderParking(pl,customer_id, car_id,email ,arrival, departure);
+    	  orderPreOrderParking(pl,customer, car_id,order_id,email ,start, end);
 	  }
       if(OrderType.MembershipOrder.getOrderType() == order_type){
 		  
-    	 // orderMembershipParking(pl,customer_id, car_id);
+    	  orderMembershipParking(pl,customer, car_id);
 	  }
 		
 	}
 	
-	public void order(Parking_Lot pl,int customer_id,int car_id ,String email ,Time departure){
+	public void order(Parking_Lot pl,Customer customer,String car_id, int order_id,String email,Date start , Date end){
 		//TODO
 /*		Location new_loc=pl.FindNearestPlLocation(); 
 		Order order =new Order((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, departure);
@@ -138,7 +137,7 @@ public final class ParkingController {
 	
 	
 	// will handle pre order parking request
-	public void orderPreOrderParking(Parking_Lot pl,int customer_id,int car_id ,String email ,Time arrival, Time departure){
+	public void orderPreOrderParking(Parking_Lot pl,Customer customer,String car_id, int order_id,String email,Date start , Date end){
 		//TODO
 /*		Location new_loc=pl.FindNearestPlLocation(); 
 		PreOrder pre_order =new PreOrder((new Customer(Integer.toString(customer_id),customer_id)), car_id, email, arrival,departure);
@@ -146,15 +145,15 @@ public final class ParkingController {
 		*/
 	}
 	
-	/*//will handle orders of type membership
-	public void orderMembershipParking(Parking_Lot pl,int customer_id, int car_id){
+	//will handle orders of type membership
+	public void orderMembershipParking(Parking_Lot pl,Customer customer, String car_id){
 		
-		if(pl.checkIfMembershipExist(customer_id, car_id)){
+		if(pl.checkIfMembershipExist(customer.getId(), car_id)){
 			Location new_loc=pl.FindNearestPlLocation(); 
 			//MembershipOrder mo= new MembershipOrder(pl.getMembership(customer_id, car_id), null);
 			//pl.updateEnableParking(new ParkedCar(car_id, customer_id, new_loc, mo));
 		}		
-	}*/
+	}
 	
 	// will check that parking lot exist
 	public boolean doesParkingLotExist(int parking_id) {
@@ -194,11 +193,6 @@ public final class ParkingController {
 		
 	}
 	
-	public String viewOrder(int parking_id, int customer_id , int car_id){
-		Parking_Lot pl=GetParkingLotById(parking_id);
-		String order = pl.viewOrder(customer_id,car_id);
-		return order;
-	}
 	
 	// display function for gui
 	// will display all locations which are not available

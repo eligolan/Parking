@@ -265,7 +265,7 @@ public class mysqlConnection {
 				java.util.Date end = dateFormat.parse(rs.getString(8));
 	
 				System.out.println(start);
-				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
+				temp = new Order(cst,rs.getString(4), 11 ,rs.getString(5), start,end);
 				orders.add(temp);
 			}			
 			//rs.close();
@@ -311,7 +311,7 @@ public class mysqlConnection {
 				Customer cst = new Customer(getName(customerId),customerId,registerDate);
 				java.util.Date start = dateFormat.parse(rs.getString(7));
 				java.util.Date end = dateFormat.parse(rs.getString(8));
-				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
+				temp = new Order(cst,rs.getString(4),11, rs.getString(5), start,end);
 				orders.add(temp);
 			}			
 			if (rs != null) {
