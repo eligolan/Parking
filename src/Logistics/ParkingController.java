@@ -154,7 +154,18 @@ public final class ParkingController {
 		pl.CancelParking(order_id);
 	}
 	
-
+    public Order getOrder(int order_id){
+    	
+    	Order o;
+    	for(Parking_Lot p : parking){
+    		o=p.getOrder(order_id);
+    		if(o!= null)
+    			return o;
+    	}
+    	return null;
+    }
+	
+	
 	// display function for gui
 	// will display all locations which are not available
 	public ArrayList<Location> display(int parking_id){

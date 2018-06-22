@@ -159,6 +159,16 @@ public class Parking_Lot {
 	public boolean CancelParking(int order_id){
 	     	return exitParking(order_id);
 	}
+	
+	public Order getOrder(int order_id){
+		
+		for(Order o : all_orders){
+			if(o.getOrderId() == order_id){
+				return o;
+			}
+		}
+		return null;
+	}
 
 
 	public int getMaximumCapacity(){
