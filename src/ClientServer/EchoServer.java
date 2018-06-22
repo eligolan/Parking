@@ -155,7 +155,11 @@ public class EchoServer extends AbstractServer
 				int OrderId = Integer.parseInt(element.get(0));				
 				client.sendToClient(m.deleteOrder(OrderId));
 				break;
+			case 11: /* get all Parking_lot */					
+				//client.sendToClient(m.getAllParkingLot());
+				break;
 			}
+			
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

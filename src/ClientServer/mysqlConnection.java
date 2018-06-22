@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import Actors.Customer;
 import Logistics.Order;
+import Logistics.Parking_Lot;
 
 
 public class mysqlConnection {
@@ -357,7 +358,7 @@ public class mysqlConnection {
 		try 
 		{
 			stmt = conn.createStatement();
-			ret =  stmt.execute("DELETE DBUSER WHERE id = " + OrderId);
+			ret =  stmt.execute("DELETE parkingOrder WHERE id = " + OrderId);
 			
 			if (stmt != null) {
 				try {
@@ -393,5 +394,38 @@ public class mysqlConnection {
 		} catch (SQLException e) {e.printStackTrace();}
 		return 0;
 	}
+
+/*	public ArrayList<PlInfo> getAllParkingLot() {
+		ArrayList<PlInfo> parkingInfo = new ArrayList<PlInfo>();
+		PlInfo temp;
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingLot;");
+			while (rs.next()) {
+				int parkingId = rs.getInt(1);
+				int managerId = rs.getInt(2);	
+				int capacity = rs.getInt(3);
+
+										
+				temp = new PlInfo(parkingId,managerId,capacity);
+				parkingInfo.add(temp);
+			}			
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {  ignored }
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {  ignored }
+			}
+		} catch (SQLException e) {e.printStackTrace();} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return parkingInfo;
+	}*/
 	
 }
