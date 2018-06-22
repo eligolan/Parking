@@ -92,8 +92,8 @@ public class RequestOneTimeController {
 			else {
 			ObjectSender snd1 = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
 			int orderId1 = (int) ClientServerController.sendMsgToServer(snd1);
-			//Location loc = controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
-			 ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " " + 1 + " " + 1 + " " + 3 + " ");
+			Location loc = controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
+			 ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " " + loc.getX() + " " + loc.getY() + " " + loc.getZ() + " ");
 			 String msg = ClientServerController.sendMsgToServer(snd).toString();
 			 if(msg.equals("failed!")) {
 				 showMsg(event,"Not Approved"," ");
