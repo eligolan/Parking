@@ -99,8 +99,7 @@ public class RequestOneTimeController {
 			 else {
 				 snd = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
 				 int orderId = (int) ClientServerController.sendMsgToServer(snd);
-				 showMsg(event,"Approved " + orderId,""+getPay(arrive, end));
-				// System.out.println("success!");
+				 showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));
 				 
 			 }
 			 //}
