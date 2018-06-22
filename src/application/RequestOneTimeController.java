@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import Actors.Customer;
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
 import Logistics.ParkingController;
@@ -79,8 +81,6 @@ public class RequestOneTimeController {
 			Date arrive = dateFormat.parse(dateArrive);
 			Date end = dateFormat.parse(dateEnd);
 
-			/*	Time arrival = new Time(Integer.parseInt(timeStart.getText()),Integer.parseInt(startDay.getText()),dateStart.getText());
-			Time departure = new Time(Integer.parseInt(timeEnd.getText()),Integer.parseInt(endDay.getText()),endDate.getText());
 			if(controller.checkIfparkingLotExist(parking_id)==false)
 				throw new Exception();
 			if(controller.isParkingFull(parking_id))
@@ -89,8 +89,10 @@ public class RequestOneTimeController {
 			}
 
 			else {
-				controller.orderParking(Integer.parseInt(parkingNum.getText()),Integer.parseInt(idText.getText()),Integer.parseInt(carNumText.getText()) ,2,"",arrival ,departure );
-			 */	ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " ");
+			ObjectSender snd1 = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
+			int orderId1 = (int) ClientServerController.sendMsgToServer(snd1);
+			controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
+			 ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " ");
 			 String msg = ClientServerController.sendMsgToServer(snd).toString();
 			 if(msg.equals("failed!")) {
 				 showMsg(event,"Not Approved"," ");
@@ -102,7 +104,7 @@ public class RequestOneTimeController {
 				 showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));
 				 
 			 }
-			 //}
+		  }
 		}
 		catch(Exception e)
 		{
