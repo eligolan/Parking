@@ -43,7 +43,7 @@ public class SignInController {
 	@FXML
 	public void initialize()
 	{
-		controll =new MainController();
+		controll = new MainController();
 		controllEdit = TextEditor.getInstance();
 	}
 
