@@ -156,7 +156,7 @@ public class EchoServer extends AbstractServer
 				client.sendToClient(m.deleteOrder(OrderId));
 				break;
 			case 11: /* get all Parking_lot */					
-				//client.sendToClient(m.getAllParkingLot());
+				client.sendToClient(m.getAllParkingLot());
 				break;
 			}
 			
