@@ -24,7 +24,11 @@ public class Order extends AllOrders {
 		order_location=loc;
 		parking_lot_id=pl_id;
 	}
-		
+	
+	
+	public Location GetOrderLocation(){
+		return order_location;
+	}
 	
 	@Override
 	public String toString() {
