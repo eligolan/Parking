@@ -15,7 +15,7 @@ public class Parking_Lot {
 	private Location maximum_corrdinates;
 	private Location next_nearest_location;
 	
-	public Parking_Lot(int Parking_lot_id, int manger_id, int capacity)
+	public Parking_Lot(int parking_lot_id, int manger_id, int capacity)
 	{
 		this.parking_lot_id = parking_lot_id;
 		invalid_parking_location= new ArrayList<Location>();
