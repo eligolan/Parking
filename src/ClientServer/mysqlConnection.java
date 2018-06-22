@@ -237,7 +237,6 @@ public class mysqlConnection {
 	}
 	
 	
-
 	public ArrayList<Order> getOrders(String name,int id) {
 		ArrayList<Order> orders = new ArrayList<Order>();
 		Order temp;
@@ -378,8 +377,8 @@ public class mysqlConnection {
 		try 
 		{
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE parking_id = '" + parkingId + "' AND customer_id = '" + customerId + "' AND "
-					+ "car_number = '" + parkingId + "';");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingOrder WHERE parking_id = '" + parkingId + "' AND customer_id = '" + customerId + "' AND "
+					+ "car_number = '" + carID + "';");
 			if(rs.next()) {
 				return rs.getInt(1);
 			}
