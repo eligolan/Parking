@@ -164,7 +164,7 @@ public class mysqlConnection {
 		return false;
 	}
 
-	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail, String startOrder, String endOrder) {
+	public boolean addOrderToTable(String table, int parking_id, int customer_id, String car_number, String mail, String startOrder, String endOrder, int x, int y, int z) {
 		try {
 			// add record to table.
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -179,6 +179,9 @@ public class mysqlConnection {
 			uprs.updateString("email",mail);
 			uprs.updateString("start_time",startOrder);
 			uprs.updateString("end_time",endOrder);
+			uprs.updateInt("xCordinate",x);
+			uprs.updateInt("yCordinate",y);
+			uprs.updateInt("floor",z);
 			uprs.insertRow();
 			return true;
 		}catch (SQLException e) {
@@ -258,8 +261,8 @@ public class mysqlConnection {
 				/**/
 				
 				Customer cst = new Customer(name,id,registerDate);
-				java.util.Date start = dateFormat.parse(rs.getString(7));
-				java.util.Date end = dateFormat.parse(rs.getString(8));
+				java.util.Date start = dateFormat.parse(rs.getString(7).trim());
+				java.util.Date end = dateFormat.parse(rs.getString(8).trim());
 	
 				Location loc = new Location(rs.getInt(9),rs.getInt(10), rs.getInt(11));
 				temp = new Order(cst,rs.getString(4), rs.getInt(1) ,rs.getString(5), start,end,loc,rs.getInt(2));
@@ -306,8 +309,8 @@ public class mysqlConnection {
 				/**/
 							
 				Customer cst = new Customer(getName(customerId),customerId,registerDate);
-				java.util.Date start = dateFormat.parse(rs.getString(7));
-				java.util.Date end = dateFormat.parse(rs.getString(8));
+				java.util.Date start = dateFormat.parse(rs.getString(7).trim());
+				java.util.Date end = dateFormat.parse(rs.getString(8).trim());
 				Location loc = new Location(rs.getInt(9),rs.getInt(10), rs.getInt(11));
 				temp = new Order(cst,rs.getString(4), rs.getInt(1) ,rs.getString(5), start,end,loc,rs.getInt(2));
 				orders.add(temp);
@@ -359,7 +362,7 @@ public class mysqlConnection {
 		try 
 		{
 			stmt = conn.createStatement();
-			ret =  stmt.execute("DELETE parkingOrder WHERE id = " + OrderId);
+			ret =  stmt.execute("DELETE FROM parkingOrder WHERE id = " + OrderId);
 			
 			if (stmt != null) {
 				try {

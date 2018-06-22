@@ -14,8 +14,11 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import Actors.Customer;
+import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
 import Logistics.Order;
+import Logistics.ParkingController;
+import Logistics.PlotInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +46,7 @@ public class SignInController {
 	@FXML
 	public void initialize()
 	{
-		controll =new MainController();
+		controll = new MainController();
 		controllEdit = TextEditor.getInstance();
 	}
 
@@ -97,6 +100,16 @@ public class SignInController {
 					TextEditor.getInstance().setCst(cst,orders);
 					checkMsgForLate(event);
 					checkMsgForReNewAcount(event);
+					
+					snd = new ObjectSender(11,"");
+					ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
+							ClientServerController.sendMsgToServer(snd));
+					
+					snd = new ObjectSender(7,"");
+					ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
+							ClientServerController.sendMsgToServer(snd));
+					
+					
 					showMsg(event,"Sign In Success :)","");
 				} 			
 			}else {
