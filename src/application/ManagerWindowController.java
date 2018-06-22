@@ -37,6 +37,7 @@ public class ManagerWindowController {
 
 	@FXML
 	void clickHandleComp(ActionEvent event) {
+		//setWindow(event,"ShowComplaints.fxml");
 
 	}
 
@@ -69,7 +70,7 @@ public class ManagerWindowController {
 	void setWindow(ActionEvent event, String fxmlFile)
 	{
 		try {
-			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("SetUpWin.fxml")) ;
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource(fxmlFile)) ;
 			Parent root1 = (Parent) fxmloader.load();
 			Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
