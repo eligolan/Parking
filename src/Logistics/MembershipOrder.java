@@ -1,4 +1,6 @@
-/*package Logistics;
+package Logistics;
+
+import java.util.Date;
 
 import Actors.Customer;
 import Actors.MemberShip;
@@ -6,14 +8,10 @@ import Actors.MemberShip;
 public class MembershipOrder extends AllOrders {	
 	    
 	    MemberShip membership;
-	    Time arrival_time;
-	
-	
-		public MembershipOrder(MemberShip membership, Time arrival_time) {
-			super(new Customer(membership.getName(),membership.getId()), membership.getCarId());
+
+		public MembershipOrder(MemberShip membership,int order_id) {
+			super(new Customer(membership.getName(), membership.getId(), membership.getDateRegister()),membership.getCarId(),order_id);
 			this.membership=membership;
-			this.arrival_time=arrival_time;
-               
 		}
 		
 		// will check that 14 days have not passed since arrival_time
@@ -23,16 +21,5 @@ public class MembershipOrder extends AllOrders {
 		
 		public double pay(){
 			return 0.0;
-		}
-		
-		// view order
-		public String view(){
-		  String text= "membership order \n";
-		  String owner = "owner : " + membership.getName() +"\n";
-		  String car = "car_id : "+ Integer.toString(membership.getCarId()) +"\n";
-		  String arrival= "arrived at " + arrival_time.getDate() + " at " + Integer.toString(arrival_time.getHour()) ; 
-		  return text + owner+car+arrival;
-		  
 		}	
 }
-*/

@@ -1,8 +1,6 @@
 package Actors;
 
-import java.io.Serializable;
 import java.util.Date;
-
 public class Customer extends Person{
 	
 	private Date dateRegister;
