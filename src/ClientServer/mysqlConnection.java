@@ -186,15 +186,12 @@ public class mysqlConnection {
 	}
 
 	public int getId(String name) {
-		// 
-		
 		Statement stmt;
 		try 
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE Name = '" + name + "';");
 			if(rs.next()) {
-				System.out.println(rs.getInt(1));
 				return rs.getInt(1);
 			}
 			//rs.close();
@@ -264,7 +261,7 @@ public class mysqlConnection {
 				java.util.Date end = dateFormat.parse(rs.getString(8));
 	
 				System.out.println(start);
-				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
+				temp = new Order(cst,rs.getString(4), 11 ,rs.getString(5), start,end);
 				orders.add(temp);
 			}			
 			//rs.close();
@@ -285,7 +282,7 @@ public class mysqlConnection {
 		return orders;
 	}
 
-	public  ArrayList<Order> getAllOrders() {
+	public ArrayList<Order> getAllOrders() {
 		ArrayList<Order> orders = new ArrayList<Order>();
 		Order temp;
 		Statement stmt;
@@ -310,7 +307,7 @@ public class mysqlConnection {
 				Customer cst = new Customer(getName(customerId),customerId,registerDate);
 				java.util.Date start = dateFormat.parse(rs.getString(7));
 				java.util.Date end = dateFormat.parse(rs.getString(8));
-				temp = new Order(cst,rs.getString(4), rs.getString(5), start,end);
+				temp = new Order(cst,rs.getString(4),11, rs.getString(5), start,end);
 				orders.add(temp);
 			}			
 			if (rs != null) {
@@ -329,7 +326,7 @@ public class mysqlConnection {
 		return orders;
 	}
 
-	private String getName(int customerId) {
+	public String getName(int customerId) {
 		Statement stmt;
 		try 
 		{
@@ -353,4 +350,48 @@ public class mysqlConnection {
 		}
 		return " ";
 	}
+	
+	public boolean deleteOrder(int OrderId) {
+		Statement stmt;
+		boolean ret = false;
+		try 
+		{
+			stmt = conn.createStatement();
+			ret =  stmt.execute("DELETE DBUSER WHERE id = " + OrderId);
+			
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	public int getOrderId(int parkingId,int customerId,String carID) {
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parking WHERE parking_id = '" + parkingId + "' AND customer_id = '" + customerId + "' AND "
+					+ "car_number = '" + parkingId + "';");
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+		} catch (SQLException e) {e.printStackTrace();}
+		return 0;
+	}
+	
 }
