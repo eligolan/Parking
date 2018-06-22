@@ -11,8 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import Actors.Customer;
+import Logistics.Location;
 import Logistics.Order;
 import Logistics.Parking_Lot;
+import Logistics.PlotInfo;
 
 
 public class mysqlConnection {
@@ -245,8 +247,7 @@ public class mysqlConnection {
 		{
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingOrder WHERE customer_id = '" + id + "';");
-			while (rs.next()) {
-				
+			while (rs.next()) {			
 				/* add date register */
 				String dateReg = getDateRegister(id);
 				java.util.Date registerDate = null;
@@ -261,8 +262,8 @@ public class mysqlConnection {
 				java.util.Date start = dateFormat.parse(rs.getString(7));
 				java.util.Date end = dateFormat.parse(rs.getString(8));
 	
-				System.out.println(start);
-				temp = new Order(cst,rs.getString(4), 11 ,rs.getString(5), start,end,null,1);
+				Location loc = new Location(rs.getInt(9),rs.getInt(10), rs.getInt(11));
+				temp = new Order(cst,rs.getString(4), rs.getInt(1) ,rs.getString(5), start,end,loc,rs.getInt(2));
 				orders.add(temp);
 			}			
 			//rs.close();
@@ -308,7 +309,8 @@ public class mysqlConnection {
 				Customer cst = new Customer(getName(customerId),customerId,registerDate);
 				java.util.Date start = dateFormat.parse(rs.getString(7));
 				java.util.Date end = dateFormat.parse(rs.getString(8));
-				temp = new Order(cst,rs.getString(4),11, rs.getString(5), start,end ,null,1);
+				Location loc = new Location(rs.getInt(9),rs.getInt(10), rs.getInt(11));
+				temp = new Order(cst,rs.getString(4), rs.getInt(1) ,rs.getString(5), start,end,loc,rs.getInt(2));
 				orders.add(temp);
 			}			
 			if (rs != null) {
@@ -395,9 +397,9 @@ public class mysqlConnection {
 		return 0;
 	}
 
-/*	public ArrayList<PlInfo> getAllParkingLot() {
-		ArrayList<PlInfo> parkingInfo = new ArrayList<PlInfo>();
-		PlInfo temp;
+	public ArrayList<PlotInfo> getAllParkingLot() {
+		ArrayList<PlotInfo> parkingInfo = new ArrayList<PlotInfo>();
+		PlotInfo temp;
 		Statement stmt;
 		try 
 		{
@@ -409,23 +411,21 @@ public class mysqlConnection {
 				int capacity = rs.getInt(3);
 
 										
-				temp = new PlInfo(parkingId,managerId,capacity);
+				temp = new PlotInfo(parkingId,managerId,capacity);
 				parkingInfo.add(temp);
 			}			
 			if (rs != null) {
 				try {
 					rs.close();
-				} catch (SQLException e) {  ignored }
+				} catch (SQLException e) {  /* ignored */ }
 			}
 			if (stmt != null) {
 				try {
 					stmt.close();
-				} catch (SQLException e) {  ignored }
+				} catch (SQLException e) {  /* ignored */ }
 			}
-		} catch (SQLException e) {e.printStackTrace();} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {e.printStackTrace();} 
 		return parkingInfo;
-	}*/
+	}
 	
 }
