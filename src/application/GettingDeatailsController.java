@@ -20,13 +20,7 @@ private ParkingController controller;
     private AnchorPane c1;
 
     @FXML
-    private TextField numId;
-
-    @FXML
-    private TextField numParkingLot;
-    
-    @FXML
-    private TextField carNumber;
+    private TextField orderNum;
 
     @FXML
     private Button cancel;
@@ -35,22 +29,23 @@ private ParkingController controller;
     private Button exit;
 
 
+
     @FXML
     void clickOnCancel(ActionEvent event) {
-    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
-    	{
-    		controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-    	}
+//    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
+//    	{
+//    		controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
+//    	}
     	
 
     }
 
     @FXML
     void clickOnExit(ActionEvent event) {
-    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
-    	{
-    		controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-    	}
+//    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
+//    	{
+//    		controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
+//    	}
 
     }
 
