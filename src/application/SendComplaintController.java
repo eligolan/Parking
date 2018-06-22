@@ -9,7 +9,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
 public class SendComplaintController {
-
     @FXML
     private AnchorPane c1;
 
