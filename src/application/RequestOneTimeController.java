@@ -6,6 +6,7 @@ package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -13,8 +14,10 @@ import Actors.Customer;
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
 import Logistics.Location;
+import Logistics.Order;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
+import Logistics.PlotInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,13 +73,24 @@ public class RequestOneTimeController {
 	@FXML
 	void clickOnPay(ActionEvent event) {
 		try {
+			ParkingController.getInstance().ExitSystem();
+			/* initialize parking */
+			ObjectSender snd = new ObjectSender(11,"");
+			ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
+					ClientServerController.sendMsgToServer(snd));
+
+			snd = new ObjectSender(7,"");
+			ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
+					ClientServerController.sendMsgToServer(snd));
+
+
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			int parking_id = Integer.parseInt(parkingNum.getText());
 			int customer_id = textEditor.getCst().getId();
 			int car_id = Integer.parseInt(carNumText.getText());
 			String email = emailText.getText();
-			
-			
+
+
 			String dateArrive = dateStart.getText() + " " + timeStart.getText();
 			String dateEnd = endDate.getText() + " " + timeEnd.getText();
 			Date arrive = dateFormat.parse(dateArrive);
@@ -90,21 +104,32 @@ public class RequestOneTimeController {
 			}
 
 			else {
-			ObjectSender snd1 = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
-			int orderId1 = (int) ClientServerController.sendMsgToServer(snd1);
-			Location loc = controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
-			 ObjectSender snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " " + 1 + " " + 1 + " " + 3 + " ");
-			 String msg = ClientServerController.sendMsgToServer(snd).toString();
-			 if(msg.equals("failed!")) {
-				 showMsg(event,"Not Approved"," ");
-				 System.out.println("failed!");
-			 }
-			 else {
-				 snd = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
-				 int orderId = (int) ClientServerController.sendMsgToServer(snd);
-				 showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));				 
-			 }
-		  }
+				ObjectSender snd1 = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
+				int orderId1 = (int) ClientServerController.sendMsgToServer(snd1);
+				Location loc = controller.orderParking(Integer.parseInt(parkingNum.getText()),textEditor.getCst(),carNumText.getText(),orderId1,1,emailText.getText(),arrive,end);
+				snd = new ObjectSender(4,parking_id+" " + customer_id + " " + car_id + " " + email + " " + dateArrive + " " + dateEnd + " " + 1 + " " + 1 + " " + 3 + " ");
+				String msg = ClientServerController.sendMsgToServer(snd).toString();
+				if(msg.equals("failed!")) {
+					showMsg(event,"Not Approved"," ");
+					System.out.println("failed!");
+				}
+				else {
+					snd = new ObjectSender(9,parking_id+" " + customer_id + " " + car_id);
+					int orderId = (int) ClientServerController.sendMsgToServer(snd);
+					ParkingController.getInstance().ExitSystem();
+					/* initialize parking */
+					snd = new ObjectSender(11,"");
+					ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
+							ClientServerController.sendMsgToServer(snd));
+
+					snd = new ObjectSender(7,"");
+					ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
+							ClientServerController.sendMsgToServer(snd));
+					showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));	
+					Stage stage = (Stage) pay.getScene().getWindow();
+					stage.close();
+				}
+			}
 		}
 		catch(Exception e)
 		{

@@ -124,6 +124,7 @@ public class SignInController {
 							}
 					    }
 					});*/
+					
 					showMsg(event,"Sign In Success :)","");
 					if(controll.isManager(new ObjectSender(3,user))) {
 						openScene("ManagerWindow.fxml", event);
