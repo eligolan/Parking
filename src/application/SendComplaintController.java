@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class SendComplaintController {
     @FXML
@@ -20,8 +21,11 @@ public class SendComplaintController {
 
     @FXML
     void clickOnSend(ActionEvent event) {
-    	ObjectSender snd = new ObjectSender(12,textComplaint.getText());
+    	String nameSender = TextEditor.getInstance().cst.getName();
+    	ObjectSender snd = new ObjectSender(12,nameSender+ ":\n"+ "complaint: " + textComplaint.getText());
     	ClientServerController.sendMsgToServer(snd);
+    	Stage stage = (Stage) send.getScene().getWindow();
+        stage.close();
     }
 
 }
