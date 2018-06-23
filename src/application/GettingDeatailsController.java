@@ -63,14 +63,19 @@ public class GettingDeatailsController {
 	 */
 	@FXML
 	void clickOnCancel(ActionEvent event) {
+		if(!isNumeric(orderNum.getText())) {
+			showMsg(event,"please enter valid namber","","WrongInput.fxml");
+			return;
+		}
 		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
 //		if(controller.checkIfparkingLotExist(order.getPlotId())) {
 //			controller.cancelParking(order.getPlotId() , Integer.parseInt(orderNum.getText()));
 //		}
+
+		
 		order = controller.getOrder(Integer.parseInt(orderNum.getText()));
 		if(order!=null) {
-			showMsg(event,"You need to pay: ",""+getPay(order),"WrongInput.fxml");
-			
+			showMsg(event,"You need to pay: ",""+getPay(order),"WrongInput.fxml");		
 		}
 		else
 		{
@@ -156,4 +161,13 @@ public class GettingDeatailsController {
 		System.out.println("More than 3 hours - 10%");
 		return ((daysDiff*24*price)+(hoursDiff*price)*0.1);
 	}
+	
+	/**
+	 * return if parameter is numeric
+	 * @param s
+	 * @return
+	 */
+	public boolean isNumeric(String s) {  
+	    return s != null && s.matches("\\d*\\.?\\d+");  
+	}  
 }
