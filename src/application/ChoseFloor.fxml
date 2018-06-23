@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ChoseFloorController">
    <children>
-      <Button id="floor1" fx:id="floor1" layoutX="224.0" layoutY="59.0" mnemonicParsing="false" onAction="#clickOnFloor1" text="floor1" />
-      <Button id="floor2" fx:id="floor2" layoutX="225.0" layoutY="125.0" mnemonicParsing="false" onAction="#clickOnFloor2" text="floor2" />
-      <Button id="floor3" fx:id="floor3" layoutX="224.0" layoutY="193.0" mnemonicParsing="false" onAction="#clickOnFloor3" text="floror3" />
+      <Button id="floor1" fx:id="floor1" layoutX="201.0" layoutY="83.0" mnemonicParsing="false" onAction="#clickOnFloor1" text="floor1" />
+      <Button id="floor2" fx:id="floor2" layoutX="201.0" layoutY="144.0" mnemonicParsing="false" onAction="#clickOnFloor2" text="floor2" />
+      <Button id="floor3" fx:id="floor3" layoutX="199.0" layoutY="207.0" mnemonicParsing="false" onAction="#clickOnFloor3" text="floror3" />
+      <TextField id="parkingNum" fx:id="parkingNum" layoutX="250.0" layoutY="23.0" />
+      <Label layoutX="90.0" layoutY="27.0" text="Parking Number: " />
    </children>
 </AnchorPane>

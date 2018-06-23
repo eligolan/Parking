@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,6 +28,9 @@ public class ChoseFloorController {
     private Button floor3;
     
     @FXML
+    private TextField parkingNum;
+    
+    @FXML
 	public void initialize()
 	{
     	
@@ -34,6 +38,8 @@ public class ChoseFloorController {
 
     @FXML
     void clickOnFloor1(ActionEvent event) {
+    	TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
+    	TextEditor.getInstance().setFloor(1);
     	setWindow(event, "ParkingView.fxml");
     	
 
@@ -41,11 +47,17 @@ public class ChoseFloorController {
 
     @FXML
     void clickOnFloor2(ActionEvent event) {
+    	TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
+    	TextEditor.getInstance().setFloor(2);
+    	setWindow(event, "ParkingView.fxml");
 
     }
 
     @FXML
     void clickOnFloor3(ActionEvent event) {
+    	TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
+    	TextEditor.getInstance().setFloor(3);
+    	setWindow(event, "ParkingView.fxml");
 
     }
     
