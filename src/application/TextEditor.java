@@ -8,6 +8,13 @@ import Logistics.Order;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
 
+/**
+ * 
+ * @author user
+ * this is single-tone class
+ * her responsibility to hold the current Costumer
+ * and the details  for the input for the windows
+ */
  public class TextEditor {
 	
 	private static TextEditor single_instance = null;

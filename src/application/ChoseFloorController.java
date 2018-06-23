@@ -68,8 +68,8 @@ public class ChoseFloorController {
     }
     /**
      * 
-     * @param event
-     * @param fxmlFile
+     * @param event - the page of the window
+     * @param fxmlFile - the name of the next window
      */
     
     void setWindow(ActionEvent event, String fxmlFile)
