@@ -1,6 +1,7 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import Actors.Customer;
 import Logistics.Order;
@@ -14,7 +15,7 @@ import Logistics.Parking_Lot;
 	
 	String bigText;
 	String smallText;
-	Customer cst;
+	Customer cst = new Customer("No CST", -1, new Date());
 	ArrayList<Order> orders; 
 	
 	public Customer getCst() {
@@ -42,8 +43,9 @@ import Logistics.Parking_Lot;
 	
 	public static TextEditor getInstance()
    {
-       if (single_instance == null)
+       if (single_instance == null) {
            single_instance = new TextEditor();
+       }
 
        return single_instance;
    }

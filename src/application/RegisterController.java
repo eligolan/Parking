@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,6 +65,30 @@ public class RegisterController {
     		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0 + " " + dateStart);
     		if(controll.registerUserAndPassToClient(snd)) {
     			openScene("MainWindow.fxml",event);
+    			
+				/* get id */
+				snd = new ObjectSender(5,user);
+				int idUser = controll.getId(snd);
+				
+				/* register online user */
+				snd = new ObjectSender(15,idUser);
+				ClientServerController.sendMsgToServer(snd);
+    			
+    			final Thread mainThread = Thread.currentThread();
+				Runtime.getRuntime().addShutdownHook(new Thread() {
+				    public void run() {
+				    	ObjectSender snd = new ObjectSender(16,idUser);
+				        ClientServerController.sendMsgToServer(snd);
+				        try {
+							mainThread.join();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				    }
+				});
+    			
+    			
     			showMsg(event,"Register Success :)"," ");
     			return;
     		}else {

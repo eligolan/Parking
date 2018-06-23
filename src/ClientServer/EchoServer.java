@@ -161,6 +161,33 @@ public class EchoServer extends AbstractServer
 			case 11: /* get all Parking_lot */					
 				client.sendToClient(m.getAllParkingLot());
 				break;
+			case 12: /* add complain */
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				String com = element.get(0);
+				client.sendToClient(m.addComplain(com));
+				break;
+			case 13: /* get all complains */					
+				client.sendToClient(m.getAllColmpains());
+				break;
+			case 14: /* check if user connection */	
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				int userId = Integer.parseInt(element.get(0));
+				client.sendToClient(m.isConnection(userId));
+				break;
+			case 15: /* connectOnline */	
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				userId = Integer.parseInt(element.get(0));
+				client.sendToClient(m.connect(userId));
+				break;
+			case 16: /* disconnect */	
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				userId = Integer.parseInt(element.get(0));
+				client.sendToClient(m.disconnect(userId));
+				break;
 			}
 			
 		

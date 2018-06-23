@@ -37,7 +37,7 @@ public class ManagerWindowController {
 
 	@FXML
 	void clickHandleComp(ActionEvent event) {
-		//setWindow(event,"ShowComplaints.fxml");
+		setWindow(event,"ShowComplaints.fxml");
 
 	}
 
@@ -64,6 +64,7 @@ public class ManagerWindowController {
 
 	@FXML
 	void clickOnView(ActionEvent event) {
+		setWindow(event,"ChoseFloor.fxml");
 
 	}
 
