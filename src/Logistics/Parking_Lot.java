@@ -95,7 +95,6 @@ public class Parking_Lot {
 		if (!isParkingAvailableAtLocation(order.GetOrderLocation()))
             return null;   
 		updateNextNearestLocation();
-		System.out.println(all_orders.size());
 		return order.GetOrderLocation();
 	}
 	
