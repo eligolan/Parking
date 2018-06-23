@@ -12,7 +12,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
+/**
+ * 
+ * @author user - Noa bayer
+ * this class is the gui for the meneger for picking floor
+ * to see the image in the specific parking lot
+ *
+ */
 public class ChoseFloorController {
 
     @FXML
@@ -60,6 +66,11 @@ public class ChoseFloorController {
     	setWindow(event, "ParkingView.fxml");
 
     }
+    /**
+     * 
+     * @param event
+     * @param fxmlFile
+     */
     
     void setWindow(ActionEvent event, String fxmlFile)
 	{
