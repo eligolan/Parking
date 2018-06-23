@@ -50,7 +50,11 @@ public final class MainController extends Application {
 		primaryStage.show();
 	}
 	
-	
+	/**
+	 * Send the name and pass to the SQL
+	 * @param userAndPass
+	 * @return return if exist or not
+	 */
 	public boolean sendUserAndPassToClient(Object userAndPass)
 	{
 		String msg = ClientServerController.sendMsgToServer(userAndPass).toString();
@@ -71,7 +75,6 @@ public final class MainController extends Application {
 	}
 
 
-
 	public boolean isManager(Object check) {
 		String msg = ClientServerController.sendMsgToServer(check).toString();
 		if(msg.equals("failed!")) {
@@ -79,7 +82,6 @@ public final class MainController extends Application {
 		}
 		return true;
 	}
-
 
 
 	public int getId(Object user) {
@@ -92,8 +94,7 @@ public final class MainController extends Application {
 		return (ArrayList<Order>) ClientServerController.sendMsgToServer(msg);
 	}
 
-
-
+	
 	public String getDateReg(ObjectSender msg) {
 		return ClientServerController.sendMsgToServer(msg).toString();
 	}
