@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #364f6b; -fx-border-color: #f5f5f5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainWindowController">
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #364f6b; -fx-border-color: #f5f5f5;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainWindowController">
    <children>
       <Button id="orderParking" fx:id="orderParking" layoutX="290.0" layoutY="160.0" mnemonicParsing="false" onAction="#clickOnOrderParking" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="Order Parking" />
       <Button id="exitParking" fx:id="exitParking" layoutX="290.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickOnExitParking" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="Exit Parking">
@@ -16,7 +14,7 @@
          </font>
       </Button>
       <Button id="cancelParking" fx:id="cancelParking" layoutX="45.0" layoutY="160.0" mnemonicParsing="false" onAction="#clickOnCancelParking" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="Cancel Parking" />
-      <Button id="complaint" fx:id="complaint" layoutX="175.0" layoutY="236.0" mnemonicParsing="false" onAction="#clickOnComplaint" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="Send Complaint" />
+      <Button id="complaint" fx:id="complaint" layoutX="290.0" layoutY="227.0" mnemonicParsing="false" onAction="#clickOnComplaint" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="Send Complaint" />
       <Button id="myOrders" fx:id="myOrders" layoutX="45.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickOnMyOrders" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="My Orders " textAlignment="CENTER">
          <font>
             <Font name="Arial" size="15.0" />
@@ -27,5 +25,6 @@
             <Font name="Agency FB Bold" size="34.0" />
          </font>
       </Label>
+      <Button id="complaint" fx:id="signOut" layoutX="45.0" layoutY="227.0" mnemonicParsing="false" onAction="#clickOnsignOut" prefHeight="50.0" prefWidth="150.0" style="-fx-border-color: #f5f5f5; -fx-background-color: #3fc1c9;" text="Sign Out" />
    </children>
 </AnchorPane>

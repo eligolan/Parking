@@ -56,20 +56,20 @@ public class ParkingViewController {
 	public void initialize()
 	{
 		
-		//ArrayList<Location> loc = ParkingController.getInstance().display(1);
+		ArrayList<Location> loc = ParkingController.getInstance().display(TextEditor.getInstance().getNumParking());
 		for(int i=1; i<5; i++) {
 			for(int j=1; j<5; j++)
 			{
 				changeColor(i,j,1);
 			}
 		}
-//    	for (Location location : loc) {
-//    		if(location.getX() == 1)
-//    		{
-//    			changeColor(location.getY(), location.getZ(),2);
-//    		}
-//			
-//		}
+    	for (Location location : loc) {
+    		if(location.getZ() == TextEditor.getInstance().getFloor())
+    		{
+    			changeColor(location.getX(), location.getY(),2);
+    		}
+			
+		}
 
 	}
 

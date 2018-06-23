@@ -1,6 +1,13 @@
 package application;
 
 
+import java.util.ArrayList;
+
+import ClientServer.ClientServerController;
+import ClientServer.ObjectSender;
+import Logistics.Order;
+import Logistics.ParkingController;
+import Logistics.PlotInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +21,6 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 
 public class MainWindowController {
-
-
 
 	@FXML
 	private Button complaint;
@@ -35,6 +40,9 @@ public class MainWindowController {
 
 	@FXML
 	private Button myOrders;
+	
+    @FXML
+    private Button signOut;
 
 	@FXML
 	void clickOnOrderParking(ActionEvent event) {
@@ -141,5 +149,21 @@ public class MainWindowController {
 		}
 
 	}
+	
+    @FXML
+    void clickOnsignOut(ActionEvent event) {
+    	
+    	int idUser = TextEditor.getInstance().getCst().getId();	
+    	/* remove from online */
+    	ObjectSender snd = new ObjectSender(16,idUser);
+        ClientServerController.sendMsgToServer(snd);
+    	
+        /* clear */
+        ParkingController.getInstance().ExitSystem();
+		
+    	Stage stage = (Stage) signOut.getScene().getWindow();
+        stage.close();
+
+    }
 
 }
