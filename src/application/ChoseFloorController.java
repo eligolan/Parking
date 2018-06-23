@@ -15,7 +15,10 @@ import javafx.stage.Window;
 /**
  * 
  * @author user - Noa bayer
- * this class is the gui for the meneger for picking floor
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * this class is the gui for the manager for picking floor
  * to see the image in the specific parking lot
  *
  */
@@ -67,11 +70,10 @@ public class ChoseFloorController {
 
     }
     /**
-     * 
+     * Show the choose floor window
      * @param event
      * @param fxmlFile
      */
-    
     void setWindow(ActionEvent event, String fxmlFile)
 	{
 		try {
@@ -84,8 +86,7 @@ public class ChoseFloorController {
 			stage.setTitle("SetUpWin");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("couldnt open the SetUpWin windows");
 		}

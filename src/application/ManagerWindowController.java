@@ -18,6 +18,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * 
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * The class used to show the manager window
+ */
 public class ManagerWindowController {
 
 	@FXML
@@ -44,38 +52,46 @@ public class ManagerWindowController {
 	@FXML
 	void clickHandleComp(ActionEvent event) {
 		setWindow(event,"ShowComplaints.fxml");
-
 	}
 
+	/**
+	 * Change the parking price
+	 * @param event
+	 */
 	@FXML
 	void clickOnChangePrice(ActionEvent event) {
 		try {
 		int pricePerHour =Integer.parseInt(textPrice.getText());
 		showMsg(event,"The Change Accept", "new price is: "+pricePerHour);
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			showMsg(event,"Wrong Input", "try again");
 		}
-
 	}
 
+	/**
+	 * Parking Lot setup
+	 * @param event
+	 */
 	@FXML
 	void clickOnSetUp(ActionEvent event) {
 		setWindow(event,"SetUpWin.fxml");
 	}
 
-
-
-
+	/**
+	 * View the parking lot
+	 * @param event
+	 */
 	@FXML
 	void clickOnView(ActionEvent event) {
 		setWindow(event,"ChoseFloor.fxml");
-
 	}
 
-	void setWindow(ActionEvent event, String fxmlFile)
-	{
+	/**
+	 * 
+	 * @param event
+	 * @param fxmlFile
+	 */
+	void setWindow(ActionEvent event, String fxmlFile) {
 		try {
 			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource(fxmlFile)) ;
 			Parent root1 = (Parent) fxmloader.load();
@@ -86,14 +102,18 @@ public class ManagerWindowController {
 			stage.setTitle("SetUpWin");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("couldnt open the SetUpWin windows");
+			System.out.println("couldn't open the SetUpWin windows");
 		}
-
 	}
 	
+	/**
+	 * 
+	 * @param event
+	 * @param text
+	 * @param smallText
+	 */
 	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
 			TextEditor.getInstance().setBigText(text);
@@ -106,15 +126,17 @@ public class ManagerWindowController {
 			stage.initOwner(existingWindow);
 			stage.setTitle("WrongInput");
 			stage.setScene(new Scene(root1));
-			
 			stage.show();
-		}catch (Exception e)
-		{
-			System.out.println("couldnt open the WrongInput wondows");
+		} catch (Exception e) {
+			System.out.println("couldn't open the WrongInput wondows");
 		}
 	}
 	
 
+	/**
+	 * Sign out of system
+	 * @param event
+	 */
     @FXML
     void clickOnSignOut(ActionEvent event) {
     	
@@ -128,7 +150,5 @@ public class ManagerWindowController {
 		
     	Stage stage = (Stage) signOut.getScene().getWindow();
         stage.close();
-
     }
-
 }

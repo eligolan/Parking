@@ -36,23 +36,23 @@ import Logistics.Parking_Lot;
 		this.cst = cst;
 		this.orders = orders;
 	}
-	
-	
 
 	public ArrayList<Order> getOrders() {
 		return orders;
 	}
 
 	//c'tor
-	private TextEditor()
-	{ 
+	private TextEditor() { 
 		bigText = "Noa";
 		smallText = "Bayer";
 		price = 5;
 	}
 	
-	public static TextEditor getInstance()
-   {
+	/**
+	 * Return singleton of the class
+	 * @return class singleton instance
+	 */
+	public static TextEditor getInstance() {
        if (single_instance == null) {
            single_instance = new TextEditor();
        }
@@ -60,23 +60,19 @@ import Logistics.Parking_Lot;
        return single_instance;
    }
 	
-	public String getBigText()
-	{
+	public String getBigText() {
 		return bigText;
 	}
 	
-	public void setBigText(String t)
-	{
+	public void setBigText(String t) {
 		this.bigText = t;
 	}
 	
-	public String getSmallText()
-	{
+	public String getSmallText() {
 		return smallText;
 	}
 	
-	public void setSmallText(String t)
-	{
+	public void setSmallText(String t) {
 		this.smallText = t;
 	}
 
@@ -95,5 +91,4 @@ import Logistics.Parking_Lot;
 	public void setFloor(int floor) {
 		this.floor = floor;
 	}
-
 }

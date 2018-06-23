@@ -13,17 +13,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+/**
+ * 
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * The class is used to connect with the SQL and runs our first window
+ */
 public final class MainController extends Application {
-	public MainController() {
-	}
+
+	public MainController() {}
 	
-	
-	
+	/**
+	 * Run the first window
+	 * @param args
+	 */
 	public void showMainMenu(String[] args)
 	{ 
 		launch(args);
 	}
 	
+	/**
+	 * Show the first window of the program
+	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		// constructing our scene
@@ -36,6 +50,7 @@ public final class MainController extends Application {
 		primaryStage.show();
 	}
 	
+	
 	public boolean sendUserAndPassToClient(Object userAndPass)
 	{
 		String msg = ClientServerController.sendMsgToServer(userAndPass).toString();
@@ -44,6 +59,7 @@ public final class MainController extends Application {
 		}
 		return true;
 	}
+	
 	
 	public boolean registerUserAndPassToClient(Object userAndPass)
 	{
@@ -71,6 +87,7 @@ public final class MainController extends Application {
 		return (int) ClientServerController.sendMsgToServer(user);
 	}
 
+	
 	public ArrayList<Order> getOrders(Object msg) {
 		return (ArrayList<Order>) ClientServerController.sendMsgToServer(msg);
 	}
@@ -80,5 +97,4 @@ public final class MainController extends Application {
 	public String getDateReg(ObjectSender msg) {
 		return ClientServerController.sendMsgToServer(msg).toString();
 	}
-	
 }

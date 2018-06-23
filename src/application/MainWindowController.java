@@ -20,6 +20,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * 
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * The class is used to show the registered client main window
+ */
 public class MainWindowController {
 
 	@FXML
@@ -44,6 +52,10 @@ public class MainWindowController {
     @FXML
     private Button signOut;
 
+    /**
+     * Show the order parking window
+     * @param event
+     */
 	@FXML
 	void clickOnOrderParking(ActionEvent event) {
 
@@ -57,14 +69,16 @@ public class MainWindowController {
 			stage.setTitle("Request");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("couldnt open the MainWindow windows");
 		}
 
 	}
 
-
+	/**
+	 * Show the exit parking window
+	 * @param event
+	 */
 	@FXML
 	void clickOnExitParking(ActionEvent event) {
 		try {
@@ -77,16 +91,15 @@ public class MainWindowController {
 			stage.setTitle("GettingDeatailsParking");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("couldnt open the GettingDeatailsParking windows");
 		}
-
-
 	}
 
-
-
+	/**
+	 * Show the cancel order window
+	 * @param event
+	 */
 	@FXML
 	void clickOnCancelParking(ActionEvent event) {
 		try {
@@ -99,15 +112,15 @@ public class MainWindowController {
 			stage.setTitle("GettingDeatailsParking");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("couldnt open the GettingDeatailsParking windows");
 		}
-
 	}
 
-
-
+	/**
+	 * Show the send complaint window
+	 * @param event
+	 */
 	@FXML
 	void clickOnComplaint(ActionEvent event) {
 
@@ -121,16 +134,15 @@ public class MainWindowController {
 			stage.setTitle("GettingDeatailsParking");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("couldnt open the GettingDeatailsParking windows");
 		}
-
-
-
 	}
 
-
+	/**
+	 * Show the my orders window
+	 * @param event
+	 */
 	@FXML
 	void clickOnMyOrders(ActionEvent event) {
 		try {
@@ -143,13 +155,15 @@ public class MainWindowController {
 			stage.setTitle("GettingDeatailsParking");
 			stage.setScene(new Scene(root1));
 			stage.show();
-		}catch (Exception e)
-		{
-			System.out.println("couldnt open the GettingDeatailsParking windows");
+		} catch (Exception e) {
+			System.out.println("couldn't open the GettingDeatailsParking windows");
 		}
-
 	}
 	
+	/**
+	 * Sign out of the user
+	 * @param event
+	 */
     @FXML
     void clickOnsignOut(ActionEvent event) {
     	
@@ -163,7 +177,5 @@ public class MainWindowController {
 		
     	Stage stage = (Stage) signOut.getScene().getWindow();
         stage.close();
-
     }
-
 }

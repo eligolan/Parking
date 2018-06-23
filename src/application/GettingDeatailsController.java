@@ -23,10 +23,21 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * 
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * The class is used to end parking or cancel invitation
+ */
 public class GettingDeatailsController {
 	private ParkingController controller;
 	private MainController controll;
 
+	/**
+	 * Initialize variables 
+	 */
 	@FXML
 	public void initialize()
 	{
@@ -46,6 +57,10 @@ public class GettingDeatailsController {
 	@FXML
 	private Button exit;
 
+	/**
+	 * Cancel parking
+	 * @param event
+	 */
 	@FXML
 	void clickOnCancel(ActionEvent event) {
 		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
@@ -64,6 +79,10 @@ public class GettingDeatailsController {
 		}
 	}
 
+	/**
+	 * Finish parking
+	 * @param event
+	 */
 	@FXML
 	void clickOnExit(ActionEvent event) {
 		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
@@ -93,6 +112,11 @@ public class GettingDeatailsController {
 		}
 	}
 
+	/**
+	 * If the client wants to cancel the order it computes the fine
+	 * @param order order details
+	 * @return price of the fine
+	 */
 	private double getPay(Order order) {
 		float daysBetween = 0;
 		int hoursDiff = 0;

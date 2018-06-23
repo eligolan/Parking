@@ -35,7 +35,7 @@ import javafx.stage.Window;
 
 public class SignInController {
 
-	private MainController controll;
+	private MainController control;
 	private TextEditor controllEdit;
 	//	
 	//   public SignInController(GuiController controll)
@@ -44,9 +44,8 @@ public class SignInController {
 	//   }
 
 	@FXML
-	public void initialize()
-	{
-		controll = new MainController();
+	public void initialize() {
+		control = new MainController();
 		controllEdit = TextEditor.getInstance();
 	}
 
@@ -66,52 +65,51 @@ public class SignInController {
 	void clickOnSignIn(ActionEvent event) {
 		String user = userText.getText();
 		String pass = passText.getText();
-		if(checkInputIsValid(user, pass))
-		{
-			ObjectSender snd = new ObjectSender(1,user+" "+pass);
-			
-			snd = new ObjectSender(5,user);
-			int idUserr = controll.getId(snd);
-			ObjectSender snd1 = new ObjectSender(14,idUserr);
-			
-			if(controll.sendUserAndPassToClient(snd) && !(boolean)ClientServerController.sendMsgToServer(snd1)) {  					
-					/* get id */
-					snd = new ObjectSender(5,user);
-					int idUser = controll.getId(snd);
-					
-					/* register online user */
-					snd = new ObjectSender(15,idUserr);
-					ClientServerController.sendMsgToServer(snd);
-					
-					/* get date start register */
-					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-					snd = new ObjectSender(8,idUser);
-					String dateReg = controll.getDateReg(snd);
-					Date resigerDate = null;
-					try {
-						resigerDate = dateFormat.parse(dateReg);
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					Customer cst = new Customer(user, idUser,resigerDate);
+		if(checkInputIsValid(user, pass)) {
+			ObjectSender snd = new ObjectSender(1,user + " " + pass);
 
-					/* get orders */
-					snd = new ObjectSender(6, user + " " + idUser);
-					ArrayList<Order> orders = controll.getOrders(snd); 				
-					TextEditor.getInstance().setCst(cst,orders);
-					checkMsgForLate(event);
-					checkMsgForReNewAcount(event);
-					
-					/* initialize parking */
-					snd = new ObjectSender(11,"");
-					ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
-							ClientServerController.sendMsgToServer(snd));
-					
-					snd = new ObjectSender(7,"");
-					ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
-							ClientServerController.sendMsgToServer(snd));
-					
-/*					final Thread mainThread = Thread.currentThread();
+			snd = new ObjectSender(5,user);
+			int idUserr = control.getId(snd);
+			ObjectSender snd1 = new ObjectSender(14,idUserr);
+
+			if(control.sendUserAndPassToClient(snd) && !(boolean)ClientServerController.sendMsgToServer(snd1)) {  					
+				/* get id */
+				snd = new ObjectSender(5,user);
+				int idUser = control.getId(snd);
+
+				/* register online user */
+				snd = new ObjectSender(15,idUserr);
+				ClientServerController.sendMsgToServer(snd);
+
+				/* get date start register */
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+				snd = new ObjectSender(8,idUser);
+				String dateReg = control.getDateReg(snd);
+				Date resigerDate = null;
+				try {
+					resigerDate = dateFormat.parse(dateReg);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Customer cst = new Customer(user, idUser,resigerDate);
+
+				/* get orders */
+				snd = new ObjectSender(6, user + " " + idUser);
+				ArrayList<Order> orders = control.getOrders(snd); 				
+				TextEditor.getInstance().setCst(cst,orders);
+				checkMsgForLate(event);
+				checkMsgForReNewAcount(event);
+
+				/* initialize parking */
+				snd = new ObjectSender(11,"");
+				ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
+						ClientServerController.sendMsgToServer(snd));
+
+				snd = new ObjectSender(7,"");
+				ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
+						ClientServerController.sendMsgToServer(snd));
+
+				/*					final Thread mainThread = Thread.currentThread();
 					Runtime.getRuntime().addShutdownHook(new Thread() {
 					    public void run() {
 					    	ObjectSender snd = new ObjectSender(16,idUser);
@@ -124,41 +122,35 @@ public class SignInController {
 							}
 					    }
 					});*/
-					
-					showMsg(event,"Sign In Success :)","");
-					if(controll.isManager(new ObjectSender(3,user))) {
-						openScene("ManagerWindow.fxml", event);
-					}else {
-						openScene("MainWindow.fxml",event);
-					}			 			
-			}else {
+
+				showMsg(event,"Sign In Success :)","");
+				if(control.isManager(new ObjectSender(3,user))) {
+					openScene("ManagerWindow.fxml", event);
+				} else {
+					openScene("MainWindow.fxml",event);
+				}			 			
+			}
+			else {
 				showMsg(event,"Wrong Input","try again");
 			}		
-		}
-		else
-		{
+		} else {
 			showMsg(event,"Wrong Input","try again");
 		}
-
 	}
 
 
 	private void checkMsgForReNewAcount(ActionEvent event) {
 		Date starAcount = controllEdit.getCst().getDateRegister();
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	    Calendar c = Calendar.getInstance();
-	    c.setTime(starAcount); // Now use today date.
-	    c.add(Calendar.DATE, 7);
-	    Date endAcount = c.getTime();
-	    Calendar cn = Calendar.getInstance();
-	    cn.setTime(new Date());
-	    Date currentDate = cn.getTime();
-	    if(currentDate.after(endAcount))
-	    {
-	    	showMsg(event,"your acount is going to expire ","less than 1 week please renews");
-	    }
-		
+		Calendar c = Calendar.getInstance();
+		c.setTime(starAcount); // Now use today date.
+		c.add(Calendar.DATE, 7);
+		Date endAcount = c.getTime();
+		Calendar cn = Calendar.getInstance();
+		cn.setTime(new Date());
+		Date currentDate = cn.getTime();
+		if(currentDate.after(endAcount)) {
+			showMsg(event,"your account is going to expire ","less than 1 week please renew");
+		}
 	}
 
 
@@ -175,34 +167,31 @@ public class SignInController {
 				if(currentDate.after(endTimeOrder))
 					showMsg(event,"You are late! pay: "+getTicket(order.getStart(),endTimeOrder),order.toString());
 			}
-
 		} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
 	private double getTicket(Date arrive, Date end) {
-			double price = controllEdit.getPrice();
-			float daysBetween = 0;
-			int hoursDiff = 0;
-			long difference = end.getTime() - arrive.getTime();
-			daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-			hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
-			int daysDiff = Math.round(daysBetween);
-			return ((daysDiff*24*price)+(hoursDiff*price))*1.2;
-		
+		double price = controllEdit.getPrice();
+		float daysBetween = 0;
+		int hoursDiff = 0;
+		long difference = end.getTime() - arrive.getTime();
+		daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+		hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
+		int daysDiff = Math.round(daysBetween);
+		return ((daysDiff*24*price)+(hoursDiff*price))*1.2;
 	}
 
 
 	private boolean checkInputIsValid(String user, String pass) {
-		// TODO check if it is write propetlly and it is on the server
+		// TODO check if it is write properly and it is on the server
 		return true;
 	}
 
-	private void openScene(String sceneName, ActionEvent event)
-	{
+	private void openScene(String sceneName, ActionEvent event) {
 		Parent parent;
 		try {
 			parent = FXMLLoader.load((getClass().getResource(sceneName)));
@@ -214,7 +203,6 @@ public class SignInController {
 		} catch (IOException e) {
 			System.out.println("couldnt open the MainWindow windows");
 		}
-
 	}
 
 
@@ -230,12 +218,9 @@ public class SignInController {
 			stage.initOwner(existingWindow);
 			stage.setTitle("Input");
 			stage.setScene(new Scene(root1));
-
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("couldnt open the WrongInput wondows");
 		}
 	}
-
 }
