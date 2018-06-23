@@ -59,17 +59,31 @@ public class ChoseFloorController {
 
 	@FXML
 	void clickOnFloor2(ActionEvent event) {
-		TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
-		TextEditor.getInstance().setFloor(2);
-		setWindow(event, "ParkingView.fxml");
+		try {
+			TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
+			TextEditor.getInstance().setFloor(2);
+			setWindow(event, "ParkingView.fxml");
+		}
+		catch(Exception e)
+		{
+			showMsg(event,"Wrong Input","check number of parking");
+		}
+
 
 	}
 
 	@FXML
 	void clickOnFloor3(ActionEvent event) {
-		TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
-		TextEditor.getInstance().setFloor(3);
-		setWindow(event, "ParkingView.fxml");
+		try {
+			TextEditor.getInstance().setNumParking(Integer.parseInt(parkingNum.getText()));
+			TextEditor.getInstance().setFloor(3);
+			setWindow(event, "ParkingView.fxml");
+
+		}
+		catch(Exception e)
+		{
+			showMsg(event,"Wrong Input","check number of parking");
+		}
 
 	}
 	/**
@@ -97,7 +111,7 @@ public class ChoseFloorController {
 		}
 
 	}
-	
+
 	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
 			TextEditor.getInstance().setBigText(text);

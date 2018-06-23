@@ -21,7 +21,15 @@ import Logistics.Parking_Lot;
 	private int price ;
 	private int floor;
 	private int numParking;
+	String bigText;
+	String smallText;
+	Customer cst = new Customer("No CST", -1, new Date());
+	ArrayList<Order> orders; 
 	
+	public void setOrders(ArrayList<Order> orders) {
+		this.orders = orders;
+	}
+
 	public int getNumParking() {
 		return numParking;
 	}
@@ -30,10 +38,7 @@ import Logistics.Parking_Lot;
 		this.numParking = numParking;
 	}
 
-	String bigText;
-	String smallText;
-	Customer cst = new Customer("No CST", -1, new Date());
-	ArrayList<Order> orders; 
+	
 	
 	public Customer getCst() {
 		return cst;
