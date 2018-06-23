@@ -56,7 +56,7 @@ public class Parking_Lot {
 	 */
 	public void SetUpLocations(){
 		
-		maximum_corrdinates=new Location(4, 4, 1);
+		maximum_corrdinates=new Location(4, 4, 3);
 		next_nearest_location =new Location(1, 1, 1);
 	}
 	
@@ -86,12 +86,16 @@ public class Parking_Lot {
 		
 		boolean loop_flag=true;
 		
+		if(all_orders.size() == maximum_capacity){
+			System.out.println(all_orders.size());
+			return;
+		}
 		
 		while(loop_flag){
 		if(maximum_corrdinates.getY()==next_nearest_location.getY()){
 			next_nearest_location.setY(1);
+			next_nearest_location.setZ(next_nearest_location.getZ()+1);
 			if(next_nearest_location.getZ()==maximum_corrdinates.getZ()){
-				System.out.println("heheheh");
 				next_nearest_location.setZ(1);
 				next_nearest_location.setX(next_nearest_location.getX()+1);
 			}
@@ -99,10 +103,11 @@ public class Parking_Lot {
 		else{
 			next_nearest_location.setY(next_nearest_location.getY()+1);
 		}
-	   	
+		
 		if(isParkingAvailableAtLocation(next_nearest_location))
 			loop_flag=false;
 	  }
+		
 	}
 	
 	

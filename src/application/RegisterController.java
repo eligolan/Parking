@@ -5,11 +5,17 @@
 package application;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import Actors.Customer;
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
+import Logistics.Order;
+import Logistics.ParkingController;
+import Logistics.PlotInfo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,7 +84,7 @@ public class RegisterController {
     		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0 + " " + dateStart);
     		if(controll.registerUserAndPassToClient(snd)) {
     			openScene("MainWindow.fxml",event);
-    			
+    					
 				/* get id */
 				snd = new ObjectSender(5,user);
 				int idUser = controll.getId(snd);
@@ -86,7 +92,36 @@ public class RegisterController {
 				/* register online user */
 				snd = new ObjectSender(15,idUser);
 				ClientServerController.sendMsgToServer(snd);
+								
+				/* get date start register */
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+				snd = new ObjectSender(8,idUser);
+				String dateReg = controll.getDateReg(snd);
+				Date resigerDate = null;
+				try {
+					resigerDate = dateFormat.parse(dateReg);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				Customer cst = new Customer(user, idUser,resigerDate);
+				
+				
+				/* get orders */
+				snd = new ObjectSender(6, user + " " + idUser);
+				ArrayList<Order> orders = controll.getOrders(snd); 				
+				TextEditor.getInstance().setCst(cst,orders);
     			
+				/* initialize parking */
+				ParkingController.getInstance().ExitSystem();
+				
+				snd = new ObjectSender(11,"");
+				ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
+						ClientServerController.sendMsgToServer(snd));
+				
+				snd = new ObjectSender(7,"");
+				ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
+						ClientServerController.sendMsgToServer(snd));
+				
     			/*final Thread mainThread = Thread.currentThread();
 				Runtime.getRuntime().addShutdownHook(new Thread() {
 				    public void run() {
