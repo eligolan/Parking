@@ -55,6 +55,7 @@ public class SetUpWinController {
 
 	@FXML
 	void clickOnOk(ActionEvent event) {
+		int capacity=0; 
 		if((smallCapacity.isSelected() && bigCapacity.isSelected()) ||
 				((!smallCapacity.isSelected()) && (!bigCapacity.isSelected())))
 		{
@@ -64,8 +65,15 @@ public class SetUpWinController {
 		else
 		{
 			
+			if(smallCapacity.isSelected()){
+				capacity=12;
+			}
+			else{
+				capacity=24;
+			}
+			
 		}
-		//contoller.SetUp(Integer.parseInt(parkingId.getText()) , loc.getText() , null, name.getText() ,Integer.parseInt(capacity.getText()));
+		contoller.addParkingLot(Integer.parseInt(parkingId.getText()), 44, capacity);
 
 	}
 	

@@ -2,6 +2,7 @@ package application;
 
 import ClientServer.ClientServerController;
 import ClientServer.ObjectSender;
+import Logistics.Order;
 import Logistics.ParkingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,10 +37,12 @@ private MainController controll;
 
     @FXML
     void clickOnCancel(ActionEvent event) {
-//    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
-//    	{
-//    		controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-//    	}
+    	
+    	Order o=controller.getOrder(Integer.parseInt(orderNum.getText()));
+    	if(controller.checkIfparkingLotExist(o.getPlotId()))
+    	{
+    		controller.cancelParking(o.getPlotId(),o.getOrderId());
+    	}
     	ObjectSender snd = new ObjectSender(10,orderNum.getText());
     	if((boolean)ClientServerController.sendMsgToServer(snd)) {
     		System.out.println("yes");
@@ -50,10 +53,11 @@ private MainController controll;
 
     @FXML
     void clickOnExit(ActionEvent event) {
-//    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText())))
-//    	{
-//    		controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-//    	}
+    	Order o=controller.getOrder(Integer.parseInt(orderNum.getText()));
+    	if(controller.checkIfparkingLotExist(o.getPlotId()))
+    	{
+    		controller.cancelParking(o.getPlotId(),o.getOrderId());
+    	}
 
     }
 
