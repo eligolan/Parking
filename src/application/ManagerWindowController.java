@@ -2,6 +2,9 @@ package application;
 
 import java.io.IOException;
 
+import ClientServer.ClientServerController;
+import ClientServer.ObjectSender;
+import Logistics.ParkingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +37,9 @@ public class ManagerWindowController {
 
 	@FXML
 	private TextField textPrice;
+	
+    @FXML
+    private Button signOut;
 
 	@FXML
 	void clickHandleComp(ActionEvent event) {
@@ -107,5 +113,22 @@ public class ManagerWindowController {
 			System.out.println("couldnt open the WrongInput wondows");
 		}
 	}
+	
+
+    @FXML
+    void clickOnSignOut(ActionEvent event) {
+    	
+    	int idUser = TextEditor.getInstance().getCst().getId();	
+    	/* remove from online */
+    	ObjectSender snd = new ObjectSender(16,idUser);
+        ClientServerController.sendMsgToServer(snd);
+    	
+        /* clear */
+        ParkingController.getInstance().ExitSystem();
+		
+    	Stage stage = (Stage) signOut.getScene().getWindow();
+        stage.close();
+
+    }
 
 }

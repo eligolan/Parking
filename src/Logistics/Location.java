@@ -7,6 +7,12 @@ public class Location implements Serializable{
 	private int corY; // column
 	private int corZ; // depth
 	
+	/**
+	 * constructor
+	 * @param x row
+	 * @param y col
+	 * @param z depth
+	 */
 	public Location(int x, int y, int z) 
 	{
 		this.corX = x;
@@ -14,6 +20,7 @@ public class Location implements Serializable{
 		this.corZ=z;
 	}
 	
+	// setters and getters
 	public int getX()
 	{
 		return corX;

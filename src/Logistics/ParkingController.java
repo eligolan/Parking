@@ -1,5 +1,4 @@
 package Logistics;
-
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,21 +11,30 @@ import javafx.util.Pair;
 public final class ParkingController {
 	
 	private static ParkingController single_instance = null;
-	
 	 ArrayList<Parking_Lot> parking;
 	
- 	//c'tor
+ 	/**
+ 	 * sets up parking lot controller
+ 	 */
 	private ParkingController()
 	{
 		parking = new ArrayList<Parking_Lot>();
 	}
 	
+	/**
+	 * exits from system
+	 * clears all parking lot from system
+	 */
 	public void ExitSystem(){
 		for(Parking_Lot pl : parking)
 			pl.exitSystem();
 		parking.clear();
 	}
 	
+	/**
+	 * 
+	 * @return Parking	Controller instance
+	 */
 	public static ParkingController getInstance()
     {
         if (single_instance == null)
@@ -36,13 +44,19 @@ public final class ParkingController {
     }
 	
 	
-	//setUp
+	/**
+	 * 
+	 * @param pli Array list containing all parking lots to be added to parking controller
+	 */
 	public void SetUpParkingLot(ArrayList<PlotInfo> pli){
 		for (PlotInfo pl : pli) {
 			addParkingLot(pl.getPLId(),pl.getMId(),pl.getCapacity());
 			}
 	}
-	
+	/**
+	 * 
+	 * @param all_orders Array list containing all parking reservations
+	 */
 	public void SetUpOrders(ArrayList<Order> all_orders){
 		for (Order order : all_orders) {
 		    Parking_Lot pl= GetParkingLotById(order.getPlotId());
@@ -51,7 +65,12 @@ public final class ParkingController {
 		
 	}
 	
-	// will create a new parking lot and add it to list of all parking lots
+	/**
+	 * 
+	 * @param parking_id
+	 * @param m_id
+	 * @param capacity
+	 */
 	public void addParkingLot(int parking_id ,int m_id,int capacity){
 		
 		if(!checkIfparkingLotExist(parking_id))
