@@ -64,9 +64,9 @@ public class ParkingViewController {
 			}
 		}
     	for (Location location : loc) {
-    		if(location.getX() == 1)
+    		if(location.getZ() == 1)
     		{
-    			changeColor(location.getY(), location.getZ(),2);
+    			changeColor(location.getX(), location.getY(),2);
     		}
 			
 		}

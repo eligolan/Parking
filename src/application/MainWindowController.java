@@ -15,8 +15,6 @@ import javafx.stage.Window;
 
 public class MainWindowController {
 
-
-
 	@FXML
 	private Button complaint;
 
@@ -35,6 +33,9 @@ public class MainWindowController {
 
 	@FXML
 	private Button myOrders;
+	
+    @FXML
+    private Button signOut;
 
 	@FXML
 	void clickOnOrderParking(ActionEvent event) {
@@ -141,5 +142,10 @@ public class MainWindowController {
 		}
 
 	}
+	
+    @FXML
+    void clickOnsignOut(ActionEvent event) {
+
+    }
 
 }
