@@ -111,7 +111,7 @@ public class SignInController {
 					ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
 							ClientServerController.sendMsgToServer(snd));
 					
-					final Thread mainThread = Thread.currentThread();
+/*					final Thread mainThread = Thread.currentThread();
 					Runtime.getRuntime().addShutdownHook(new Thread() {
 					    public void run() {
 					    	ObjectSender snd = new ObjectSender(16,idUser);
@@ -123,7 +123,7 @@ public class SignInController {
 								e.printStackTrace();
 							}
 					    }
-					});
+					});*/
 					showMsg(event,"Sign In Success :)","");
 					if(controll.isManager(new ObjectSender(3,user))) {
 						openScene("ManagerWindow.fxml", event);
