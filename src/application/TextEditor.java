@@ -8,13 +8,28 @@ import Logistics.Order;
 import Logistics.ParkingController;
 import Logistics.Parking_Lot;
 
+/**
+ * 
+ * @author user
+ * this is single-tone class
+ * her responsibility to hold the current Costumer
+ * and the details  for the input for the windows
+ */
  public class TextEditor {
 	
 	private static TextEditor single_instance = null;
 	private int price ;
 	private int floor;
 	private int numParking;
+	String bigText;
+	String smallText;
+	Customer cst = new Customer("No CST", -1, new Date());
+	ArrayList<Order> orders; 
 	
+	public void setOrders(ArrayList<Order> orders) {
+		this.orders = orders;
+	}
+
 	public int getNumParking() {
 		return numParking;
 	}
@@ -23,10 +38,7 @@ import Logistics.Parking_Lot;
 		this.numParking = numParking;
 	}
 
-	String bigText;
-	String smallText;
-	Customer cst = new Customer("No CST", -1, new Date());
-	ArrayList<Order> orders; 
+	
 	
 	public Customer getCst() {
 		return cst;

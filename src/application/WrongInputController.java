@@ -4,6 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * 
+ * @author user
+ *this class showing the messages for per process
+ *
+ */
 public class WrongInputController {
 	
 	private TextEditor textEditor;

@@ -49,12 +49,13 @@ public class GettingDeatailsController {
 	@FXML
 	void clickOnCancel(ActionEvent event) {
 		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
-		if(controller.checkIfparkingLotExist(order.getPlotId())) {
-			controller.cancelParking(order.getPlotId() , Integer.parseInt(orderNum.getText()));
-		}
+//		if(controller.checkIfparkingLotExist(order.getPlotId())) {
+//			controller.cancelParking(order.getPlotId() , Integer.parseInt(orderNum.getText()));
+//		}
 		order = controller.getOrder(Integer.parseInt(orderNum.getText()));
 		if(order!=null) {
-			getPay(order);
+			showMsg(event,"You need to pay: ",""+getPay(order),"WrongInput.fxml");
+			
 		}
 
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
