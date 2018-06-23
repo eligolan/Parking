@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ParkingViewController">
+<AnchorPane id="c1" fx:id="c1" prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #3fc1c9; -fx-border-color: #364f6b;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ParkingViewController">
    <children>
       <ImageView id="index11" fx:id="index11" fitHeight="86.0" fitWidth="104.0" layoutX="21.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
          <image>
