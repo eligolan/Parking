@@ -132,14 +132,14 @@ public class RequestOneTimeController {
 					/* get orders */
 					String user = TextEditor.getInstance().getCst().getName();
 					int idUser = TextEditor.getInstance().getCst().getId();
-					snd = new ObjectSender(6, user + " " + idUser);
-					ArrayList<Order> orders = (ArrayList<Order>) ClientServerController.sendMsgToServer(snd); 				
-					TextEditor.getInstance().setOrders(orders);
-					/**/
+					if(idUser != -1) {
+						snd = new ObjectSender(6, user + " " + idUser);
+						ArrayList<Order> orders = (ArrayList<Order>) ClientServerController.sendMsgToServer(snd); 				
+						TextEditor.getInstance().setOrders(orders);
+						/**/
+					}
 					showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));	
-					/* close window */
-					Stage stage = (Stage) pay.getScene().getWindow();
-					stage.close();
+
 				}
 			}
 		}
