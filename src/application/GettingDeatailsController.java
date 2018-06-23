@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -11,9 +12,16 @@ import Logistics.Order;
 import Logistics.ParkingController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class GettingDeatailsController {
 	private ParkingController controller;
@@ -51,10 +59,14 @@ public class GettingDeatailsController {
 			long difference = order.getArrivalTime().getTime() - current.getTime();
 			int hoursDiff = (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
 			if(hoursDiff > 3) {
+				//showMsg(event,"You Need ");
 				System.out.println("10% more");
 			}
 			else if(hoursDiff <=3 && hoursDiff >=1) {
 				System.out.println("50% more");
+			}
+			else if(hoursDiff <=1 && hoursDiff >=0) {
+				System.out.println("100% more");
 			}
 		}
 
@@ -73,6 +85,23 @@ public class GettingDeatailsController {
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
 			System.out.println("yes");
+		}
+	}
+
+
+	private void showMsg(ActionEvent event,String text,String smallText,String sceneName) {
+		try {
+			TextEditor.getInstance().setBigText(text);
+			TextEditor.getInstance().setSmallText(smallText);
+			Parent parent;
+			parent = FXMLLoader.load((getClass().getResource(sceneName)));
+			Scene child = new Scene(parent);
+
+			Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
+			window.setScene(child);
+			window.show();
+		} catch (IOException e) {
+			System.out.println("couldnt open the MainWindow windows");
 		}
 	}
 }

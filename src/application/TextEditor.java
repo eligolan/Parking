@@ -12,7 +12,17 @@ import Logistics.Parking_Lot;
 	
 	private static TextEditor single_instance = null;
 	private int price ;
+	private int floor;
+	private int numParking;
 	
+	public int getNumParking() {
+		return numParking;
+	}
+
+	public void setNumParking(int numParking) {
+		this.numParking = numParking;
+	}
+
 	String bigText;
 	String smallText;
 	Customer cst = new Customer("No CST", -1, new Date());
@@ -76,6 +86,14 @@ import Logistics.Parking_Lot;
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public int getFloor() {
+		return floor;
+	}
+
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
 
 }
