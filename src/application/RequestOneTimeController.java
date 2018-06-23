@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Actors.Customer;
 import ClientServer.ClientServerController;
@@ -72,6 +74,9 @@ public class RequestOneTimeController {
 
 	@FXML
 	void clickOnPay(ActionEvent event) {
+		if(!checkInputIsValid(event)) {
+			return;
+		}
 		try {
 			ParkingController.getInstance().ExitSystem();
 			/* initialize parking */
@@ -138,7 +143,7 @@ public class RequestOneTimeController {
 						TextEditor.getInstance().setOrders(orders);
 						/**/
 					}
-					showMsg(event,"Approved! \n Remember you order id: " + orderId,""+getPay(arrive, end));	
+					showMsg(event,"Approved! \n Remember your order id: " + orderId,""+getPay(arrive, end));	
 
 				}
 			}
@@ -150,6 +155,56 @@ public class RequestOneTimeController {
 		}
 	}
 
+	
+	private boolean checkInputIsValid(ActionEvent event) {
+		
+		String carn =  carNumText.getText();
+		String ds =  dateStart.getText();
+		String ed = endDate.getText();
+		String et =  emailText.getText();
+		String pn = parkingNum.getText();
+		String ts = timeStart.getText();
+		String te = timeEnd.getText();
+		
+		if(carn.equals("") || ds.equals("")  || ed.equals("") || et.equals("")  || 
+				pn.equals("")  || ts.equals("")  || te.equals("") ) {
+			showMsg(event,"Please fill all fileds","try again");
+			return false;
+		}
+	
+		if (!ds.matches("\\d{2}/\\d{2}/\\d{4}")) {
+			showMsg(event,"Wrong date in Start date","try again");
+			return false;
+		}
+		/**/		
+		if (!ed.matches("\\d{2}/\\d{2}/\\d{4}")) {
+			showMsg(event,"Wrong date in End date","try again");
+			return false;
+		}
+		/**/
+		if (!et.matches("^*@*.*$")) {
+			showMsg(event,"email not valid","try again");
+			return false;
+		}
+		/**/
+		if (!pn.matches("\\d{1}")) {
+			showMsg(event,"Parking number not valid","try again");
+			return false;
+		}
+		/**/
+		if (!ts.matches("^\\d{2}:\\d{2}$")) {
+			showMsg(event,"Time start not valid","try again");
+			return false;
+		}
+		/**/
+		if (!te.matches("^\\d{2}:\\d{2}$")) {
+			showMsg(event,"Time end not valid","try again");
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
 			TextEditor.getInstance().setBigText(text);

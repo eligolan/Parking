@@ -197,19 +197,6 @@ public class EchoServer extends AbstractServer
 
 	}
 
-	private boolean isNumber(String str) {
-		try  
-		{  
-			int d = Integer.parseInt(str);  
-		}  
-		catch(NumberFormatException nfe)  
-		{  
-			return false;  
-		}  
-		return true;  
-	}
-
-
 	/**
 	 * This method overrides the one in the superclass.  Called
 	 * when the server starts listening for connections.

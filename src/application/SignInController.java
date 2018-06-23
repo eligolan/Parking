@@ -37,11 +37,6 @@ public class SignInController {
 
 	private MainController control;
 	private TextEditor controllEdit;
-	//	
-	//   public SignInController(GuiController controll)
-	//   {
-	//	   this.controll = controll;
-	//   }
 
 	@FXML
 	public void initialize() {
@@ -68,48 +63,52 @@ public class SignInController {
 		if(checkInputIsValid(user, pass)) {
 			ObjectSender snd = new ObjectSender(1,user + " " + pass);
 
-			snd = new ObjectSender(5,user);
-			int idUserr = control.getId(snd);
-			ObjectSender snd1 = new ObjectSender(14,idUserr);
-
-			if(control.sendUserAndPassToClient(snd) && !(boolean)ClientServerController.sendMsgToServer(snd1)) {  					
-				/* get id */
+			String ret = ClientServerController.sendMsgToServer(snd).toString();			
+			if(ret.equals("SignIn success!")) {  	
 				snd = new ObjectSender(5,user);
-				int idUser = control.getId(snd);
+				int idUserr = control.getId(snd);
+				ObjectSender snd1 = new ObjectSender(14,idUserr);
+				
+				if((boolean)ClientServerController.sendMsgToServer(snd1)) {
+					showMsg(event,"User is online","please sign out from all places");
+				}else {
+					/* get id */
+					snd = new ObjectSender(5,user);
+					int idUser = control.getId(snd);
 
-				/* register online user */
-				snd = new ObjectSender(15,idUserr);
-				ClientServerController.sendMsgToServer(snd);
+					/* register online user */
+					snd = new ObjectSender(15,idUserr);
+					ClientServerController.sendMsgToServer(snd);
 
-				/* get date start register */
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-				snd = new ObjectSender(8,idUser);
-				String dateReg = control.getDateReg(snd);
-				Date resigerDate = null;
-				try {
-					resigerDate = dateFormat.parse(dateReg);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				Customer cst = new Customer(user, idUser,resigerDate);
+					/* get date start register */
+					SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+					snd = new ObjectSender(8,idUser);
+					String dateReg = control.getDateReg(snd);
+					Date resigerDate = null;
+					try {
+						resigerDate = dateFormat.parse(dateReg);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Customer cst = new Customer(user, idUser,resigerDate);
 
-				/* get orders */
-				snd = new ObjectSender(6, user + " " + idUser);
-				ArrayList<Order> orders = control.getOrders(snd); 				
-				TextEditor.getInstance().setCst(cst,orders);
-				checkMsgForLate(event);
-				checkMsgForReNewAcount(event);
+					/* get orders */
+					snd = new ObjectSender(6, user + " " + idUser);
+					ArrayList<Order> orders = control.getOrders(snd); 				
+					TextEditor.getInstance().setCst(cst,orders);
+					checkMsgForLate(event);
+					checkMsgForReNewAcount(event);
 
-				/* initialize parking */
-				snd = new ObjectSender(11,"");
-				ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
-						ClientServerController.sendMsgToServer(snd));
+					/* initialize parking */
+					snd = new ObjectSender(11,"");
+					ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
+							ClientServerController.sendMsgToServer(snd));
 
-				snd = new ObjectSender(7,"");
-				ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
-						ClientServerController.sendMsgToServer(snd));
+					snd = new ObjectSender(7,"");
+					ParkingController.getInstance().SetUpOrders((ArrayList<Order>)
+							ClientServerController.sendMsgToServer(snd));
 
-				/*					final Thread mainThread = Thread.currentThread();
+					/*final Thread mainThread = Thread.currentThread();
 					Runtime.getRuntime().addShutdownHook(new Thread() {
 					    public void run() {
 					    	ObjectSender snd = new ObjectSender(16,idUser);
@@ -123,18 +122,19 @@ public class SignInController {
 					    }
 					});*/
 
-				showMsg(event,"Sign In Success :)","");
-				if(control.isManager(new ObjectSender(3,user))) {
-					openScene("ManagerWindow.fxml", event);
-				} else {
-					openScene("MainWindow.fxml",event);
-				}			 			
+					showMsg(event,"Sign In Success :)","");
+					if(control.isManager(new ObjectSender(3,user))) {
+						openScene("ManagerWindow.fxml", event);
+					} else {
+						openScene("MainWindow.fxml",event);
+					}			 			
+				}
 			}
 			else {
-				showMsg(event,"Wrong Input","try again");
+				showMsg(event,"User or password not valid","try again");
 			}		
 		} else {
-			showMsg(event,"Wrong Input","try again");
+			showMsg(event,"Wrong Input","check the fields and try again");
 		}
 	}
 
@@ -187,7 +187,9 @@ public class SignInController {
 
 
 	private boolean checkInputIsValid(String user, String pass) {
-		// TODO check if it is write properly and it is on the server
+		if(user.equals("") || pass.equals("")) {
+			return false;
+		}
 		return true;
 	}
 
