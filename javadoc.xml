@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="src/mysql-connector-java-5.1.46-bin.jar" destdir="C:\Users\user2\Desktop" doctitle="CarPoolDoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" overview="C:\Program Files\Java\jre1.8.0_91\Welcome.html" source="1.8" sourcefiles="src/Logistics/ParkingController.java" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
