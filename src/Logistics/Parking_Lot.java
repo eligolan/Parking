@@ -32,6 +32,15 @@ public class Parking_Lot {
 		SetUpLocations();
 		
 	}
+	
+	public void exitSystem(){
+		employees.clear();
+		all_orders.clear();
+		invalid_parking_location.clear();
+		next_nearest_location.setX(1);
+		next_nearest_location.setY(1);
+		next_nearest_location.setZ(1);
+	}
 
 	
 	public void SetUpLocations(){
@@ -95,7 +104,6 @@ public class Parking_Lot {
 		if (!isParkingAvailableAtLocation(order.GetOrderLocation()))
             return null;   
 		updateNextNearestLocation();
-		System.out.println(all_orders.size());
 		return order.GetOrderLocation();
 	}
 	

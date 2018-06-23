@@ -64,6 +64,7 @@ public class ManagerWindowController {
 
 	@FXML
 	void clickOnView(ActionEvent event) {
+		setWindow(event,"ChoseFloor.fxml");
 
 	}
 

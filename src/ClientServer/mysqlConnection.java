@@ -453,7 +453,7 @@ public class mysqlConnection {
 		try 
 		{
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingLot;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM complain;");
 			while (rs.next()) {
 				parkingCom.add(rs.getString(2));
 			}			

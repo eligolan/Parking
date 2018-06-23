@@ -21,6 +21,12 @@ public final class ParkingController {
 		parking = new ArrayList<Parking_Lot>();
 	}
 	
+	public void ExitSystem(){
+		for(Parking_Lot pl : parking)
+			pl.exitSystem();
+		parking.clear();
+	}
+	
 	public static ParkingController getInstance()
     {
         if (single_instance == null)
@@ -150,9 +156,9 @@ public final class ParkingController {
 		return pl.exitParking(order_id);
 	}
 
-	public void cancelParking(int parking_id , int order_id) {
+	public boolean cancelParking(int parking_id , int order_id) {
 		Parking_Lot pl=GetParkingLotById(parking_id);
-		pl.CancelParking(order_id);
+		return pl.CancelParking(order_id);
 	}
 	
     public Order getOrder(int order_id){
