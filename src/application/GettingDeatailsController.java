@@ -72,7 +72,11 @@ public class GettingDeatailsController {
 			showMsg(event,"You need to pay: ",""+getPay(order),"WrongInput.fxml");
 			
 		}
-
+		else
+		{
+			showMsg(event,"Number Request Unvalid ","try again","WrongInput.fxml");
+			return;
+		}
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
 			System.out.println("yes");
@@ -86,6 +90,11 @@ public class GettingDeatailsController {
 	@FXML
 	void clickOnExit(ActionEvent event) {
 		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
+		if(order == null)
+		{
+			showMsg(event,"Number Request Unvalid ","try again","WrongInput.fxml");
+			return;
+		}
 		if(controller.checkIfparkingLotExist(order.getPlotId())) {
 			controller.exitParking(order.getPlotId() , Integer.parseInt(orderNum.getText()));
 		}	

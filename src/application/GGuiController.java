@@ -100,7 +100,7 @@ public class GGuiController {
 	@FXML
 	void requestOneTime(ActionEvent event) {
 		try {
-			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("RequestOneTime.fxml")) ;
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("NotClientOneTime.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
 			Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
@@ -121,17 +121,17 @@ public class GGuiController {
 	@FXML
 	void clickOnFutureOneT(ActionEvent event) {
 		try {
-			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("FutureOneTime.fxml")) ;
+			FXMLLoader fxmloader = new FXMLLoader(getClass().getResource("NotClientOneTime.fxml")) ;
 			Parent root1 = (Parent) fxmloader.load();
 			Window existingWindow = ((Node) event.getSource()).getScene().getWindow();
 			Stage stage = new Stage();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(existingWindow);
-			stage.setTitle("FutureOneTime");
+			stage.setTitle("RequestOneTime");
 			stage.setScene(new Scene(root1));
 			stage.show();
 		} catch (Exception e) {
-			System.out.println("couldnt open the FutureOneTime windows");
+			System.out.println("couldnt open the RequestOneTime windows");
 		}
 	}
 }
