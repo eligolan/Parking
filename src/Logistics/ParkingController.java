@@ -70,11 +70,12 @@ public final class ParkingController {
 		}
 	}
 	
+	
 	/**
 	 * 
-	 * @param parking_id
-	 * @param m_id
-	 * @param capacity
+	 * @param parking_id integer parking lot id
+	 * @param m_id manager id
+	 * @param capacity parking lot capacity
 	 */
 	public void addParkingLot(int parking_id ,int m_id,int capacity){
 		
@@ -85,8 +86,11 @@ public final class ParkingController {
 		}    
 	}
 		
-	
-	// will check if parking lot exist already
+    /**
+     * checks if parking lot exist
+     * @param parking_id int parking lot id
+     * @return true or false
+     */
 	public boolean checkIfparkingLotExist(int parking_id){
 		
 		for (Parking_Lot pl : parking) {
@@ -96,8 +100,13 @@ public final class ParkingController {
 		return false;
 	}
     
-	
-	// will get parking id and check that parking is available 
+    
+	/**
+	 * checks if parking lot is available at a certain location
+	 * @param parking_id integer parking lot id
+	 * @param loc Location
+	 * @return true or false
+	 */
 	public boolean isParkingAvailable(int parking_id ,Location loc ) {
 		Parking_Lot pl=this.GetParkingLotById(parking_id);
 		if (!pl.isParkingAvailableAtLocation(loc))
@@ -105,7 +114,11 @@ public final class ParkingController {
 		return true;
 	}
 	
-	// will check if a certain parking lot is full
+	/**
+	 * will check if a certain parking lot is full
+	 * @param parking_id integer parking lot id
+	 * @return true or false
+	 */
 	public boolean isParkingFull(int parking_id){
 		
 		Parking_Lot pl=this.GetParkingLotById(parking_id);
@@ -114,7 +127,11 @@ public final class ParkingController {
 		return false;
 	}
 	
-	// retrieves parking lot by id 
+	/**
+	 * retrieves parking lot by id
+	 * @param parking_id
+	 * @return Praking_Lot
+	 */
 	public Parking_Lot GetParkingLotById(int parking_id){
 		
 		for (Parking_Lot pl : parking) {
@@ -124,7 +141,18 @@ public final class ParkingController {
 		return null;
 	}
 	
-    // handles parking lot orders by type
+    /**
+     * orders parking by order type
+     * @param parking_id integer parking lot id
+     * @param customer Customer which contains customer information
+     * @param car_id string car id
+     * @param order_id integer order id
+     * @param order_type enum order type
+     * @param email String email
+     * @param start Date arrival time
+     * @param end Date departure time
+     * @return Location
+     */
 	public Location orderParking(int parking_id,Customer customer,String car_id,int order_id, int order_type,String email ,Date start, Date end) {
 				
 	  Parking_Lot pl = GetParkingLotById(parking_id);
@@ -155,36 +183,64 @@ public final class ParkingController {
 	}
 	
 	
-	// will handle pre order parking request
+	/**
+	 * handles order of pre type
+	 * @return
+	 */
 	public Location orderPreOrderParking(){
 		return null;
 	}
 	
-	//will handle orders of type membership
+	/**
+	 * handles order of membership
+	 * @return
+	 */
+	
 	public Location orderMembershipParking(){
 		return null;	
 	}
 	
-	// will check that parking lot exist
+	/**
+	 * checks if parking lot exist
+	 * @param parking_id integer parking lot id
+	 * @return true or false
+	 */
 	public boolean doesParkingLotExist(int parking_id) {
 		Parking_Lot pl=GetParkingLotById(parking_id);
 		if(pl==null)
 			return false;
 		return true;
 	}
-
+    
+	/**
+	 * car exists from parking lot
+	 * @param parking_id integer parking lot id
+	 * @param order_id integer order id
+	 * @return true or false
+	 */
 	public boolean exitParking(int parking_id,int order_id) {
 		Parking_Lot pl=GetParkingLotById(parking_id);
 		if(pl==null)
 			return false;
 		return pl.exitParking(order_id);
 	}
-
+    
+	/**
+	 *  cancels parking
+	 * @param parking_id integer parking lot id 
+	 * @param order_id integer order id
+	 * @return true or false
+	 */
 	public boolean cancelParking(int parking_id , int order_id) {
 		Parking_Lot pl=GetParkingLotById(parking_id);
 		return pl.CancelParking(order_id);
 	}
 	
+	/**
+	 * gets order by id
+	 * @param order_id integer order id
+	 * @return Order which contains all order ids information
+	 */
     public Order getOrder(int order_id){
     	
     	Order o;
@@ -196,9 +252,11 @@ public final class ParkingController {
     	return null;
     }
 	
-	
-	// display function for gui
-	// will display all locations which are not available
+	/**
+	 * gets all unavailable locations of a certain parking lot
+	 * @param parking_id integer parking lot id
+	 * @return Array List which contains Location type
+	 */
 	public ArrayList<Location> display(int parking_id){
 		Parking_Lot pl =GetParkingLotById(parking_id);
 		ArrayList<Location> view_array = pl.getAllParkedLocaions();
