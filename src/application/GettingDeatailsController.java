@@ -81,6 +81,7 @@ public class GettingDeatailsController {
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
 			System.out.println("yes");
 		}
+		showMsg(event,"Approve ","","WrongInput.fxml");
 	}
 
 	/**
@@ -102,6 +103,7 @@ public class GettingDeatailsController {
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
 			System.out.println("yes");
 		}
+		showMsg(event,"Approve ","","WrongInput.fxml");
 	}
 
 

@@ -70,6 +70,13 @@ public final class ParkingController {
 		}
 	}
 	
+	public void addOrderToParkingLot(int numParking, Order o)
+	{
+		Parking_Lot parkingLotNew = GetParkingLotById(numParking);
+		parkingLotNew.AddOrderToParkingLot(o);
+		
+	}
+	
 	
 	/**
 	 * 
