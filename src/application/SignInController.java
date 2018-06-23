@@ -74,15 +74,7 @@ public class SignInController {
 			int idUserr = controll.getId(snd);
 			ObjectSender snd1 = new ObjectSender(14,idUserr);
 			
-			if(controll.sendUserAndPassToClient(snd) && !(boolean)ClientServerController.sendMsgToServer(snd1)) {  
-				if(controll.isManager(new ObjectSender(3,user))) {
-					openScene("ManagerWindow.fxml", event);
-				}else {
-
-					openScene("MainWindow.fxml",event);
-					//getMainWindow(event);
-					
-
+			if(controll.sendUserAndPassToClient(snd) && !(boolean)ClientServerController.sendMsgToServer(snd1)) {  					
 					/* get id */
 					snd = new ObjectSender(5,user);
 					int idUser = controll.getId(snd);
@@ -110,6 +102,7 @@ public class SignInController {
 					checkMsgForLate(event);
 					checkMsgForReNewAcount(event);
 					
+					/* initialize parking */
 					snd = new ObjectSender(11,"");
 					ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
 							ClientServerController.sendMsgToServer(snd));
@@ -132,7 +125,11 @@ public class SignInController {
 					    }
 					});
 					showMsg(event,"Sign In Success :)","");
-				} 			
+					if(controll.isManager(new ObjectSender(3,user))) {
+						openScene("ManagerWindow.fxml", event);
+					}else {
+						openScene("MainWindow.fxml",event);
+					}			 			
 			}else {
 				showMsg(event,"Wrong Input","try again");
 			}		
