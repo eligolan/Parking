@@ -48,11 +48,10 @@ public class GettingDeatailsController {
 
 	@FXML
 	void clickOnCancel(ActionEvent event) {
-		/*		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
-			controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
+		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
+		if(controller.checkIfparkingLotExist(order.getPlotId())) {
+			controller.cancelParking(order.getPlotId() , Integer.parseInt(orderNum.getText()));
 		}
-		 */
-		Order order = null;
 		order = controller.getOrder(Integer.parseInt(orderNum.getText()));
 		if(order!=null) {
 			getPay(order);
@@ -66,10 +65,10 @@ public class GettingDeatailsController {
 
 	@FXML
 	void clickOnExit(ActionEvent event) {
-		/*		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
-			controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-		}*/	
-
+		Order order = controller.getOrder(Integer.parseInt(orderNum.getText()));
+		if(controller.checkIfparkingLotExist(order.getPlotId())) {
+			controller.exitParking(order.getPlotId() , Integer.parseInt(orderNum.getText()));
+		}	
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
 			System.out.println("yes");
