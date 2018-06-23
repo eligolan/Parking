@@ -56,6 +56,9 @@ public class GettingDeatailsController {
 			else if(hoursDiff <=3 && hoursDiff >=1) {
 				System.out.println("50% more");
 			}
+			else if(hoursDiff <=1 && hoursDiff >=0) {
+				System.out.println("100% more");
+			}
 		}
 
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
