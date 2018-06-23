@@ -87,7 +87,6 @@ public class Parking_Lot {
 		boolean loop_flag=true;
 		
 		if(all_orders.size() == maximum_capacity){
-			System.out.println(all_orders.size());
 			return;
 		}
 		
