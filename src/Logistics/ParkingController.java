@@ -63,6 +63,11 @@ public final class ParkingController {
 		    pl.AddOrderToParkingLot(order);
 		}
 		
+		for(Parking_Lot p : parking){
+			Location loc =new Location(1, 1, 1);
+			p.SetNearestLocation(loc);
+			p.updateNextNearestLocation();
+		}
 	}
 	
 	/**

@@ -56,7 +56,7 @@ public class Parking_Lot {
 	 */
 	public void SetUpLocations(){
 		
-		maximum_corrdinates=new Location(4, 4, 1);
+		maximum_corrdinates=new Location(4, 4, 3);
 		next_nearest_location =new Location(1, 1, 1);
 	}
 	
@@ -91,7 +91,6 @@ public class Parking_Lot {
 		if(maximum_corrdinates.getY()==next_nearest_location.getY()){
 			next_nearest_location.setY(1);
 			if(next_nearest_location.getZ()==maximum_corrdinates.getZ()){
-				System.out.println("heheheh");
 				next_nearest_location.setZ(1);
 				next_nearest_location.setX(next_nearest_location.getX()+1);
 			}
@@ -99,10 +98,26 @@ public class Parking_Lot {
 		else{
 			next_nearest_location.setY(next_nearest_location.getY()+1);
 		}
-	   	
+//		while(loop_flag){
+//		if(maximum_corrdinates.getZ()==next_nearest_location.getZ()){
+//			next_nearest_location.setZ(1);
+//			if(next_nearest_location.getY()==maximum_corrdinates.getY()){
+//				next_nearest_location.setY(1);
+//				next_nearest_location.setX(next_nearest_location.getX()+1);
+//			}
+//		}
+//		else{
+//			next_nearest_location.setZ(next_nearest_location.getZ()+1);
+//		}
+//	   	
 		if(isParkingAvailableAtLocation(next_nearest_location))
 			loop_flag=false;
 	  }
+		
+//		System.out.println("update next nearest location");
+//		System.out.println( next_nearest_location.getX());
+//		System.out.println(next_nearest_location.getY());
+//		System.out.println(next_nearest_location.getZ());
 	}
 	
 	
@@ -144,6 +159,11 @@ public class Parking_Lot {
 		if (!isParkingAvailableAtLocation(order.GetOrderLocation()))
             return null;   
 		updateNextNearestLocation();
+		
+//		System.out.println("reservation location");
+//		System.out.println(order.GetOrderLocation().getX());
+//		System.out.println(order.GetOrderLocation().getY());
+//		System.out.println(order.GetOrderLocation().getZ());
 		return order.GetOrderLocation();
 	}
 	
