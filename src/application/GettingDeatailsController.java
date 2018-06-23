@@ -48,26 +48,14 @@ public class GettingDeatailsController {
 
 	@FXML
 	void clickOnCancel(ActionEvent event) {
-		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
+		/*		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
 			controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
 		}
-
+		 */
 		Order order = null;
 		order = controller.getOrder(Integer.parseInt(orderNum.getText()));
 		if(order!=null) {
-			Date current = new Date();
-			long difference = order.getArrivalTime().getTime() - current.getTime();
-			int hoursDiff = (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
-			if(hoursDiff > 3) {
-				//showMsg(event,"You Need ");
-				System.out.println("10% more");
-			}
-			else if(hoursDiff <=3 && hoursDiff >=1) {
-				System.out.println("50% more");
-			}
-			else if(hoursDiff <=1 && hoursDiff >=0) {
-				System.out.println("100% more");
-			}
+			getPay(order);
 		}
 
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
@@ -78,9 +66,9 @@ public class GettingDeatailsController {
 
 	@FXML
 	void clickOnExit(ActionEvent event) {
-		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
+		/*		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
 			controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-		}	
+		}*/	
 
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
@@ -103,5 +91,34 @@ public class GettingDeatailsController {
 		} catch (IOException e) {
 			System.out.println("couldnt open the MainWindow windows");
 		}
+	}
+
+	private double getPay(Order order) {
+		float daysBetween = 0;
+		int hoursDiff = 0;
+		double price = order.getPricePerHour();
+		Date arrivalDate = order.getArrivalTime();
+		Date current = new Date();
+		long difference = current.getTime() - arrivalDate.getTime();
+		daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+		hoursDiff =  (int) TimeUnit.HOURS.convert(difference, TimeUnit.MILLISECONDS);
+		int daysDiff = Math.round(daysBetween);
+		if(daysDiff > 0) {
+			System.out.println("More than 3 hours - 10%");
+			return ((daysDiff*24*price)+(hoursDiff*price)*0.1);
+		}
+
+		else if(hoursDiff <=1 && hoursDiff >=0) {
+			System.out.println("Between 0 to 1 hours - full charge");
+			return (hoursDiff*price);
+		}
+
+		else if(hoursDiff <=3 && hoursDiff >=1) {
+			System.out.println("Between 1 to 3 hours - 50%");
+			return (hoursDiff*price*0.5);
+		}
+
+		System.out.println("More than 3 hours - 10%");
+		return ((daysDiff*24*price)+(hoursDiff*price)*0.1);
 	}
 }

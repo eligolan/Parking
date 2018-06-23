@@ -74,6 +74,4 @@ public class Order extends AllOrders {
 	public int getOrderType(){
 		return order_type;
 	}
-	
-	
 }
