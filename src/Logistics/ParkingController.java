@@ -21,6 +21,12 @@ public final class ParkingController {
 		parking = new ArrayList<Parking_Lot>();
 	}
 	
+	public void ExitSystem(){
+		for(Parking_Lot pl : parking)
+			pl.exitSystem();
+		parking.clear();
+	}
+	
 	public static ParkingController getInstance()
     {
         if (single_instance == null)
