@@ -14,6 +14,17 @@ public class Order extends AllOrders {
 	protected Location order_location;
 	int parking_lot_id;
 	
+	/**
+	 * constructor
+	 * @param customer type Customer which contains customer information
+	 * @param car_id String 
+	 * @param order_id Integer
+	 * @param email String
+	 * @param start Date indicating arrival time 
+	 * @param end Date indication departure time
+	 * @param loc Location where car will be parked 
+	 * @param pl_id integer parking lot id
+	 */
 	public Order(Customer customer , String car_id, int order_id ,String email , Date start,Date end , Location loc, int pl_id){
 		super(customer , car_id , order_id);
 		this.email=email;
@@ -25,11 +36,7 @@ public class Order extends AllOrders {
 		parking_lot_id=pl_id;
 	}
 	
-	
-	public Location GetOrderLocation(){
-		return order_location;
-	}
-	
+  
 	@Override
 	public String toString() {
 
@@ -39,6 +46,12 @@ public class Order extends AllOrders {
 		  String startDate = "start : "+this.start.toString() +"\n";
 		  String endDate = "end : "+this.end.toString() +"\n";
 		return text + car + startDate + endDate;
+	}
+	
+	// setters and getters
+	
+	public Location GetOrderLocation(){
+		return order_location;
 	}
 	
 	public int getPlotId(){return parking_lot_id;}
