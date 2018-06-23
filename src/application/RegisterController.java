@@ -30,6 +30,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * 
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * The class used to show the register to the system window
+ */
 public class RegisterController {
 	
 	private MainController controll;
@@ -52,12 +60,18 @@ public class RegisterController {
     @FXML
     private PasswordField pass;
     
+    /**
+     * Initialize variables
+     */
     @FXML
-    public void initialize()
-    {
-		controll =new MainController();
+    public void initialize() {
+		controll = new MainController();
     }
 
+    /**
+     * Register to the system
+     * @param event
+     */
     @FXML
     void clickOnRegister(ActionEvent event) {
     	String user = name.getText();
@@ -66,8 +80,7 @@ public class RegisterController {
     	String numCar = carNumText.getText();
     	String dateStart = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date());
     	
-    	if(checkInputIsValid(user, password))
-    	{
+    	if(checkInputIsValid(user, password)) {
     		ObjectSender snd = new ObjectSender(2,user+" " + password + " " + email + " " + numCar + " " + 0 + " " + dateStart);
     		if(controll.registerUserAndPassToClient(snd)) {
     			openScene("MainWindow.fxml",event);
@@ -126,25 +139,32 @@ public class RegisterController {
     			
     			showMsg(event,"Register Success :)"," ");
     			return;
-    		}else {
+    		} else {
     			showMsg(event,"Wrong Input","try again");
     		}		
-    	}
-    	else
-    	{
+    	} else {
     		showMsg(event,"Wrong Input","try again");
     	}
     }
     
+    /**
+     * Check if the input is ok
+     * @param user
+     * @param pass
+     * @return
+     */
     private boolean checkInputIsValid(String user, String pass) {
-		// TODO check if it is write propetlly and it is on the server
+		// TODO check if it is write properly and it is on the server
 		return true;
 	}
     
 
-
-	private void openScene(String sceneName, ActionEvent event)
-	{
+    /**
+     * 
+     * @param sceneName
+     * @param event
+     */
+	private void openScene(String sceneName, ActionEvent event){
 		Parent parent;
 		try {
 			parent = FXMLLoader.load((getClass().getResource(sceneName)));
@@ -154,7 +174,7 @@ public class RegisterController {
 			window.setScene(child);
 			window.show();
 		} catch (IOException e) {
-			System.out.println("couldnt open the MainWindow windows");
+			System.out.println("couldn't open the MainWindow windows");
 		}
 		
 	}
@@ -175,7 +195,7 @@ public class RegisterController {
 			stage.show();
 		}catch (Exception e)
 		{
-			System.out.println("couldnt open the WrongInput wondows");
+			System.out.println("couldn't open the WrongInput windows");
 		}
 	}
 

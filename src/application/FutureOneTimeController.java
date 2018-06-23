@@ -7,9 +7,12 @@ import javafx.scene.control.TextField;
 
 /**
  * 
- * @author user
- * this class is taking the deatails from the client
- * according to the deatails we order the parking request
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * this class is taking the details from the client
+ * according to the details we order the parking request
  *
  */
 public class FutureOneTimeController {
@@ -42,8 +45,6 @@ public class FutureOneTimeController {
     private TextField timeStartText;
 
     @FXML
-    void clickOnPay(ActionEvent event) {
-
-    }
+    void clickOnPay(ActionEvent event) {}
 
 }

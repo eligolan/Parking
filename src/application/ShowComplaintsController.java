@@ -12,6 +12,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
 public class ShowComplaintsController {
+	
+	/**
+	 * Initialize variables
+	 */
 	@FXML
 	public void initialize()
 	{
@@ -35,9 +39,10 @@ public class ShowComplaintsController {
     @FXML
     private Button refun;
 
+    /**
+     * Should refund the customer
+     * @param event
+     */
     @FXML
-    void clickOnRefun(ActionEvent event) {
-
-    }
-
+    void clickOnRefun(ActionEvent event) {}
 }

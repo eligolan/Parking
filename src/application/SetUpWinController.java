@@ -19,14 +19,25 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+/**
+ * 
+ * @author user - Noa bayer
+ * @author user - Shlomi Ohana
+ * @author user - Eli Golan
+ * @author user - Stephanie Shalmoni
+ * The class used to show the parking lot initialize
+ */
 public class SetUpWinController {
 
 	ParkingController contoller;
 
+	/**
+	 * Initialize variables
+	 */
 	@FXML
 	public void initialize()
 	{
-		contoller =ParkingController.getInstance();
+		contoller = ParkingController.getInstance();
 	}
 
 	@FXML
@@ -53,32 +64,28 @@ public class SetUpWinController {
 	@FXML
 	private CheckBox bigCapacity;
 
+	/**
+	 * Check the needed fields
+	 * @param event
+	 */
 	@FXML
 	void clickOnOk(ActionEvent event) {
 		int capacity=0; 
 		if((smallCapacity.isSelected() && bigCapacity.isSelected()) ||
-				((!smallCapacity.isSelected()) && (!bigCapacity.isSelected())))
-		{
+				((!smallCapacity.isSelected()) && (!bigCapacity.isSelected()))) {
 			showMsg(event,"Wrong Input","pick 1 on check box");
 
-		}
-		else
-		{
-			
+		} else {
 			if(smallCapacity.isSelected()){
 				capacity=12;
-			}
-			else{
+			} else {
 				capacity=24;
 			}
-			
 		}
 		contoller.addParkingLot(Integer.parseInt(parkingId.getText()), 44, capacity);
-
 	}
 	
-	private void openScene(String sceneName, ActionEvent event)
-	{
+	private void openScene(String sceneName, ActionEvent event) {
 		Parent parent;
 		try {
 			parent = FXMLLoader.load((getClass().getResource(sceneName)));
@@ -90,7 +97,6 @@ public class SetUpWinController {
 		} catch (IOException e) {
 			System.out.println("couldnt open the MainWindow windows");
 		}
-
 	}
 
 	private void showMsg(ActionEvent event,String text,String smallText) {
@@ -105,12 +111,9 @@ public class SetUpWinController {
 			stage.initOwner(existingWindow);
 			stage.setTitle("Input");
 			stage.setScene(new Scene(root1));
-
 			stage.show();
-		}catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("couldnt open the WrongInput wondows");
 		}
 	}
-
 }

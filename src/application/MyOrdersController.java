@@ -30,7 +30,4 @@ public class MyOrdersController {
 
     @FXML
     private TextArea textOrders;
-    
 }
-
-
