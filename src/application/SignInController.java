@@ -103,6 +103,8 @@ public class SignInController {
 					checkMsgForReNewAcount(event);
 					
 					/* initialize parking */
+					ParkingController.getInstance().ExitSystem();
+					
 					snd = new ObjectSender(11,"");
 					ParkingController.getInstance().SetUpParkingLot((ArrayList<PlotInfo>)
 							ClientServerController.sendMsgToServer(snd));
