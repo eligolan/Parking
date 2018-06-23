@@ -48,9 +48,9 @@ public class GettingDeatailsController {
 
 	@FXML
 	void clickOnCancel(ActionEvent event) {
-		//    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
-		//    		controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-		//    	}
+		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
+			controller.cancelParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
+		}
 
 		Order order = null;
 		order = controller.getOrder(Integer.parseInt(orderNum.getText()));
@@ -78,9 +78,9 @@ public class GettingDeatailsController {
 
 	@FXML
 	void clickOnExit(ActionEvent event) {
-		//    	if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
-		//    		controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
-		//    	}	
+		if(controller.checkIfparkingLotExist(Integer.parseInt(numParkingLot.getText()))) {
+			controller.exitParking(Integer.parseInt(numParkingLot.getText()) , Integer.parseInt(numId.getText()) , Integer.parseInt(carNumber.getText()));
+		}	
 
 		ObjectSender snd = new ObjectSender(10,orderNum.getText());
 		if((boolean)ClientServerController.sendMsgToServer(snd)) {
