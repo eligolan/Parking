@@ -162,9 +162,8 @@ public class EchoServer extends AbstractServer
 				client.sendToClient(m.getAllParkingLot());
 				break;
 			case 12: /* add complain */
-				input = sndRequest.getMsg().toString();
-				element = Arrays.asList(input.split(" "));					
-				String com = element.get(0);
+				input = sndRequest.getMsg().toString();				
+				String com = input;
 				client.sendToClient(m.addComplain(com));
 				break;
 			case 13: /* get all complains */					
