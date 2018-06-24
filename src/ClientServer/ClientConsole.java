@@ -143,9 +143,15 @@ public class ClientConsole implements ParkingClientIF
 		String host = "";
 		int port = 0;  //The port number
 
-
-			host = "localhost";
 		
+		
+		if(args.length < 2) {
+			host = "localhost";
+			port = 0;
+		}else {
+			host = args[0];
+			port = Integer.parseInt(args[1]);
+		}
 
 		/*TODO: add code to get user info(user name, user id) and pass it, NOTE: no need to check if info is valid */
 
