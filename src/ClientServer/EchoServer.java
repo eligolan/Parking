@@ -187,8 +187,14 @@ public class EchoServer extends AbstractServer
 				userId = Integer.parseInt(element.get(0));
 				client.sendToClient(m.disconnect(userId));
 				break;
-			}
-			
+			case 17: /* if manager of parking */	
+				input = sndRequest.getMsg().toString();
+				element = Arrays.asList(input.split(" "));					
+				userId = Integer.parseInt(element.get(0));
+				parkingId = Integer.parseInt(element.get(1));
+				client.sendToClient(m.isManagerOfParking(userId,parkingId));
+				break;
+			}			
 		
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

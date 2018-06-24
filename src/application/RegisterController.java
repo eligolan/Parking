@@ -140,10 +140,10 @@ public class RegisterController {
     			showMsg(event,"Register Success :)"," ");
     			return;
     		} else {
-    			showMsg(event,"Wrong Input","try again");
+    			showMsg(event,"User exist","try again");
     		}		
     	} else {
-    		showMsg(event,"Wrong Input","try again");
+    		showMsg(event,"Wrong Input","check the fields and try again");
     	}
     }
     
@@ -154,7 +154,11 @@ public class RegisterController {
      * @return
      */
     private boolean checkInputIsValid(String user, String pass) {
-		// TODO check if it is write properly and it is on the server
+        String cn = carNumText.getText();
+        String mail =  emailText.getText();
+		if(user.equals("") || pass.equals("") || cn.equals("") || mail.equals("") ) {
+			return false;
+		}
 		return true;
 	}
     
@@ -179,6 +183,12 @@ public class RegisterController {
 		
 	}
 	
+	/**
+	 * 
+	 * @param event
+	 * @param text
+	 * @param smallText
+	 */
 	private void showMsg(ActionEvent event,String text,String smallText) {
 		try {
 			TextEditor.getInstance().setBigText(text);

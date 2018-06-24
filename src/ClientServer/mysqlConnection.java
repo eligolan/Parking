@@ -530,5 +530,30 @@ public class mysqlConnection {
 		}
 		return false;
 	}
+
+	public boolean isManagerOfParking(int userId, int parking_id) {
+		Statement stmt;
+		try 
+		{
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM parkingLot WHERE id = '" + parking_id + "' AND manager_id = '"+ userId +"';");
+			if(rs.next()) {
+				return true;
+			}
+			//rs.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) { /* ignored */}
+			}
+			//stmt.executeUpdate("UPDATE course SET semestr=\"W08\" WHERE num=61309");
+		} catch (SQLException e) {e.printStackTrace();}
+		return false;
+	}
 	
 }
